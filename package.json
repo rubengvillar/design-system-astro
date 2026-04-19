@@ -1,0 +1,17 @@
+{
+  "name": "@tu-usuario/design-system-astro",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Ruben Villar",
+  "license": "ISC",
+  "type": "commondjs",
+  "files": ["src", "dist"],
+  "publishConfig": {
+    "@tu-usuario:registry": "https://npm.pkg.github.com/"
+  }
+}

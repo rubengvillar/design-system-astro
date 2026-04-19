@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* --- Colores (HSL) --- */
+  /* El formato H S L permite controlar la saturación y luminosidad después */
+  --background: 0 0% 100%;
+  --foreground: 222 47% 11%;
+
+  --primary: 221 83% 53%;
+  --primary-foreground: 210 40% 98%;
+
+  --secondary: 210 40% 96%;
+  --secondary-foreground: 222 47% 11%;
+
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+
+  /* --- Espaciado y Radio --- */
+  --radius: 0.5rem;
+  --spacing-base: 1rem;
+}
+
+/* Modo oscuro (opcional, pero buena práctica dejar la estructura) */
+.dark {
+  --background: 222 47% 11%;
+  --foreground: 210 40% 98%;
+  /* ... aquí irían los ajustes para modo oscuro */
+}

@@ -1,16 +1,29 @@
 {
   "name": "@rubengvillar/design-system-astro",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "description": "Mi sistema de diseño personal",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "files": [
+    "src"
+  ],
+  "peerDependencies": {
+    "astro": "^4.0.0 || ^5.0.0",
+    "tailwindcss": "^3.0.0 || ^4.0.0"
   },
-  "keywords": [],
+  "devDependencies": {
+    "astro": "^5.0.0",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.0.0",
+    "@astrojs/check": "^0.9.0",
+    "prettier": "^3.0.0",
+    "prettier-plugin-astro": "^0.14.0"
+  },
+  "scripts": {
+    "check": "astro check"
+  },
   "author": "Ruben Villar",
   "license": "ISC",
-  "type": "commondjs",
-  "files": ["src", "dist"],
   "publishConfig": {
     "@tu-usuario:registry": "https://npm.pkg.github.com/"
   }

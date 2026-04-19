@@ -1,0 +1,19 @@
+---
+interface Props {
+  class?: string;
+  size?: 'sm' | 'md' | 'lg' | 'full';
+}
+
+const { class: className, size = 'lg' } = Astro.props;
+
+const sizes = {
+  sm: 'max-w-screen-sm',
+  md: 'max-w-screen-md',
+  lg: 'max-w-screen-xl',
+  full: 'max-w-full'
+};
+---
+
+<div class:list={["mx-auto px-6 w-full", sizes[size], className]}>
+  <slot />
+</div>

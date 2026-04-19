@@ -1,0 +1,30 @@
+---
+interface Props {
+  cols?: string; // Ej: "1 md:2 lg:3"
+  gap?: 'sm' | 'md' | 'lg';
+  class?: string;
+}
+
+const { 
+  cols = "1 md:2", 
+  gap = "md", 
+  class: className 
+} = Astro.props;
+
+const gapStyles = {
+  sm: 'gap-2',
+  md: 'gap-4',
+  lg: 'gap-8',
+};
+---
+
+<div class:list={[
+  "grid w-full",
+  `grid-cols-${cols.split(' ')[0]}`, // Base (Mobile)
+  cols.includes('md:') ? `md:grid-cols-${cols.split('md:')[1].trim().split(' ')[0]}` : '',
+  cols.includes('lg:') ? `lg:grid-cols-${cols.split('lg:')[1].trim().split(' ')[0]}` : '',
+  gapStyles[gap],
+  className
+]}>
+  <slot />
+</div>

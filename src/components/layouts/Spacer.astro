@@ -1,0 +1,23 @@
+---
+interface Props {
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+  axis?: 'vertical' | 'horizontal';
+}
+
+const { size = 'md', axis = 'vertical' } = Astro.props;
+
+const sizes = {
+  sm: 'size-4',      // 1rem
+  md: 'size-8',      // 2rem
+  lg: 'size-16',     // 4rem
+  xl: 'size-24',     // 6rem
+};
+
+// Si es vertical, aplicamos altura. Si es horizontal, aplicamos ancho.
+const axisStyles = {
+  vertical: `h-${sizes[size].split('-')[1]}`,
+  horizontal: `w-${sizes[size].split('-')[1]}`,
+};
+---
+
+<div class:list={["shrink-0", axis === 'vertical' ? axisStyles.vertical : axisStyles.horizontal]} />

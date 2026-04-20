@@ -1,0 +1,37 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import ComponentPreview from '../../components/ComponentPreview.astro';
+import { Button, Typography } from '@rubengvillar/design-system-astro';
+
+// Definimos los fragmentos de código en variables para mantener el HTML limpio
+const primaryCode = `<Button>
+  Primary Button
+</Button>`;
+
+const secondaryCode = `<Button variant="secondary">
+  Secondary Button
+</Button>`;
+
+const disabledCode = `<Button disabled>
+  Disabled Button
+</Button>`;
+---
+
+<DocsLayout title="Button">
+  <Typography variant="lead" class="mb-8 text-muted-foreground">
+    Desencadena una acción o un evento, como enviar un formulario o mostrar un diálogo.
+  </Typography>
+
+  <ComponentPreview title="Variante: Primary (Por defecto)" code={primaryCode}>
+    <Button>Primary Button</Button>
+  </ComponentPreview>
+
+  <ComponentPreview title="Variante: Secondary" code={secondaryCode}>
+    <Button variant="secondary">Secondary Button</Button>
+  </ComponentPreview>
+
+  <ComponentPreview title="Estados: Disabled" code={disabledCode}>
+    <Button disabled>Disabled Button</Button>
+  </ComponentPreview>
+
+</DocsLayout>

@@ -14,7 +14,7 @@ const {
 } = Astro.props;
 
 // Diccionario de clases dinámicas que leen de las variables CSS
-const variants = {
+const variants: { [key: string]: string } = {
   h1: 'text-[var(--h1-size)] font-[var(--h1-weight)] tracking-[var(--h1-track)]',
   h2: 'text-[var(--h2-size)] font-[var(--h2-weight)] tracking-[var(--h2-track)]',
   h3: 'text-[var(--h3-size)] font-[var(--h3-weight)] tracking-[var(--h3-track)]',

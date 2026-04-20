@@ -23,6 +23,9 @@ export { default as ThemeToggle } from './components/ui/ThemeToggle.astro';
 // Componentes de formulario
 export { default as Input } from './components/ui/form/Input.astro';
 export { default as Label } from './components/ui/form/Label.astro';
+export { default as Textarea } from './components/ui/form/Textarea.astro';
+export { default as Checkbox } from './components/ui/form/Checkbox.astro';
+export { default as FormField } from './components/ui/form/FormField.astro';
 export { default as ErrorMessage } from './components/ui/form/ErrorMessage.astro';
 
 // elementos de SEO

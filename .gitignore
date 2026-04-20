@@ -4,3 +4,6 @@ dist
 .npmrc
 .DS_Store
 *.log
+.vscode
+.idea
+.astro

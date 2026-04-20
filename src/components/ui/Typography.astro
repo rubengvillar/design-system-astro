@@ -1,30 +1,44 @@
 ---
-import type { HTMLTag } from 'astro/types';
+import type { HTMLTag, Polymorphic } from 'astro/types';
 
-interface Props {
-  as?: HTMLTag;
-  variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
-  class?: string;
-}
+// Definimos las variantes permitidas
+type Variant = 'h1' | 'h2' | 'h3' | 'p' | 'lead' | 'large' | 'small' | 'muted';
 
-const { 
-  as: Tag = 'p', 
-  variant = 'p', 
-  class: className 
-} = Astro.props;
+// Mapeamos cada variante a una etiqueta HTML por defecto para mantener la semántica
+const defaultTags: Record<Variant, HTMLTag> = {
+  h1: 'h1',
+  h2: 'h2',
+  h3: 'h3',
+  p: 'p',
+  lead: 'p',
+  large: 'div',
+  small: 'small',
+  muted: 'p',
+};
 
-// Diccionario de clases dinámicas que leen de las variables CSS
-const variants: { [key: string]: string } = {
-  h1: 'text-[var(--h1-size)] font-[var(--h1-weight)] tracking-[var(--h1-track)]',
-  h2: 'text-[var(--h2-size)] font-[var(--h2-weight)] tracking-[var(--h2-track)]',
-  h3: 'text-[var(--h3-size)] font-[var(--h3-weight)] tracking-[var(--h3-track)]',
-  h4: 'text-[var(--h4-size)] font-[var(--h4-weight)] tracking-[var(--h4-track)]',
-  h5: 'text-[var(--h5-size)] font-[var(--h5-weight)] tracking-[var(--h5-track)]',
-  h6: 'text-[var(--h6-size)] font-[var(--h6-weight)] tracking-[var(--h6-track)]',
-  p:  'text-[var(--p-size)] font-[var(--p-weight)] leading-relaxed',
+// Usamos el tipo Polymorphic nativo de Astro para que TypeScript entienda las props
+type Props<Tag extends HTMLTag = HTMLTag> = Polymorphic<{ as: Tag }> & {
+  variant?: Variant;
+};
+
+const { as, variant = 'p', class: className, ...rest } = Astro.props;
+
+// La etiqueta final será la que pase el usuario (as="span") o la que dicte la variante
+const Tag = as || defaultTags[variant as Variant];
+
+// Diccionario de clases de Tailwind para cada variante (Estilo Shadcn UI)
+const variantClasses: Record<Variant, string> = {
+  h1: "scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl",
+  h2: "scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0",
+  h3: "scroll-m-20 text-2xl font-semibold tracking-tight",
+  p: "leading-7 [&:not(:first-child)]:mt-6",
+  lead: "text-xl text-muted-foreground",
+  large: "text-lg font-semibold",
+  small: "text-sm font-medium leading-none",
+  muted: "text-sm text-muted-foreground",
 };
 ---
 
-<Tag class:list={[variants[variant], className]}>
+<Tag class:list={[variantClasses[variant as Variant], className]} {...rest}>
   <slot />
 </Tag>

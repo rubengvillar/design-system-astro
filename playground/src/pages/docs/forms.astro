@@ -1,0 +1,72 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import ComponentPreview from '../../components/ComponentPreview.astro';
+import { 
+  Input, 
+  Label, 
+  Textarea, 
+  Checkbox, 
+  FormField, 
+  Typography 
+} from '@rubengvillar/design-system-astro';
+
+// 1. Input Básico con Label
+const basicInputCode = `<div class="grid w-full max-w-sm items-center gap-2">
+  <Label for="email">Correo electrónico</Label>
+  <Input type="email" id="email" placeholder="ejemplo@correo.com" />
+</div>`;
+
+// 2. FormField (El contenedor inteligente con errores)
+const formFieldCode = `<FormField error="El correo electrónico introducido no es válido.">
+  <Label for="email-error" slot="label">Correo electrónico</Label>
+  <Input type="email" id="email-error" placeholder="ejemplo@correo.com" error={true} />
+</FormField>`;
+
+// 3. Textarea
+const textareaCode = `<div class="grid w-full max-w-sm gap-2">
+  <Label for="message">Mensaje</Label>
+  <Textarea id="message" placeholder="Escribe tu mensaje aquí..." />
+</div>`;
+
+// 4. Checkbox
+const checkboxCode = `<Checkbox 
+  id="terms" 
+  label="Acepto los términos y condiciones" 
+/>`;
+---
+
+<DocsLayout title="Forms (Formularios)">
+  <Typography variant="lead" class="mb-8">
+    Componentes de entrada de datos diseñados para ser accesibles, componibles y fáciles de validar.
+  </Typography>
+
+  <ComponentPreview title="Input Básico" code={basicInputCode}>
+    <div class="grid w-full max-w-sm items-center gap-2">
+      <Label for="email">Correo electrónico</Label>
+      <Input type="email" id="email" placeholder="ejemplo@correo.com" />
+    </div>
+  </ComponentPreview>
+
+  <ComponentPreview title="Campo con Validación (Error)" code={formFieldCode}>
+    <div class="w-full max-w-sm">
+      <FormField error="El correo electrónico introducido no es válido.">
+        <Label for="email-error" slot="label">Correo electrónico</Label>
+        <Input type="email" id="email-error" placeholder="ejemplo@correo.com" error={true} />
+      </FormField>
+    </div>
+  </ComponentPreview>
+
+  <ComponentPreview title="Textarea" code={textareaCode}>
+    <div class="grid w-full max-w-sm gap-2">
+      <Label for="message">Mensaje</Label>
+      <Textarea id="message" placeholder="Escribe tu mensaje aquí..." />
+    </div>
+  </ComponentPreview>
+
+  <ComponentPreview title="Checkbox" code={checkboxCode}>
+    <div class="w-full max-w-sm">
+      <Checkbox id="terms" label="Acepto los términos y condiciones" />
+    </div>
+  </ComponentPreview>
+
+</DocsLayout>

@@ -1,0 +1,93 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import ComponentPreview from '../../components/ComponentPreview.astro';
+import { Typography as TypographyComponent } from '@rubengvillar/design-system-astro';
+
+// Fragmentos de código para la documentación
+const h1Code = `<Typography variant="h1">
+  El zorro marrón rápido salta sobre el perro perezoso.
+</Typography>`;
+
+const h2Code = `<Typography variant="h2">
+  El zorro marrón rápido salta sobre el perro perezoso.
+</Typography>`;
+
+const h3Code = `<Typography variant="h3">
+  El zorro marrón rápido salta sobre el perro perezoso.
+</Typography>`;
+
+const pCode = `<Typography variant="p">
+  El zorro marrón rápido salta sobre el perro perezoso. Esta es una oración de ejemplo para mostrar cómo se ve un bloque de texto más largo en la variante de párrafo estándar.
+</Typography>`;
+
+const leadCode = `<Typography variant="lead">
+  Un párrafo introductorio que destaca del resto del texto.
+</Typography>`;
+
+const largeCode = `<Typography variant="large">
+  Texto un poco más grande e importante.
+</Typography>`;
+
+const smallCode = `<Typography variant="small">
+  Texto pequeño para detalles o anotaciones secundarias.
+</Typography>`;
+
+const mutedCode = `<Typography variant="muted">
+  Texto con un contraste más bajo, ideal para descripciones de campos o notas menos importantes.
+</Typography>`;
+---
+
+<DocsLayout title="Typography">
+  <TypographyComponent variant="lead" class="mb-8 text-muted-foreground">
+    Estilos para títulos, párrafos, listas y otros elementos de texto.
+  </TypographyComponent>
+
+  <ComponentPreview title="h1 (Heading 1)" code={h1Code}>
+    <TypographyComponent variant="h1">
+      El zorro marrón rápido salta sobre el perro perezoso.
+    </TypographyComponent>
+  </ComponentPreview>
+
+  <ComponentPreview title="h2 (Heading 2)" code={h2Code}>
+    <TypographyComponent variant="h2">
+      El zorro marrón rápido salta sobre el perro perezoso.
+    </TypographyComponent>
+  </ComponentPreview>
+
+  <ComponentPreview title="h3 (Heading 3)" code={h3Code}>
+    <TypographyComponent variant="h3">
+      El zorro marrón rápido salta sobre el perro perezoso.
+    </TypographyComponent>
+  </ComponentPreview>
+
+  <ComponentPreview title="p (Párrafo)" code={pCode}>
+    <TypographyComponent variant="p">
+      El zorro marrón rápido salta sobre el perro perezoso. Esta es una oración de ejemplo para mostrar cómo se ve un bloque de texto más largo en la variante de párrafo estándar.
+    </TypographyComponent>
+  </ComponentPreview>
+
+  <ComponentPreview title="lead (Introducción)" code={leadCode}>
+    <TypographyComponent variant="lead">
+      Un párrafo introductorio que destaca del resto del texto.
+    </TypographyComponent>
+  </ComponentPreview>
+
+  <ComponentPreview title="large (Grande)" code={largeCode}>
+    <TypographyComponent variant="large">
+      Texto un poco más grande e importante.
+    </TypographyComponent>
+  </ComponentPreview>
+
+  <ComponentPreview title="small (Pequeño)" code={smallCode}>
+    <TypographyComponent variant="small">
+      Texto pequeño para detalles o anotaciones secundarias.
+    </TypographyComponent>
+  </ComponentPreview>
+
+  <ComponentPreview title="muted (Atenuado)" code={mutedCode}>
+    <TypographyComponent variant="muted">
+      Texto con un contraste más bajo, ideal para descripciones de campos o notas menos importantes.
+    </TypographyComponent>
+  </ComponentPreview>
+
+</DocsLayout>

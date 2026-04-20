@@ -1,7 +1,7 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
 import ComponentPreview from '../../components/ComponentPreview.astro';
-import { Button, Typography } from '@rubengvillar/design-system-astro';
+import { Button as ButtonComponent, Typography } from '@rubengvillar/design-system-astro';
 
 // Definimos los fragmentos de código en variables para mantener el HTML limpio
 const primaryCode = `<Button>
@@ -23,15 +23,15 @@ const disabledCode = `<Button disabled>
   </Typography>
 
   <ComponentPreview title="Variante: Primary (Por defecto)" code={primaryCode}>
-    <Button>Primary Button</Button>
+    <ButtonComponent>Primary Button</ButtonComponent>
   </ComponentPreview>
 
   <ComponentPreview title="Variante: Secondary" code={secondaryCode}>
-    <Button variant="secondary">Secondary Button</Button>
+    <ButtonComponent variant="secondary">Secondary Button</ButtonComponent>
   </ComponentPreview>
 
   <ComponentPreview title="Estados: Disabled" code={disabledCode}>
-    <Button disabled>Disabled Button</Button>
+    <ButtonComponent disabled>Disabled Button</ButtonComponent>
   </ComponentPreview>
 
 </DocsLayout>

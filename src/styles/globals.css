@@ -53,6 +53,8 @@
     /* Cuerpo */
     --p-size: 1rem;      --p-weight: 400;
 
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
   }
 
   /* Modo oscuro (opcional, pero buena práctica dejar la estructura) */
@@ -62,5 +64,7 @@
     --foreground: 210 40% 98%;
     --border: 217 32% 17%;
     --primary: 217 91% 60%; /* Un azul más brillante para modo oscuro */
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
   }
 }

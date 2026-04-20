@@ -1,0 +1,30 @@
+---
+import type { HTMLTag } from 'astro/types';
+
+interface Props {
+  as?: HTMLTag;
+  variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
+  class?: string;
+}
+
+const { 
+  as: Tag = 'p', 
+  variant = 'p', 
+  class: className 
+} = Astro.props;
+
+// Diccionario de clases dinámicas que leen de las variables CSS
+const variants = {
+  h1: 'text-[var(--h1-size)] font-[var(--h1-weight)] tracking-[var(--h1-track)]',
+  h2: 'text-[var(--h2-size)] font-[var(--h2-weight)] tracking-[var(--h2-track)]',
+  h3: 'text-[var(--h3-size)] font-[var(--h3-weight)] tracking-[var(--h3-track)]',
+  h4: 'text-[var(--h4-size)] font-[var(--h4-weight)] tracking-[var(--h4-track)]',
+  h5: 'text-[var(--h5-size)] font-[var(--h5-weight)] tracking-[var(--h5-track)]',
+  h6: 'text-[var(--h6-size)] font-[var(--h6-weight)] tracking-[var(--h6-track)]',
+  p:  'text-[var(--p-size)] font-[var(--p-weight)] leading-relaxed',
+};
+---
+
+<Tag class:list={[variants[variant], className]}>
+  <slot />
+</Tag>

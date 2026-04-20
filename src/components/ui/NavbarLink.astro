@@ -1,0 +1,30 @@
+---
+interface Props {
+  href: string;
+  class?: string;
+}
+
+const { href, class: className } = Astro.props;
+
+// Obtenemos la ruta actual
+const pathname = Astro.url.pathname;
+
+// Determinamos si el link es activo:
+// 1. Es un match exacto (ej: '/' == '/')
+// 2. O la ruta actual empieza con el href (ej: '/proyectos/1' empieza con '/proyectos')
+// NOTA: Para '/' debemos ser estrictos para que no marque todo como activo.
+const isActive = href === pathname || (href !== '/' && pathname.startsWith(href));
+---
+
+<a 
+  href={href} 
+  class:list={[
+    "text-sm font-medium transition-colors",
+    isActive 
+      ? "text-primary font-semibold" 
+      : "text-muted-foreground hover:text-primary",
+    className
+  ]}
+>
+  <slot />
+</a>

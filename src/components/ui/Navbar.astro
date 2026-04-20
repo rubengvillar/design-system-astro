@@ -1,0 +1,40 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<header class:list={["sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60", className]}>
+  <div class="container mx-auto flex h-14 items-center justify-between px-6">
+    <div class="flex items-center gap-2">
+      <slot name="brand" />
+    </div>
+
+    <nav class="hidden md:flex items-center gap-6">
+      <slot name="links" />
+    </nav>
+
+    <button id="mobile-menu-toggle" class="md:hidden p-2" aria-label="Abrir menú">
+      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="hidden md:hidden border-b p-6 bg-background">
+    <nav class="flex flex-col gap-4">
+      <slot name="links" />
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('mobile-menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+
+  toggle?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
+  });
+</script>

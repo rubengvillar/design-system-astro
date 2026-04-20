@@ -1,49 +1,66 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
-  /* --- Colores (HSL) --- */
-  /* El formato H S L permite controlar la saturación y luminosidad después */
-  --background: 0 0% 100%;
-  --foreground: 222 47% 11%;
-
-  --primary: 221 83% 53%;
-  --primary-foreground: 210 40% 98%;
-
-  --secondary: 210 40% 96%;
-  --secondary-foreground: 222 47% 11%;
-
-  --border: 214 32% 91%;
-  --input: 214 32% 91%;
-
-  /* --- Espaciado y Radio --- */
-  --radius: 0.5rem;
-  --spacing-base: 1rem;
-
-  /* Tipografia */
-
-  /* H1 */
-  --h1-size: 2.5rem;   --h1-weight: 800; --h1-track: -0.025em;
-  /* H2 */
-  --h2-size: 2rem;     --h2-weight: 700; --h2-track: -0.025em;
-  /* H3 */
-  --h3-size: 1.5rem;   --h3-weight: 600; --h3-track: -0.025em;
-  /* H4 */
-  --h4-size: 1.25rem;  --h4-weight: 600; --h4-track: -0.025em;
-  /* H5 */
-  --h5-size: 1.125rem; --h5-weight: 600; --h5-track: normal;
-  /* H6 */
-  --h6-size: 1rem;     --h6-weight: 600; --h6-track: normal;
-  
-  /* Cuerpo */
-  --p-size: 1rem;      --p-weight: 400;
-
+/* 1. Mapeo de Tailwind v4 */
+@theme {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-primary: hsl(var(--primary));
+  --color-secondary: hsl(var(--secondary));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
 }
 
-/* Modo oscuro (opcional, pero buena práctica dejar la estructura) */
-.dark {
-  --background: 222 47% 11%;
-  --foreground: 210 40% 98%;
-  /* ... aquí irían los ajustes para modo oscuro */
+/* 2. Variables por Defecto */
+@layer base {
+  /* Variables globales */
+  :root {
+    /* --- Colores (HSL) --- */
+    /* El formato H S L permite controlar la saturación y luminosidad después */
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+
+    --primary: 221 83% 53%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+
+    /* --- Espaciado y Radio --- */
+    --radius: 0.5rem;
+    --spacing-base: 1rem;
+
+    /* Tipografia */
+
+    /* H1 */
+    --h1-size: 2.5rem;   --h1-weight: 800; --h1-track: -0.025em;
+    /* H2 */
+    --h2-size: 2rem;     --h2-weight: 700; --h2-track: -0.025em;
+    /* H3 */
+    --h3-size: 1.5rem;   --h3-weight: 600; --h3-track: -0.025em;
+    /* H4 */
+    --h4-size: 1.25rem;  --h4-weight: 600; --h4-track: -0.025em;
+    /* H5 */
+    --h5-size: 1.125rem; --h5-weight: 600; --h5-track: normal;
+    /* H6 */
+    --h6-size: 1rem;     --h6-weight: 600; --h6-track: normal;
+    
+    /* Cuerpo */
+    --p-size: 1rem;      --p-weight: 400;
+
+  }
+
+  /* Modo oscuro (opcional, pero buena práctica dejar la estructura) */
+  .dark {
+    /* Modo Oscuro */
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+    --border: 217 32% 17%;
+    --primary: 217 91% 60%; /* Un azul más brillante para modo oscuro */
+  }
 }

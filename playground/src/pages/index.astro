@@ -1,17 +1,11 @@
 ---
-
+import { Typography } from '@rubengvillar/design-system-astro';
+import DocsLayout from '../layouts/DocsLayout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<DocsLayout title="Inicio">
+  <Typography as="p" variant="p">
+	Bienvenido a la documentación de nuestro Design System. Aquí encontrarás guías, ejemplos y referencias para implementar nuestros componentes en tus proyectos.
+  </Typography>
+</DocsLayout>
+

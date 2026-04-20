@@ -1,0 +1,62 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import ComponentPreview from '../../components/ComponentPreview.astro';
+import { Image as UIImage, Typography } from '@rubengvillar/design-system-astro';
+
+const basicCode = `<Image 
+  src="https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?q=80&w=800&auto=format&fit=crop" 
+  alt="Paisaje de montaña" 
+  class="rounded-xl"
+/>`;
+
+const aspectVideoCode = `<Image 
+  src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800&auto=format&fit=crop" 
+  alt="Espacio de trabajo" 
+  aspectRatio="video"
+  class="rounded-xl"
+/>`;
+
+const avatarCode = `<Image 
+  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop" 
+  alt="Retrato de usuario" 
+  aspectRatio="square"
+  class="w-24 rounded-full"
+/>`;
+---
+
+<DocsLayout title="Image">
+  <Typography variant="lead" class="mb-8 text-muted-foreground">
+    Componente de imagen optimizado con carga diferida (lazy loading), relaciones de aspecto y efecto de aparición suave.
+  </Typography>
+
+  <ComponentPreview title="Imagen Básica" code={basicCode}>
+    <div class="w-full max-w-md">
+      <UIImage 
+        src="https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?q=80&w=800&auto=format&fit=crop" 
+        alt="Paisaje de montaña" 
+        class="rounded-xl"
+      />
+    </div>
+  </ComponentPreview>
+
+  <ComponentPreview title="Relación de Aspecto: Video (16:9)" code={aspectVideoCode}>
+    <div class="w-full max-w-md">
+      <UIImage 
+        src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800&auto=format&fit=crop" 
+        alt="Espacio de trabajo" 
+        aspectRatio="video"
+        class="rounded-xl"
+      />
+    </div>
+  </ComponentPreview>
+
+  <ComponentPreview title="Uso como Avatar (Square + rounded-full)" code={avatarCode}>
+    <UIImage 
+      src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop" 
+      alt="Retrato de usuario" 
+      aspectRatio="square"
+      class="w-24 rounded-full"
+    />
+  </ComponentPreview>
+
+</DocsLayout>

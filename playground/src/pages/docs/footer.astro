@@ -1,0 +1,74 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import ComponentPreview from '../../components/ComponentPreview.astro';
+import { Footer as UIFooter, Typography } from '@rubengvillar/design-system-astro';
+
+// Código de ejemplo para la documentación
+const footerCode = `<Footer copyrightOwner="SystemDocs">
+  <div slot="brand" class="flex flex-col gap-2">
+    <div class="font-bold text-xl">SystemDocs</div>
+    <p class="text-sm text-muted-foreground">Construyendo el futuro de la web.</p>
+  </div>
+
+  <Fragment slot="links">
+    <div class="flex flex-col gap-2">
+      <h4 class="font-semibold text-foreground">Producto</h4>
+      <a href="#" class="text-sm text-muted-foreground hover:text-foreground">Features</a>
+      <a href="#" class="text-sm text-muted-foreground hover:text-foreground">Precios</a>
+    </div>
+    <div class="flex flex-col gap-2">
+      <h4 class="font-semibold text-foreground">Compañía</h4>
+      <a href="#" class="text-sm text-muted-foreground hover:text-foreground">Nosotros</a>
+      <a href="#" class="text-sm text-muted-foreground hover:text-foreground">Blog</a>
+    </div>
+    <div class="flex flex-col gap-2">
+      <h4 class="font-semibold text-foreground">Legal</h4>
+      <a href="#" class="text-sm text-muted-foreground hover:text-foreground">Privacidad</a>
+      <a href="#" class="text-sm text-muted-foreground hover:text-foreground">Términos</a>
+    </div>
+  </Fragment>
+
+  <Fragment slot="bottom-links">
+    <a href="#" class="text-sm text-muted-foreground hover:underline">Política de Cookies</a>
+  </Fragment>
+</Footer>`;
+---
+
+<DocsLayout title="Footer">
+  <Typography variant="lead" class="mb-8 text-muted-foreground">
+    Un pie de página modular, responsivo y fácil de configurar mediante slots.
+  </Typography>
+
+  <ComponentPreview title="Footer Completo" code={footerCode}>
+    <div class="w-full border rounded-xl overflow-hidden bg-background">
+      <UIFooter copyrightOwner="SystemDocs">
+        <div slot="brand" class="flex flex-col gap-2">
+          <div class="font-bold text-xl tracking-tight">SystemDocs</div>
+          <p class="text-sm text-muted-foreground">Construyendo el futuro de la web.</p>
+        </div>
+        
+        <Fragment slot="links">
+          <div class="flex flex-col gap-2">
+            <h4 class="font-semibold text-foreground">Producto</h4>
+            <a href="#" class="text-sm text-muted-foreground hover:text-foreground">Features</a>
+            <a href="#" class="text-sm text-muted-foreground hover:text-foreground">Precios</a>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h4 class="font-semibold text-foreground">Compañía</h4>
+            <a href="#" class="text-sm text-muted-foreground hover:text-foreground">Nosotros</a>
+            <a href="#" class="text-sm text-muted-foreground hover:text-foreground">Blog</a>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h4 class="font-semibold text-foreground">Legal</h4>
+            <a href="#" class="text-sm text-muted-foreground hover:text-foreground">Privacidad</a>
+            <a href="#" class="text-sm text-muted-foreground hover:text-foreground">Términos</a>
+          </div>
+        </Fragment>
+
+        <Fragment slot="bottom-links">
+          <a href="#" class="text-sm text-muted-foreground hover:underline">Política de Cookies</a>
+        </Fragment>
+      </UIFooter>
+    </div>
+  </ComponentPreview>
+</DocsLayout>

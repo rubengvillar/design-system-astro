@@ -1,14 +1,14 @@
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
+import tailwindcss from '@tailwindcss/vite'; // <--- Nuevo import
 
 export default defineConfig({
-  integrations: [tailwind()],
+  // Eliminamos "integrations: [tailwind()]"
   vite: {
+    plugins: [tailwindcss()], // <--- Añadimos el plugin aquí
     optimizeDeps: {
-      // Obligamos a Vite a incluir tu librería en la pre-optimización
-      include: ['@rubengvillar/design-system-astro'] 
+      // Mantenemos tu configuración anterior de monorepo que es correcta
+      include: ['@rubengvillar/design-system-astro']
     },
-    // Opcional: A veces ayuda a evitar problemas de "duplicación" de módulos
     resolve: {
       dedupe: ['astro']
     }

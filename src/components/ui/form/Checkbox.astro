@@ -1,0 +1,18 @@
+---
+interface Props {
+  id: string;
+  label: string;
+}
+const { id, label } = Astro.props;
+---
+
+<div class="flex items-center space-x-2">
+  <input 
+    type="checkbox" 
+    id={id} 
+    class="peer h-4 w-4 shrink-0 rounded border border-[var(--input)] ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" 
+  />
+  <label for={id} class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+    {label}
+  </label>
+</div>

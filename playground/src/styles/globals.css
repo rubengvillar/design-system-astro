@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+/* 1. Importamos la base de colores de tu librería */
+@import "@rubengvillar/design-system-astro/styles.css";
+
+/* 2. Le decimos a Tailwind que lea los componentes para inyectar sus clases */
+@source "@rubengvillar/design-system-astro";
+
+/* Si en este proyecto en particular (playground) quisieras 
+  cambiar el color primario de azul a rojo, simplemente 
+  sobrescribes la variable aquí, ¡y todo el sistema cambia! 
+*/
+/*
+:root {
+  --primary: 0 100% 50%; 
+}
+*/

@@ -1,0 +1,33 @@
+---
+import { Container, Separator } from '../../'; // Ajusta según tu estructura de alias
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class:list={["w-full py-10 bg-background border-t", className]}>
+  <Container>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+      <div class="col-span-2 md:col-span-1">
+        <slot name="brand" />
+      </div>
+      
+      <div class="col-span-2 md:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-8">
+        <slot name="links" />
+      </div>
+    </div>
+
+    <Separator class="my-6" />
+
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
+      <p>© {year} [Tu Nombre]. Todos los derechos reservados.</p>
+      <div class="flex gap-4">
+        <slot name="bottom-links" />
+      </div>
+    </div>
+  </Container>
+</footer>

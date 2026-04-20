@@ -1,0 +1,14 @@
+---
+// src/components/ui/ThemeToggle.astro
+---
+<button id="theme-toggle" class="p-2 rounded-md hover:bg-secondary transition-colors" aria-label="Cambiar tema">
+  <span class="dark:hidden">🌙</span>
+  <span class="hidden dark:inline">☀️</span>
+</button>
+
+<script>
+  import { toggleTheme } from '@/utils/theme';
+
+  const button = document.getElementById('theme-toggle');
+  button?.addEventListener('click', toggleTheme);
+</script>

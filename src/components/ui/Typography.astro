@@ -1,5 +1,6 @@
 ---
 import type { HTMLTag, Polymorphic } from 'astro/types';
+import { classMerge } from "../../utils/classMerge";
 
 // Definimos las variantes permitidas
 type Variant = 'h1' | 'h2' | 'h3' | 'p' | 'lead' | 'large' | 'small' | 'muted';
@@ -39,6 +40,6 @@ const variantClasses: Record<Variant, string> = {
 };
 ---
 
-<Tag class:list={[variantClasses[variant as Variant], className]} {...rest}>
+<Tag class={classMerge([variantClasses[variant as Variant], className])} {...rest}>
   <slot />
 </Tag>

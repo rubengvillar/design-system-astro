@@ -1,4 +1,6 @@
 ---
+import { classMerge } from "../../../utils/classMerge";
+
 interface Props {
   error?: string | boolean;
   class?: string;
@@ -7,7 +9,7 @@ interface Props {
 const { error, class: className } = Astro.props;
 ---
 
-<div class:list={["space-y-2", className]}>
+<div class={classMerge(["space-y-2", className])}>
   <slot name="label" />
   
   <slot />

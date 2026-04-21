@@ -1,4 +1,5 @@
 ---
+import { classMerge } from "../../utils/classMerge";
 import type { HTMLAttributes } from 'astro/types';
 
 interface Props extends HTMLAttributes<'img'> {
@@ -24,7 +25,7 @@ const aspectClasses = {
 };
 ---
 
-<div class:list={["overflow-hidden bg-muted", aspectClasses[aspectRatio], className]}>
+<div class={classMerge(["overflow-hidden bg-muted", aspectClasses[aspectRatio], className])}>
   <img
     src={src}
     alt={alt}

@@ -1,1 +1,5 @@
-<h3 class="font-semibold leading-none tracking-tight"><slot /></h3>
+---
+import { classMerge } from "../../../utils/classMerge";
+---
+
+<h3 class={classMerge("font-semibold leading-none tracking-tight")}><slot /></h3>

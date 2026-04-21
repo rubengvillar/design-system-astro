@@ -1,3 +1,7 @@
-<div class:list={["flex items-center p-6 pt-0", Astro.props.class]}>
+---
+import { classMerge } from "../../../utils/classMerge";
+---
+
+<div class={classMerge("flex items-center p-6 pt-0", Astro.props.class)}>
   <slot />
 </div>

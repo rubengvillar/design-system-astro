@@ -1,4 +1,5 @@
 ---
+import { classMerge } from "../../utils/classMerge";
 import Container from '../layouts/Container.astro';
 import Separator from '../layouts/Separator.astro';
 
@@ -15,7 +16,7 @@ const {
 const year = new Date().getFullYear();
 ---
 
-<footer class:list={["w-full py-10 bg-background border-t", className]}>
+<footer class={classMerge(["w-full py-10 bg-background border-t", className])}>
   <Container>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
       

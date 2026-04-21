@@ -1,1 +1,5 @@
-<p class="text-sm text-muted-foreground"><slot /></p>
+---
+import { classMerge } from "../../../utils/classMerge";
+---
+
+<p class={classMerge("text-sm text-muted-foreground")}><slot /></p>

@@ -1,8 +1,11 @@
 ---
+import { classMerge } from '../../utils/classMerge';
 import type { HTMLAttributes } from 'astro/types';
 
+type Variant = 'primary' | 'secondary' | 'destructive' | 'outline' | 'ghost' | 'link';
+
 interface Props extends HTMLAttributes<'button'> {
-  variant?: 'primary' | 'secondary' | 'destructive' | 'outline' | 'ghost' | 'link';
+  variant?: Variant;
   size?: 'sm' | 'md' | 'lg';
 }
 
@@ -16,7 +19,6 @@ const {
 // Diccionario de clases con Tailwind (aprovechando tu config)
 const variants: Record<Variant, string> = {
   primary: "bg-primary text-primary-foreground shadow hover:bg-primary/90",
-  // CORRECCIÓN: Añadimos 'text-secondary-foreground' aquí abajo
   secondary: "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
   destructive: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
   outline: "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
@@ -32,12 +34,12 @@ const sizes = {
 ---
 
 <button 
-  class:list={[
+  class={classMerge(
     "inline-flex items-center justify-center rounded-[var(--radius)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50 disabled:pointer-events-none cursor-pointer",
     variants[variant],
     sizes[size],
     className
-  ]}
+  )}
   {...rest}
 >
   <slot />

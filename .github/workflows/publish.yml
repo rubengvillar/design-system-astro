@@ -26,6 +26,6 @@ jobs:
       - name: Publish
         run: |
           npm version patch --no-git-tag-version # Incrementa versión automáticamente
-          pnpm publish
+          pnpm publish --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

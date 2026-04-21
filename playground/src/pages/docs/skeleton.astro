@@ -1,0 +1,42 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import ComponentPreview from '../../components/ComponentPreview.astro';
+import Skeleton from "../../../../src/components/ui/Skeleton.astro";
+
+const basicUsage = `<Skeleton class="h-4 w-[250px]" />`;
+
+const profileUsage = `
+<div class="flex items-center space-x-4">
+  <Skeleton class="h-12 w-12 rounded-full" />
+  <div class="space-y-2">
+    <Skeleton class="h-4 w-[250px]" />
+    <Skeleton class="h-4 w-[200px]" />
+  </div>
+</div>
+`;
+---
+
+<DocsLayout 
+  title="Skeleton" 
+  description="Muestra un marcador de posición mientras se carga el contenido real."
+>
+  <section class="space-y-6">
+    <h2 class="text-2xl font-bold">Uso Básico</h2>
+    <ComponentPreview code={basicUsage}>
+      <div class="p-4">
+        <Skeleton class="h-4 w-[250px]" />
+      </div>
+    </ComponentPreview>
+
+    <h2 class="text-2xl font-bold">Perfil de Usuario</h2>
+    <ComponentPreview code={profileUsage}>
+      <div class="p-4 flex items-center space-x-4">
+        <Skeleton class="h-12 w-12 rounded-full" />
+        <div class="space-y-2">
+          <Skeleton class="h-4 w-[250px]" />
+          <Skeleton class="h-4 w-[200px]" />
+        </div>
+      </div>
+    </ComponentPreview>
+  </section>
+</DocsLayout>

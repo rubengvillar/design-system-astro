@@ -15,6 +15,18 @@
 
   --color-card: hsl(var(--card));
   --color-card-foreground: hsl(var(--card-foreground));
+
+  /* Tokens de Color para estados de carga */
+  --color-skeleton: var(--color-neutral-200);
+  --color-skeleton-dark: var(--color-neutral-800);
+  
+  /* Animación personalizada (opcional, si quieres ajustar la intensidad) */
+  --animate-skeleton-pulse: skeleton-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+  @keyframes skeleton-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: .5; }
+  }
 }
 
 /* 2. Variables por Defecto */
@@ -35,6 +47,8 @@
     --destructive-foreground: 0 0% 98%;
     --accent: 210 40% 96.1%;
     --accent-foreground: 222 47% 11%;
+
+    --bg-skeleton: var(--color-skeleton);
 
     /* Card */
     --card: 0 0% 100%;
@@ -79,6 +93,7 @@
     --destructive-foreground: 0 0% 98%;
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
+    --bg-skeleton: var(--color-skeleton-dark);
 
     /* Card */
     --card: 0 10% 100%;

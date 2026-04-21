@@ -47,6 +47,11 @@
     --destructive-foreground: 0 0% 98%;
     --accent: 210 40% 96.1%;
     --accent-foreground: 222 47% 11%;
+    --success: 142.1 76.2% 36.3%;
+    --success-foreground: 0 0% 98%;
+    
+    --warning: 38 92% 50%;
+    --warning-foreground: 48 96% 11%;
 
     --bg-skeleton: var(--color-skeleton);
 

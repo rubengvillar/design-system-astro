@@ -1,0 +1,60 @@
+---
+import { classMerge } from "@/utils/classMerge";
+
+// Toaster.astro
+// Este componente se instancia una sola vez en el Layout principal de la app.
+---
+
+<toast-provider class={classMerge("fixed bottom-4 right-4 z-50 flex flex-col gap-2 w-full max-w-sm pointer-events-none sm:bottom-6 sm:right-6")}>
+</toast-provider>
+
+<script>
+  class ToastProvider extends HTMLElement {
+    connectedCallback() {
+      window.addEventListener("design-system-toast", (e) => this.addToast((e as CustomEvent).detail));
+    }
+
+    addToast({ id, title, description, variant = 'default', duration = 5000 }: any) {
+      const toast = document.createElement('div');
+      
+      // Mapeo de variantes a tus variables HSL
+      const variantClasses: Record<string, string> = {
+        default: "bg-[hsl(var(--background))] text-[hsl(var(--foreground))] border border-[hsl(var(--muted))]",
+        primary: "bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] border-transparent",
+        secondary: "bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] border-transparent",
+        destructive: "bg-[hsl(var(--destructive))] text-[hsl(var(--destructive-foreground))] border-transparent",
+        success: "bg-[hsl(var(--success))] text-[hsl(var(--success-foreground))] border-transparent",
+        warning: "bg-[hsl(var(--warning))] text-[hsl(var(--warning-foreground))] border-transparent"
+      };
+
+      const themeClass = variantClasses[variant] || variantClasses.default;
+
+      // Clases base y de animación inicial
+      toast.className = `pointer-events-auto flex w-full flex-col gap-1 rounded-md p-4 shadow-lg transition-all duration-300 translate-y-4 opacity-0 sm:translate-y-0 sm:translate-x-4 ${themeClass}`;
+      
+      // Estructura interna
+      toast.innerHTML = `
+        ${title ? `<h3 class="font-semibold text-sm leading-none tracking-tight">${title}</h3>` : ''}
+        ${description ? `<p class="text-sm opacity-90">${description}</p>` : ''}
+      `;
+      
+      this.appendChild(toast);
+      
+      // Disparar la animación de entrada en el siguiente frame
+      requestAnimationFrame(() => {
+        toast.classList.remove('translate-y-4', 'sm:translate-x-4', 'opacity-0');
+      });
+
+      // Lógica de auto-cierre y animación de salida
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'scale-95');
+        setTimeout(() => toast.remove(), 300); // Esperar a que termine la transición CSS
+      }, duration);
+    }
+  }
+
+  // Registramos el Custom Element si no existe
+  if (!customElements.get('toast-provider')) {
+    customElements.define('toast-provider', ToastProvider);
+  }
+</script>

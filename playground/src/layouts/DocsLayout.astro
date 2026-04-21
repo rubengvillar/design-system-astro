@@ -1,6 +1,6 @@
 ---
 import '../styles/globals.css';
-import { Navbar, NavbarLink, ThemeScript } from '@rubengvillar/design-system-astro'; // O la ruta que estés usando
+import { Navbar, NavbarLink, ThemeScript, Toaster } from '@rubengvillar/design-system-astro'; // O la ruta que estés usando
 
 interface Props {
   title: string;
@@ -66,5 +66,7 @@ const components = [
         </div>
       </main>
     </div>
+
+    <Toaster />
   </body>
 </html>

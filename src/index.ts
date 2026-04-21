@@ -27,6 +27,11 @@ export { default as CardDescription } from './components/ui/card/CardDescription
 export { default as CardContent } from './components/ui/card/CardContent.astro';
 export { default as CardFooter } from './components/ui/card/CardFooter.astro';
 
+// Componentes de UI funcionales (como Toast, Modal, etc.)
+export { toast, type ToastOptions, type ToastVariant } from "./utils/use-toast";
+export { default as Toaster } from "./components/ui/Toaster.astro";
+export { default as Skeleton } from "./components/ui/Skeleton.astro";
+
 // Componentes de formulario
 export { default as Input } from './components/ui/form/Input.astro';
 export { default as Label } from './components/ui/form/Label.astro';
@@ -41,3 +46,4 @@ export { default as ThemeScript } from './components/seo/ThemeScript.astro';
 
 // Utilidades
 export { toggleTheme } from './utils/theme';
+export { classMerge } from './utils/classMerge';

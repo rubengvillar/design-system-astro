@@ -1,0 +1,135 @@
+---
+import DocsLayout from "../../layouts/DocsLayout.astro";
+import ComponentPreview from "../../components/ComponentPreview.astro";
+import Button from "../../../../src/components/ui/Button.astro";
+
+// Nota: Asegúrate de tener <Toaster /> en tu DocsLayout.astro o Layout principal.
+
+const defaultCode = `
+---
+import { Button } from "design-system-astro";
+---
+
+<Button id="btn-toast-default">Mostrar Toast Default</Button>
+
+<script>
+  import { toast } from "design-system-astro";
+
+  document.getElementById('btn-toast-default')?.addEventListener('click', () => {
+    toast({
+      title: "Perfil actualizado",
+      description: "Los cambios se han guardado correctamente en tu cuenta.",
+      variant: "default"
+    });
+  });
+</script>
+`;
+
+const variantsCode = `
+---
+import { Button } from "design-system-astro";
+---
+
+<div class="flex flex-wrap gap-4">
+  <Button id="btn-toast-primary">Primary</Button>
+  <Button id="btn-toast-secondary" variant="secondary">Secondary</Button>
+  <Button id="btn-toast-destructive" variant="destructive">Destructive</Button>
+</div>
+
+<script>
+  import { toast } from "design-system-astro";
+
+  document.getElementById('btn-toast-primary')?.addEventListener('click', () => {
+    toast({ title: "Acción principal", variant: "primary" });
+  });
+
+  document.getElementById('btn-toast-secondary')?.addEventListener('click', () => {
+    toast({ title: "Acción secundaria", variant: "secondary" });
+  });
+
+  document.getElementById('btn-toast-destructive')?.addEventListener('click', () => {
+    toast({ 
+      title: "Error crítico", 
+      description: "Acción irreversible ejecutada.", 
+      variant: "destructive" 
+    });
+  });
+</script>
+`;
+---
+
+<DocsLayout 
+  title="Toast" 
+  description="Notificaciones imperativas y efímeras para eventos del sistema."
+>
+  <div class="space-y-12">
+    
+    <section class="space-y-4">
+      <h2 class="text-2xl font-semibold tracking-tight">Uso Básico</h2>
+      <p class="text-neutral-500">Notificación estándar. En Astro, asignamos un ID al componente y disparamos el evento desde un bloque <code>&lt;script&gt;</code>.</p>
+      
+      <ComponentPreview code={defaultCode}>
+        <div class="p-4 flex justify-center">
+          <Button id="demo-toast-default">Mostrar Toast Default</Button>
+        </div>
+      </ComponentPreview>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl font-semibold tracking-tight">Variantes de Color</h2>
+      <p class="text-neutral-500">Toasts mapeados directamente a los tokens de diseño (Primary, Secondary, Destructive).</p>
+      
+      <ComponentPreview code={variantsCode}>
+        <div class="p-4 flex flex-wrap gap-4 justify-center">
+            <Button id="demo-toast-primary">Toast Primary</Button>
+            <Button id="demo-toast-secondary" variant="secondary">Toast Secondary</Button>
+            <Button id="demo-toast-destructive" variant="destructive">Toast Destructive</Button>
+            <Button id="demo-toast-success" class="bg-green-600 hover:bg-green-700 text-white">Toast Success</Button>
+            <Button id="demo-toast-warning" class="bg-amber-500 hover:bg-amber-600 text-black">Toast Warning</Button>
+        </div>
+      </ComponentPreview>
+    </section>
+
+  </div>
+</DocsLayout>
+
+<script>
+  // Script exclusivo del Playground para hacer funcionar los botones de demostración
+  // Disparamos el CustomEvent directamente para evitar importar rutas relativas complejas en la demo
+  
+  document.getElementById('demo-toast-default')?.addEventListener('click', () => {
+    window.dispatchEvent(new CustomEvent('design-system-toast', { 
+      detail: { title: 'Perfil actualizado', description: 'Los cambios se han guardado correctamente en tu cuenta.', variant: 'default' } 
+    }));
+  });
+
+  document.getElementById('demo-toast-primary')?.addEventListener('click', () => {
+    window.dispatchEvent(new CustomEvent('design-system-toast', { 
+      detail: { title: 'Acción principal', variant: 'primary' } 
+    }));
+  });
+
+  document.getElementById('demo-toast-secondary')?.addEventListener('click', () => {
+    window.dispatchEvent(new CustomEvent('design-system-toast', { 
+      detail: { title: 'Acción secundaria', variant: 'secondary' } 
+    }));
+  });
+
+  document.getElementById('demo-toast-destructive')?.addEventListener('click', () => {
+    window.dispatchEvent(new CustomEvent('design-system-toast', { 
+      detail: { title: 'Error crítico', description: 'Acción irreversible ejecutada.', variant: 'destructive' } 
+    }));
+  });
+
+  document.getElementById('demo-toast-success')?.addEventListener('click', () => {
+    window.dispatchEvent(new CustomEvent('design-system-toast', { 
+      detail: { title: 'Completado', description: 'Los datos se han guardado con éxito.', variant: 'success' } 
+    }));
+  });
+
+  document.getElementById('demo-toast-warning')?.addEventListener('click', () => {
+    window.dispatchEvent(new CustomEvent('design-system-toast', { 
+      detail: { title: 'Atención', description: 'Tu sesión expirará en 5 minutos.', variant: 'warning' } 
+    }));
+  });
+</script>

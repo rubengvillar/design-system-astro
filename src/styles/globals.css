@@ -25,12 +25,20 @@
     /* El formato H S L permite controlar la saturación y luminosidad después */
     --background: 0 0% 100%;
     --foreground: 222 47% 11%;
-
     --primary: 221 83% 53%;
     --primary-foreground: 210 40% 98%;
-
     --secondary: 210 40% 96%;
     --secondary-foreground: 222 47% 11%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222 47% 11%;
+
+    /* Card */
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
 
     --border: 214 32% 91%;
     --input: 214 32% 91%;
@@ -56,13 +64,6 @@
     
     /* Cuerpo */
     --p-size: 1rem;      --p-weight: 400;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    /* Card */
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
   }
 
   /* Modo oscuro (opcional, pero buena práctica dejar la estructura) */
@@ -74,6 +75,10 @@
     --primary: 217 91% 60%; /* Un azul más brillante para modo oscuro */
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
 
     /* Card */
     --card: 0 10% 100%;

@@ -1,0 +1,27 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import ComponentPreview from '../../components/ComponentPreview.astro';
+import { Badge, Typography } from '@rubengvillar/design-system-astro';
+
+const code = `
+<Badge>Default</Badge>
+<Badge variant="secondary">Secondary</Badge>
+<Badge variant="outline">Outline</Badge>
+<Badge variant="destructive">Destructive</Badge>
+`;
+---
+
+<DocsLayout title="Badge">
+  <Typography variant="lead" class="mb-8">
+    Muestras de estado o etiquetas para contenido.
+  </Typography>
+
+  <ComponentPreview title="Variantes" code={code}>
+    <div class="flex gap-2">
+      <Badge>Default</Badge>
+      <Badge variant="secondary">Secondary</Badge>
+      <Badge variant="outline">Outline</Badge>
+      <Badge variant="destructive">Destructive</Badge>
+    </div>
+  </ComponentPreview>
+</DocsLayout>

@@ -18,9 +18,11 @@ const defaultTags: Record<Variant, HTMLTag> = {
 };
 
 // Usamos el tipo Polymorphic nativo de Astro para que TypeScript entienda las props
-type Props<Tag extends HTMLTag = HTMLTag> = Polymorphic<{ as: Tag }> & {
+type Properties<Tag extends HTMLTag = HTMLTag> = Polymorphic<{ as: Tag }> & {
   variant?: Variant;
 };
+
+interface Props extends Properties { }
 
 const { as, variant = 'p', class: className, ...rest } = Astro.props;
 

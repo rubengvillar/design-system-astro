@@ -1,0 +1,11 @@
+---
+import { classMerge } from "../../../utils/classMerge";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {}
+const { class: className, ...rest } = Astro.props;
+---
+
+<div class={classMerge("mt-12 flex flex-col items-center justify-between gap-4 border-t pt-8 pb-8 md:flex-row text-sm text-muted-foreground", className)} {...rest}>
+  <slot />
+</div>

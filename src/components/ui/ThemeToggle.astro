@@ -1,14 +1,53 @@
 ---
 // src/components/ui/ThemeToggle.astro
+import { classMerge } from '../../utils/classMerge';
+
+interface Props {
+  class?: string;
+  darkIcon?: string;
+  lightIcon?: string;
+}
+
+const { 
+  class: className,
+  darkIcon = "🌙",
+  lightIcon = "☀️"
+} = Astro.props;
 ---
-<button id="theme-toggle" class="p-2 rounded-md hover:bg-secondary transition-colors" aria-label="Cambiar tema">
-  <span class="dark:hidden">🌙</span>
-  <span class="hidden dark:inline">☀️</span>
-</button>
+
+<ui-theme-toggle class={classMerge("inline-block", className)}>
+  <button 
+    type="button"
+    data-toggle-button
+    class="p-2 rounded-md hover:bg-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50" 
+    aria-label="Cambiar tema"
+  >
+    <span class="dark:!hidden">
+      <slot name="light">
+        {lightIcon}
+      </slot>
+    </span>
+    <span class="hidden dark:!inline">
+      <slot name="dark">
+        {darkIcon}
+      </slot>
+    </span>
+  </button>
+</ui-theme-toggle>
 
 <script>
-  import { toggleTheme } from '@/utils/theme';
+  import { toggleTheme } from '../../utils/theme';
 
-  const button = document.getElementById('theme-toggle');
-  button?.addEventListener('click', toggleTheme);
-</script>
+  class UIThemeToggle extends HTMLElement {
+    connectedCallback() {
+      const button = this.querySelector('[data-toggle-button]');
+      button?.addEventListener('click', () => {
+        toggleTheme();
+      });
+    }
+  }
+
+  if (!customElements.get('ui-theme-toggle')) {
+    customElements.define('ui-theme-toggle', UIThemeToggle);
+  }
+</script>

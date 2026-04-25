@@ -1,0 +1,116 @@
+---
+import DocsLayout from "../../layouts/DocsLayout.astro";
+import ComponentPreview from "../../components/ComponentPreview.astro";
+
+// Nota: Importamos desde el barrel file (index.ts) para simular la DX real
+import { Container, Grid, GridItem, Separator, Spacer } from "@rubengvillar/design-system-astro";
+
+const containerCode = `
+---
+import { Container } from "design-system-astro";
+---
+
+<Container class="border-2 border-dashed border-neutral-300 p-6 text-center bg-neutral-50 dark:bg-neutral-900 dark:border-neutral-700">
+  <p class="text-neutral-500">Este contenido está centrado y contenido con márgenes responsivos automáticos.</p>
+</Container>
+`;
+
+const gridCode = `
+---
+import { Grid, GridItem } from "design-system-astro";
+---
+
+<Grid class="grid-cols-1 md:grid-cols-3 gap-4">
+  <GridItem class="bg-blue-100 dark:bg-blue-900 p-4 rounded-md text-center">Columna 1</GridItem>
+  <GridItem class="bg-blue-100 dark:bg-blue-900 p-4 rounded-md text-center">Columna 2</GridItem>
+  <GridItem class="bg-blue-100 dark:bg-blue-900 p-4 rounded-md text-center">Columna 3</GridItem>
+  
+  <GridItem class="col-span-1 md:col-span-3 bg-indigo-100 dark:bg-indigo-900 p-4 rounded-md text-center">
+    Fila completa (col-span-3)
+  </GridItem>
+</Grid>
+`;
+
+const spacingCode = `
+---
+import { Separator, Spacer } from "design-system-astro";
+---
+
+<div class="border rounded-md p-6">
+  <h3 class="text-lg font-medium">Sección Principal</h3>
+  <p class="text-sm text-neutral-500">Descripción detallada de esta sección.</p>
+  
+  <Spacer class="h-6" /> 
+  <Separator /> 
+  <Spacer class="h-6" /> <h3 class="text-lg font-medium">Sub-sección</h3>
+  
+  <p class="text-sm text-neutral-500">Más contenido estructurado visualmente.</p>
+</div>
+`;
+---
+
+<DocsLayout 
+  title="Layout & Estructura" 
+  description="Primitivas fundamentales para organizar y espaciar el contenido de la interfaz."
+>
+  <div class="space-y-16">
+    
+    <section class="space-y-4">
+      <div class="space-y-1">
+        <h2 class="text-2xl font-semibold tracking-tight">Container</h2>
+        <p class="text-neutral-500">Limita el ancho máximo del contenido y lo centra horizontalmente. Ideal para envolturas principales de página.</p>
+      </div>
+      <ComponentPreview code={containerCode}>
+        <div class="p-4 w-full">
+          <Container class="border-2 border-dashed border-neutral-300 p-6 text-center bg-neutral-50 dark:bg-neutral-900 dark:border-neutral-700 rounded-md">
+            <p class="text-neutral-500">Este contenido está centrado y contenido con márgenes responsivos automáticos.</p>
+          </Container>
+        </div>
+      </ComponentPreview>
+    </section>
+
+    <section class="space-y-4">
+      <div class="space-y-1">
+        <h2 class="text-2xl font-semibold tracking-tight">Grid & GridItem</h2>
+        <p class="text-neutral-500">Sistema de cuadrícula basado en CSS Grid. Extiende el componente con las clases utilitarias de Tailwind (ej. <code>grid-cols-3</code>).</p>
+      </div>
+      <ComponentPreview code={gridCode}>
+        <div class="p-4 w-full">
+          <Grid class="grid-cols-1 md:grid-cols-3 gap-4">
+            <GridItem class="bg-blue-100 dark:bg-blue-900/40 p-4 rounded-md text-center border dark:border-blue-800 text-sm">Columna 1</GridItem>
+            <GridItem class="bg-blue-100 dark:bg-blue-900/40 p-4 rounded-md text-center border dark:border-blue-800 text-sm">Columna 2</GridItem>
+            <GridItem class="bg-blue-100 dark:bg-blue-900/40 p-4 rounded-md text-center border dark:border-blue-800 text-sm">Columna 3</GridItem>
+            <GridItem class="col-span-1 md:col-span-3 bg-indigo-100 dark:bg-indigo-900/40 p-4 rounded-md text-center border dark:border-indigo-800 text-sm">
+              Fila completa (col-span-3)
+            </GridItem>
+          </Grid>
+        </div>
+      </ComponentPreview>
+    </section>
+
+    <section class="space-y-4">
+      <div class="space-y-1">
+        <h2 class="text-2xl font-semibold tracking-tight">Separator & Spacer</h2>
+        <p class="text-neutral-500">Controla el ritmo vertical y divide el contenido de forma semántica y visual.</p>
+      </div>
+      <ComponentPreview code={spacingCode}>
+        <div class="p-4 w-full flex justify-center">
+          <div class="border rounded-md p-6 w-full max-w-md bg-white dark:bg-neutral-950 shadow-sm">
+            <h3 class="text-lg font-medium">Sección Principal</h3>
+            <p class="text-sm text-neutral-500">Descripción detallada de esta sección.</p>
+            
+            <Spacer class="h-6 block w-full bg-red-500/10 border-y border-dashed border-red-500/30 my-2 relative" />
+            
+            <Separator class="bg-neutral-200 dark:bg-neutral-800 w-full h-[1px]" />
+            
+            <Spacer class="h-6 block w-full bg-red-500/10 border-y border-dashed border-red-500/30 my-2 relative" />
+            
+            <h3 class="text-lg font-medium">Sub-sección</h3>
+            <p class="text-sm text-neutral-500">Más contenido estructurado visualmente.</p>
+          </div>
+        </div>
+      </ComponentPreview>
+    </section>
+
+  </div>
+</DocsLayout>

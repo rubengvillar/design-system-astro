@@ -1,0 +1,122 @@
+---
+import DocsLayout from "../../layouts/DocsLayout.astro";
+import ComponentPreview from "../../components/ComponentPreview.astro";
+import { ThemeToggle } from "@rubengvillar/design-system-astro";
+
+const layoutCode = `
+---
+import { ThemeScript } from "design-system-astro";
+---
+
+<html lang="es">
+  <head>
+    <ThemeScript /> 
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+`;
+
+const toggleCode = `
+---
+import { ThemeToggle } from "design-system-astro";
+---
+
+<ThemeToggle />
+`;
+
+const customIconsCode = `
+---
+import { ThemeToggle } from "design-system-astro";
+---
+
+<ThemeToggle darkIcon="🌚" lightIcon="🌞" />
+
+<!-- Or using slots -->
+<ThemeToggle>
+  <span slot="light">LIGHT</span>
+  <span slot="dark">DARK</span>
+</ThemeToggle>
+`;
+
+const programmaticCode = `
+import { setTheme } from "design-system-astro";
+setTheme('dark'); // 'light' | 'dark' | 'system'
+`
+---
+
+<DocsLayout 
+  title="Tema (Modo Oscuro/Claro)" 
+  description="Sistema de gestión de temas con persistencia y detección automática."
+>
+  <div class="space-y-12">
+    
+    <section class="space-y-4">
+      <h2 class="text-2xl font-semibold tracking-tight">1. Configuración del Layout</h2>
+      <p class="text-neutral-500">
+        Debes incluir <code>ThemeScript</code> en el <code>&lt;head&gt;</code> de tu layout principal. 
+        Este script se encarga de leer las preferencias del sistema o del localStorage inmediatamente 
+        antes de renderizar la página, evitando el parpadeo de color.
+      </p>
+      <ComponentPreview code={layoutCode} />
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl font-semibold tracking-tight">2. Componente de Toggle</h2>
+      <p class="text-neutral-500">
+        Simplemente importa y coloca el componente <code>ThemeToggle</code> en tu Navbar, 
+        Footer o cualquier área de configuración.
+      </p>
+      <ComponentPreview code={toggleCode}>
+        <div class="p-4 border rounded-md flex justify-center items-center gap-4">
+          <div class="flex flex-col items-center gap-1">
+            <span class="text-xs text-neutral-500">Instancia 1</span>
+            <ThemeToggle />
+          </div>
+          <div class="flex flex-col items-center gap-1">
+            <span class="text-xs text-neutral-500">Instancia 2</span>
+            <ThemeToggle />
+          </div>
+        </div>
+      </ComponentPreview>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl font-semibold tracking-tight">3. Personalización</h2>
+      <p class="text-neutral-500">
+        Puedes personalizar los iconos usando las props <code>darkIcon</code> y <code>lightIcon</code>, 
+        o usar los slots <code>dark</code> y <code>light</code> para mayor control.
+      </p>
+      <ComponentPreview code={customIconsCode}>
+        <div class="p-4 border rounded-md flex justify-center items-center gap-6">
+          <div class="flex flex-col items-center gap-1">
+            <span class="text-xs text-neutral-500">Emojis Props</span>
+            <ThemeToggle darkIcon="🌚" lightIcon="🌞" />
+          </div>
+          <div class="flex flex-col items-center gap-1">
+            <span class="text-xs text-neutral-500">Slots</span>
+            <ThemeToggle>
+              <span slot="light" class="text-xs font-bold px-2 py-1 bg-yellow-100 text-yellow-800 rounded">LIGHT</span>
+              <span slot="dark" class="text-xs font-bold px-2 py-1 bg-blue-900 text-blue-100 rounded">DARK</span>
+            </ThemeToggle>
+          </div>
+        </div>
+      </ComponentPreview>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl font-semibold tracking-tight">3. Control Programático (theme.ts)</h2>
+      <p class="text-neutral-500">
+        Si necesitas cambiar el tema manualmente desde otro script o componente, 
+        puedes importar las utilidades desde el sistema:
+      </p>
+      <ComponentPreview code={programmaticCode}>
+        <div class="p-4 border rounded-md bg-neutral-50 dark:bg-neutral-900">
+          <p class="text-sm text-neutral-500">Ejemplo de cómo usar <code>setTheme</code> para cambiar el tema programáticamente.</p>
+        </div>
+      </ComponentPreview>
+    </section>
+
+  </div>
+</DocsLayout>

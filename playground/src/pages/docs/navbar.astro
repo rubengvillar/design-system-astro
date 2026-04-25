@@ -1,80 +1,66 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
 import ComponentPreview from '../../components/ComponentPreview.astro';
-import { Navbar, NavbarLink, Typography } from '@rubengvillar/design-system-astro';
+import { Navbar, NavbarBrand, NavbarContent, NavbarMenuToggle, NavbarMenu, NavbarLink, Typography } from '@rubengvillar/design-system-astro';
 
 // 1. Código del Navbar Básico
 const basicCode = `<Navbar>
-  <a href="/" slot="brand" class="font-bold text-xl tracking-tight">
-    BrandLogo
-  </a>
-  
-  <Fragment slot="links">
+  <div class="w-full max-w-screen-xl mx-auto px-4 md:px-8 flex h-14 items-center justify-between">
+    <NavbarBrand>
+      <a href="/" class="font-bold text-xl tracking-tight">BrandLogo</a>
+    </NavbarBrand>
+    
+    <div class="flex items-center gap-6">
+      <NavbarContent>
+        <NavbarLink href="/features">Características</NavbarLink>
+        <NavbarLink href="/pricing">Precios</NavbarLink>
+        <NavbarLink href="/about">Nosotros</NavbarLink>
+      </NavbarContent>
+      <NavbarMenuToggle />
+    </div>
+  </div>
+
+  <NavbarMenu>
     <NavbarLink href="/features">Características</NavbarLink>
     <NavbarLink href="/pricing">Precios</NavbarLink>
     <NavbarLink href="/about">Nosotros</NavbarLink>
-  </Fragment>
-</Navbar>`;
-
-// 2. Código con enlaces activos
-const activeStateCode = `<Navbar>
-  <a href="/" slot="brand" class="font-bold text-xl tracking-tight">
-    Docs
-  </a>
-  <Fragment slot="links">
-    <NavbarLink href="/">Inicio</NavbarLink>
-    <NavbarLink href="/docs/navbar" isActive={true}>
-      Componentes
-    </NavbarLink>
-    <NavbarLink href="/github">GitHub</NavbarLink>
-  </Fragment>
+  </NavbarMenu>
 </Navbar>`;
 ---
 
-<DocsLayout title="Navbar & NavbarLink">
+<DocsLayout title="Navbar">
   <Typography variant="lead" class="mb-8 text-muted-foreground">
-    Una cabecera de navegación responsiva que soporta marca, enlaces y estados activos automáticos.
+    Una cabecera de navegación responsiva utilizando componentes puramente modulares.
   </Typography>
 
   <ComponentPreview title="Navegación Básica" code={basicCode}>
-    {/* Contenedor que simula una ventana de navegador para que el Navbar no se escape */}
     <div class="w-full flex flex-col rounded-xl border bg-background overflow-hidden shadow-sm">
       <Navbar>
-        <a href="#home" slot="brand" class="font-bold text-xl tracking-tight">
-          BrandLogo
-        </a>
-        <Fragment slot="links">
+        <div class="w-full max-w-screen-xl mx-auto px-4 md:px-8 flex h-14 items-center justify-between">
+          <NavbarBrand>
+            <a href="#home" class="font-bold text-xl tracking-tight">BrandLogo</a>
+          </NavbarBrand>
+          
+          <div class="flex items-center gap-6">
+            <NavbarContent>
+              <NavbarLink href="#features">Características</NavbarLink>
+              <NavbarLink href="#pricing">Precios</NavbarLink>
+              <NavbarLink href="#about">Nosotros</NavbarLink>
+            </NavbarContent>
+            <NavbarMenuToggle />
+          </div>
+        </div>
+
+        <NavbarMenu>
           <NavbarLink href="#features">Características</NavbarLink>
           <NavbarLink href="#pricing">Precios</NavbarLink>
           <NavbarLink href="#about">Nosotros</NavbarLink>
-        </Fragment>
+        </NavbarMenu>
       </Navbar>
       
-      {/* Falso contenido de página para dar contexto */}
       <div class="flex-1 bg-muted/30 p-8 flex items-center justify-center min-h-[150px]">
         <p class="text-sm text-muted-foreground">Contenido de la página</p>
       </div>
     </div>
   </ComponentPreview>
-
-  <ComponentPreview title="Estado Activo (Active State)" code={activeStateCode}>
-    <div class="w-full flex flex-col rounded-xl border bg-background overflow-hidden shadow-sm">
-      <Navbar>
-        <a href="#docs" slot="brand" class="font-bold text-xl tracking-tight">
-          Docs
-        </a>
-        <Fragment slot="links">
-          <NavbarLink href="#home">Inicio</NavbarLink>
-          {/* Aquí forzamos el isActive para que se vea resaltado en la doc */}
-          <NavbarLink href="#components" isActive={true}>Componentes</NavbarLink>
-          <NavbarLink href="#github">GitHub</NavbarLink>
-        </Fragment>
-      </Navbar>
-      
-      <div class="flex-1 bg-muted/30 p-8 flex items-center justify-center min-h-[150px]">
-        <p class="text-sm text-muted-foreground">Viendo la sección de Componentes...</p>
-      </div>
-    </div>
-  </ComponentPreview>
-
 </DocsLayout>

@@ -1,74 +1,88 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
 import ComponentPreview from '../../components/ComponentPreview.astro';
-import { Footer as UIFooter, Typography } from '@rubengvillar/design-system-astro';
+import { Footer, FooterColumn, FooterHeading, FooterLink, FooterBottom, Typography } from '@rubengvillar/design-system-astro';
 
 // Código de ejemplo para la documentación
-const footerCode = `<Footer copyrightOwner="SystemDocs">
-  <div slot="brand" class="flex flex-col gap-2">
-    <div class="font-bold text-xl">SystemDocs</div>
-    <p class="text-sm text-muted-foreground">Construyendo el futuro de la web.</p>
+const footerCode = `<Footer>
+  <div class="max-w-screen-xl mx-auto px-6 w-full pt-16 pb-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="flex flex-col gap-2 md:col-span-1">
+        <div class="font-bold text-xl tracking-tight">SystemDocs</div>
+        <p class="text-sm text-muted-foreground">Construyendo el futuro de la web.</p>
+      </div>
+
+      <FooterColumn>
+        <FooterHeading>Producto</FooterHeading>
+        <FooterLink href="#">Features</FooterLink>
+        <FooterLink href="#">Precios</FooterLink>
+      </FooterColumn>
+
+      <FooterColumn>
+        <FooterHeading>Compañía</FooterHeading>
+        <FooterLink href="#">Nosotros</FooterLink>
+        <FooterLink href="#">Blog</FooterLink>
+      </FooterColumn>
+
+      <FooterColumn>
+        <FooterHeading>Legal</FooterHeading>
+        <FooterLink href="#">Privacidad</FooterLink>
+        <FooterLink href="#">Términos</FooterLink>
+      </FooterColumn>
+    </div>
+
+    <FooterBottom>
+      <p>&copy; 2026 SystemDocs. Todos los derechos reservados.</p>
+      <div class="flex gap-4">
+        <FooterLink href="#">Política de Cookies</FooterLink>
+      </div>
+    </FooterBottom>
   </div>
-
-  <Fragment slot="links">
-    <div class="flex flex-col gap-2">
-      <h4 class="font-semibold text-foreground">Producto</h4>
-      <a href="#" class="text-sm text-muted-foreground hover:text-foreground">Features</a>
-      <a href="#" class="text-sm text-muted-foreground hover:text-foreground">Precios</a>
-    </div>
-    <div class="flex flex-col gap-2">
-      <h4 class="font-semibold text-foreground">Compañía</h4>
-      <a href="#" class="text-sm text-muted-foreground hover:text-foreground">Nosotros</a>
-      <a href="#" class="text-sm text-muted-foreground hover:text-foreground">Blog</a>
-    </div>
-    <div class="flex flex-col gap-2">
-      <h4 class="font-semibold text-foreground">Legal</h4>
-      <a href="#" class="text-sm text-muted-foreground hover:text-foreground">Privacidad</a>
-      <a href="#" class="text-sm text-muted-foreground hover:text-foreground">Términos</a>
-    </div>
-  </Fragment>
-
-  <Fragment slot="bottom-links">
-    <a href="#" class="text-sm text-muted-foreground hover:underline">Política de Cookies</a>
-  </Fragment>
 </Footer>`;
 ---
 
 <DocsLayout title="Footer">
   <Typography variant="lead" class="mb-8 text-muted-foreground">
-    Un pie de página modular, responsivo y fácil de configurar mediante slots.
+    Un pie de página modular usando componentes componibles.
   </Typography>
 
   <ComponentPreview title="Footer Completo" code={footerCode}>
     <div class="w-full border rounded-xl overflow-hidden bg-background">
-      <UIFooter copyrightOwner="SystemDocs">
-        <div slot="brand" class="flex flex-col gap-2">
-          <div class="font-bold text-xl tracking-tight">SystemDocs</div>
-          <p class="text-sm text-muted-foreground">Construyendo el futuro de la web.</p>
-        </div>
-        
-        <Fragment slot="links">
-          <div class="flex flex-col gap-2">
-            <h4 class="font-semibold text-foreground">Producto</h4>
-            <a href="#" class="text-sm text-muted-foreground hover:text-foreground">Features</a>
-            <a href="#" class="text-sm text-muted-foreground hover:text-foreground">Precios</a>
-          </div>
-          <div class="flex flex-col gap-2">
-            <h4 class="font-semibold text-foreground">Compañía</h4>
-            <a href="#" class="text-sm text-muted-foreground hover:text-foreground">Nosotros</a>
-            <a href="#" class="text-sm text-muted-foreground hover:text-foreground">Blog</a>
-          </div>
-          <div class="flex flex-col gap-2">
-            <h4 class="font-semibold text-foreground">Legal</h4>
-            <a href="#" class="text-sm text-muted-foreground hover:text-foreground">Privacidad</a>
-            <a href="#" class="text-sm text-muted-foreground hover:text-foreground">Términos</a>
-          </div>
-        </Fragment>
+      <Footer>
+        <div class="max-w-screen-xl mx-auto px-6 w-full pt-16 pb-8">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="flex flex-col gap-2 md:col-span-1">
+              <div class="font-bold text-xl tracking-tight">SystemDocs</div>
+              <p class="text-sm text-muted-foreground">Construyendo el futuro de la web.</p>
+            </div>
 
-        <Fragment slot="bottom-links">
-          <a href="#" class="text-sm text-muted-foreground hover:underline">Política de Cookies</a>
-        </Fragment>
-      </UIFooter>
+            <FooterColumn>
+              <FooterHeading>Producto</FooterHeading>
+              <FooterLink href="#">Features</FooterLink>
+              <FooterLink href="#">Precios</FooterLink>
+            </FooterColumn>
+
+            <FooterColumn>
+              <FooterHeading>Compañía</FooterHeading>
+              <FooterLink href="#">Nosotros</FooterLink>
+              <FooterLink href="#">Blog</FooterLink>
+            </FooterColumn>
+
+            <FooterColumn>
+              <FooterHeading>Legal</FooterHeading>
+              <FooterLink href="#">Privacidad</FooterLink>
+              <FooterLink href="#">Términos</FooterLink>
+            </FooterColumn>
+          </div>
+
+          <FooterBottom>
+            <p>&copy; 2026 SystemDocs. Todos los derechos reservados.</p>
+            <div class="flex gap-4">
+              <FooterLink href="#">Política de Cookies</FooterLink>
+            </div>
+          </FooterBottom>
+        </div>
+      </Footer>
     </div>
   </ComponentPreview>
 </DocsLayout>

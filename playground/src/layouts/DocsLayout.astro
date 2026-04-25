@@ -4,9 +4,10 @@ import { Navbar, NavbarLink, ThemeScript, Toaster } from '@rubengvillar/design-s
 
 interface Props {
   title: string;
+  description?: string;
 }
 
-const { title } = Astro.props;
+const { title, description } = Astro.props;
 
 // Lista de componentes para el Sidebar
 const components = [
@@ -17,8 +18,10 @@ const components = [
   { name: 'Image', url: '/docs/image' },
   { name: 'Footer', url: '/docs/footer' },
   { name: 'Forms', url: '/docs/forms' },
+  { name: ' Layout', url: '/docs/layout'},
   { name: 'Navbar', url: '/docs/navbar' },
   { name: 'Skeleton', url: '/docs/skeleton' },
+  { name: 'Theme Dark/Light', url: '/docs/theme' },
   { name: 'Toast', url: '/docs/toast' },
   { name: 'Typography', url: '/docs/typography' },
 ];
@@ -29,6 +32,8 @@ const components = [
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>{title} | Design System Docs</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.ico" />
     <ThemeScript />
   </head>
   <body class="min-h-screen bg-background text-foreground flex flex-col">

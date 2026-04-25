@@ -1,0 +1,62 @@
+---
+import { classMerge } from "../../../utils/classMerge";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"header"> {}
+const { class: className, ...rest } = Astro.props;
+---
+
+<ui-navbar>
+  <header
+    class={classMerge(
+      "flex flex-col items-center sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur",
+      className
+    )}
+    {...rest}
+  >
+    <slot />
+  </header>
+</ui-navbar>
+
+<script>
+  class UiNavbar extends HTMLElement {
+    constructor() {
+      super();
+      
+      this.addEventListener("navbar-toggle", () => {
+        const isExpanded = this.getAttribute("data-expanded") === "true";
+        this.setAttribute("data-expanded", (!isExpanded).toString());
+        
+        // Find child elements
+        const menu = this.querySelector('[data-navbar-menu]');
+        const toggleBtn = this.querySelector('[data-navbar-toggle]');
+        const iconMenu = toggleBtn?.querySelector('[data-icon="menu"]');
+        const iconClose = toggleBtn?.querySelector('[data-icon="close"]');
+
+        if (toggleBtn) {
+          toggleBtn.setAttribute('aria-expanded', (!isExpanded).toString());
+        }
+
+        if (!isExpanded) {
+          menu?.classList.remove('grid-rows-[0fr]', 'opacity-0');
+          menu?.classList.add('grid-rows-[1fr]', 'opacity-100', 'border-b');
+          
+          iconMenu?.classList.add('rotate-90', 'opacity-0', 'scale-50');
+          iconClose?.classList.remove('opacity-0', 'scale-50');
+          iconClose?.classList.add('rotate-0', 'opacity-100', 'scale-100');
+        } else {
+          menu?.classList.remove('grid-rows-[1fr]', 'opacity-100', 'border-b');
+          menu?.classList.add('grid-rows-[0fr]', 'opacity-0');
+          
+          iconMenu?.classList.remove('rotate-90', 'opacity-0', 'scale-50');
+          iconClose?.classList.add('opacity-0', 'scale-50');
+          iconClose?.classList.remove('rotate-0', 'opacity-100', 'scale-100');
+        }
+      });
+    }
+  }
+
+  if (!customElements.get("ui-navbar")) {
+    customElements.define("ui-navbar", UiNavbar);
+  }
+</script>

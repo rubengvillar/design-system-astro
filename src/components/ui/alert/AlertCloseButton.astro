@@ -1,0 +1,24 @@
+---
+import { classMerge } from "../../../utils/classMerge";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"button"> {}
+const { class: className, ...rest } = Astro.props;
+---
+
+<button
+  type="button"
+  class={classMerge(
+    "absolute right-4 top-4 rounded-md opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2 focus:ring-offset-background",
+    className
+  )}
+  aria-label="Cerrar alerta"
+  {...rest}
+  onclick="this.dispatchEvent(new CustomEvent('alert-dismiss', { bubbles: true }))"
+>
+  <slot>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+    </svg>
+  </slot>
+</button>

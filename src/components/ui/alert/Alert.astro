@@ -1,0 +1,46 @@
+---
+import { classMerge } from "../../../utils/classMerge";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {
+  variant?: "default" | "error" | "success" | "warning";
+}
+
+const { variant = "default", class: className, ...rest } = Astro.props;
+
+const styles = {
+  default: "border-border bg-background text-foreground",
+  error: "border-red-500/50 bg-red-50 text-red-900 dark:bg-red-900/10 dark:text-red-200 dark:border-red-900/50",
+  success: "border-green-500/50 bg-green-50 text-green-900 dark:bg-green-900/10 dark:text-green-200 dark:border-green-900/50",
+  warning: "border-yellow-500/50 bg-yellow-50 text-yellow-900 dark:bg-yellow-900/10 dark:text-yellow-200 dark:border-yellow-900/50",
+};
+---
+
+<ui-alert>
+  <div
+    role="alert"
+    class={classMerge(
+      "relative w-full rounded-[var(--radius)] border p-4 flex items-start gap-4",
+      styles[variant],
+      className
+    )}
+    {...rest}
+  >
+    <slot />
+  </div>
+</ui-alert>
+
+<script>
+  class UiAlert extends HTMLElement {
+    constructor() {
+      super();
+      this.addEventListener("alert-dismiss", () => {
+        this.style.display = "none";
+      });
+    }
+  }
+
+  if (!customElements.get("ui-alert")) {
+    customElements.define("ui-alert", UiAlert);
+  }
+</script>

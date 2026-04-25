@@ -13,12 +13,31 @@ export { default as Typography } from './components/ui/Typography.astro';
 // Componentes de UI visuales atomicos
 export { default as Button } from './components/ui/Button.astro';
 export { default as Badge } from './components/ui/Badge.astro';
-export { default as Alert } from './components/ui/Alert.astro';
-export { default as Navbar } from './components/ui/Navbar.astro';
-export { default as NavbarLink } from './components/ui/NavbarLink.astro';
-export { default as Footer } from './components/ui/Footer.astro';
 export { default as ThemeToggle } from './components/ui/ThemeToggle.astro';
 export { default as Image } from './components/ui/Image.astro';
+
+// Alert Componible
+export { default as Alert } from './components/ui/alert/Alert.astro';
+export { default as AlertIcon } from './components/ui/alert/AlertIcon.astro';
+export { default as AlertTitle } from './components/ui/alert/AlertTitle.astro';
+export { default as AlertDescription } from './components/ui/alert/AlertDescription.astro';
+export { default as AlertCloseButton } from './components/ui/alert/AlertCloseButton.astro';
+export { default as AlertContent } from './components/ui/alert/AlertContent.astro';
+
+// Navbar Componible
+export { default as Navbar } from './components/ui/navbar/Navbar.astro';
+export { default as NavbarBrand } from './components/ui/navbar/NavbarBrand.astro';
+export { default as NavbarContent } from './components/ui/navbar/NavbarContent.astro';
+export { default as NavbarMenuToggle } from './components/ui/navbar/NavbarMenuToggle.astro';
+export { default as NavbarMenu } from './components/ui/navbar/NavbarMenu.astro';
+export { default as NavbarLink } from './components/ui/NavbarLink.astro';
+
+// Footer Componible
+export { default as Footer } from './components/ui/footer/Footer.astro';
+export { default as FooterColumn } from './components/ui/footer/FooterColumn.astro';
+export { default as FooterHeading } from './components/ui/footer/FooterHeading.astro';
+export { default as FooterLink } from './components/ui/footer/FooterLink.astro';
+export { default as FooterBottom } from './components/ui/footer/FooterBottom.astro';
 
 export { default as Card } from './components/ui/Card.astro';
 export { default as CardHeader } from './components/ui/card/CardHeader.astro';

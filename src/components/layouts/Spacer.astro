@@ -1,10 +1,13 @@
 ---
+import { classMerge } from '../../utils/classMerge';
+
 interface Props {
+  class?: string;
   size?: 'sm' | 'md' | 'lg' | 'xl';
   axis?: 'vertical' | 'horizontal';
 }
 
-const { size = 'md', axis = 'vertical' } = Astro.props;
+const { size = 'md', axis = 'vertical', class: className } = Astro.props;
 
 const sizes = {
   sm: 'size-4',      // 1rem
@@ -20,4 +23,4 @@ const axisStyles = {
 };
 ---
 
-<div class:list={["shrink-0", axis === 'vertical' ? axisStyles.vertical : axisStyles.horizontal]} />
+<div class={classMerge(["shrink-0", axis === 'vertical' ? axisStyles.vertical : axisStyles.horizontal, className])} />

@@ -1,0 +1,75 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { classMerge } from "../../../utils/classMerge";
+
+interface Props extends HTMLAttributes<'div'> {
+  defaultValue?: string;
+}
+
+const { defaultValue, class: className, ...rest } = Astro.props;
+---
+
+<ui-tabs data-default={defaultValue} class={classMerge("block", className)} {...rest}>
+  <slot />
+</ui-tabs>
+
+<script>
+  class UITabs extends HTMLElement {
+    constructor() {
+      super();
+    }
+
+    connectedCallback() {
+      // Delay initialization slightly to ensure children are parsed
+      setTimeout(() => this.init(), 0);
+    }
+
+    init() {
+      const triggers = this.querySelectorAll('button[role="tab"]');
+      const contents = this.querySelectorAll('[role="tabpanel"]');
+      const defaultValue = this.dataset.default;
+
+      let activeValue = defaultValue;
+
+      const activateTab = (value: string | null) => {
+        if (!value) return;
+        triggers.forEach(t => {
+          if ((t as HTMLElement).dataset.value === value) {
+            t.setAttribute('aria-selected', 'true');
+            t.setAttribute('data-state', 'active');
+          } else {
+            t.setAttribute('aria-selected', 'false');
+            t.setAttribute('data-state', 'inactive');
+          }
+        });
+
+        contents.forEach(c => {
+          if ((c as HTMLElement).dataset.value === value) {
+            c.classList.remove('hidden');
+            c.setAttribute('data-state', 'active');
+          } else {
+            c.classList.add('hidden');
+            c.setAttribute('data-state', 'inactive');
+          }
+        });
+      };
+
+      triggers.forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+          const value = (e.currentTarget as HTMLElement).dataset.value;
+          activateTab(value || null);
+        });
+      });
+
+      // Activate initial
+      if (!activeValue && triggers.length > 0) {
+        activeValue = (triggers[0] as HTMLElement).dataset.value || null;
+      }
+      activateTab(activeValue);
+    }
+  }
+
+  if (!customElements.get('ui-tabs')) {
+    customElements.define('ui-tabs', UITabs);
+  }
+</script>

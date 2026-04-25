@@ -1,0 +1,18 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { classMerge } from "../../../utils/classMerge";
+
+interface Props extends HTMLAttributes<'dialog'> {}
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<dialog
+  class={classMerge(
+    "hidden open:grid fixed left-[50%] top-[50%] z-50 w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 sm:rounded-lg backdrop:bg-background/80 backdrop:backdrop-blur-sm open:animate-in open:fade-in-0 open:zoom-in-95",
+    className
+  )}
+  {...rest}
+>
+  <slot />
+</dialog>

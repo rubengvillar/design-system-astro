@@ -1,0 +1,43 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import ComponentPreview from '../../components/ComponentPreview.astro';
+import { 
+  Tooltip,
+  Typography 
+} from '@rubengvillar/design-system-astro';
+
+const tooltipCode = `<Tooltip content="Agregar a favoritos" position="top">
+  <button class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2">
+    Pasa el ratón
+  </button>
+</Tooltip>`;
+---
+
+<DocsLayout title="Tooltip">
+  <Typography variant="lead" class="mb-8">
+    Muestra información contextual al pasar el ratón por encima de un elemento, utilizando solo CSS (sin JavaScript).
+  </Typography>
+
+  <ComponentPreview title="Ejemplo Básico" code={tooltipCode}>
+    <div class="flex items-center justify-center py-12 space-x-4">
+        <Tooltip content="Tooltip superior" position="top">
+            <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2">
+                Top
+            </button>
+        </Tooltip>
+
+        <Tooltip content="Tooltip inferior" position="bottom">
+            <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2">
+                Bottom
+            </button>
+        </Tooltip>
+
+        <Tooltip content="Tooltip lateral" position="right">
+            <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2">
+                Right
+            </button>
+        </Tooltip>
+    </div>
+  </ComponentPreview>
+
+</DocsLayout>

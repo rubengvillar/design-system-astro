@@ -1,0 +1,18 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { classMerge } from "../../../utils/classMerge";
+
+interface Props extends HTMLAttributes<'th'> {}
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<th
+  class={classMerge(
+    "h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0",
+    className
+  )}
+  {...rest}
+>
+  <slot />
+</th>

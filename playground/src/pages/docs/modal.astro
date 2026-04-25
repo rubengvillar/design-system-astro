@@ -1,0 +1,73 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import ComponentPreview from '../../components/ComponentPreview.astro';
+import { 
+  Modal, 
+  ModalTrigger, 
+  ModalContent, 
+  ModalHeader, 
+  ModalFooter, 
+  ModalTitle, 
+  ModalDescription, 
+  ModalClose,
+  Button,
+  Typography 
+} from '@rubengvillar/design-system-astro';
+
+const modalCode = `<ModalTrigger target="example-modal" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2">
+  Abrir Modal
+</ModalTrigger>
+
+<Modal id="example-modal">
+  <ModalContent>
+    <ModalHeader>
+      <ModalTitle>¿Estás completamente seguro?</ModalTitle>
+      <ModalDescription>
+        Esta acción no se puede deshacer. Esto eliminará permanentemente tu cuenta y removerá los datos de nuestros servidores.
+      </ModalDescription>
+    </ModalHeader>
+    <div class="py-4 flex items-center gap-4">
+        Contenido del modal va aquí.
+    </div>
+    <ModalFooter>
+      <Button variant="outline" data-modal-close>Cancelar</Button>
+      <Button variant="default">Continuar</Button>
+    </ModalFooter>
+    <ModalClose />
+  </ModalContent>
+</Modal>`;
+---
+
+<DocsLayout title="Modal (Dialog)">
+  <Typography variant="lead" class="mb-8">
+    Un overlay interactivo para mostrar contenido importante o pedir confirmaciones, construido con HTML nativo \`dialog\`.
+  </Typography>
+
+  <ComponentPreview title="Ejemplo Básico" code={modalCode}>
+    <div class="flex items-center justify-center py-8">
+        <ModalTrigger target="example-modal" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2">
+            Abrir Modal
+        </ModalTrigger>
+
+        <Modal id="example-modal">
+            <ModalContent>
+                <ModalHeader>
+                <ModalTitle>¿Estás completamente seguro?</ModalTitle>
+                <ModalDescription>
+                    Esta acción no se puede deshacer. Esto eliminará permanentemente tu cuenta y removerá los datos de nuestros servidores.
+                </ModalDescription>
+                </ModalHeader>
+                <div class="py-4">
+                    <p class="text-sm text-foreground">Puedes poner formularios u otro contenido interactivo aquí adentro.</p>
+                </div>
+                <ModalFooter>
+                <Button variant="outline" data-modal-close>Cancelar</Button>
+                <Button variant="default">Continuar</Button>
+                </ModalFooter>
+                <ModalClose />
+            </ModalContent>
+        </Modal>
+    </div>
+  </ComponentPreview>
+
+</DocsLayout>

@@ -1,0 +1,18 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { classMerge } from "../../../utils/classMerge";
+
+interface Props extends HTMLAttributes<'button'> {}
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<button
+  data-dropdown-trigger
+  aria-haspopup="true"
+  aria-expanded="false"
+  class={className}
+  {...rest}
+>
+  <slot />
+</button>

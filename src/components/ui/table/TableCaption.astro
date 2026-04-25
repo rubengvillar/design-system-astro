@@ -1,0 +1,12 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { classMerge } from "../../../utils/classMerge";
+
+interface Props extends HTMLAttributes<'caption'> {}
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<caption class={classMerge("mt-4 text-sm text-muted-foreground", className)} {...rest}>
+  <slot />
+</caption>

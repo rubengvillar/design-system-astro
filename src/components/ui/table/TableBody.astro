@@ -1,0 +1,12 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { classMerge } from "../../../utils/classMerge";
+
+interface Props extends HTMLAttributes<'tbody'> {}
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<tbody class={classMerge("[&_tr:last-child]:border-0", className)} {...rest}>
+  <slot />
+</tbody>

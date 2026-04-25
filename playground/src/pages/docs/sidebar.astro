@@ -1,0 +1,66 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import ComponentPreview from '../../components/ComponentPreview.astro';
+import { 
+  Sidebar, 
+  SidebarHeader, 
+  SidebarContent, 
+  SidebarFooter, 
+  SidebarItem,
+  Typography 
+} from '@rubengvillar/design-system-astro';
+
+const sidebarCode = `<div class="flex h-[400px] border rounded-md overflow-hidden relative">
+  <Sidebar class="h-full w-48 relative border-r-0 border-r-border">
+    <SidebarHeader>
+      <h2 class="font-bold">Dashboard</h2>
+    </SidebarHeader>
+    <SidebarContent>
+      <div class="px-2 space-y-1">
+        <SidebarItem href="#" active={true}>Inicio</SidebarItem>
+        <SidebarItem href="#">Analytics</SidebarItem>
+        <SidebarItem href="#">Usuarios</SidebarItem>
+        <SidebarItem href="#">Configuración</SidebarItem>
+      </div>
+    </SidebarContent>
+    <SidebarFooter>
+      <SidebarItem href="#">Cerrar sesión</SidebarItem>
+    </SidebarFooter>
+  </Sidebar>
+  <div class="flex-1 p-6 bg-muted/20">
+    Contenido principal...
+  </div>
+</div>`;
+---
+
+<DocsLayout title="Sidebar (Menú Lateral)">
+  <Typography variant="lead" class="mb-8">
+    Un componente estructurado para la navegación lateral en dashboards y aplicaciones complejas.
+  </Typography>
+
+  <ComponentPreview title="Ejemplo Básico" code={sidebarCode}>
+    <div class="flex h-[400px] w-full max-w-2xl border rounded-md overflow-hidden relative">
+      <Sidebar class="h-full w-48 relative border-r-0 border-r-border">
+        <SidebarHeader>
+          <h2 class="font-bold">Dashboard</h2>
+        </SidebarHeader>
+        <SidebarContent>
+          <div class="px-2 space-y-1">
+            <SidebarItem href="#" active={true}>Inicio</SidebarItem>
+            <SidebarItem href="#">Analytics</SidebarItem>
+            <SidebarItem href="#">Usuarios</SidebarItem>
+            <SidebarItem href="#">Configuración</SidebarItem>
+          </div>
+        </SidebarContent>
+        <SidebarFooter>
+          <SidebarItem href="#">Cerrar sesión</SidebarItem>
+        </SidebarFooter>
+      </Sidebar>
+      <div class="flex-1 p-6 bg-muted/20">
+        <h3 class="text-xl font-medium mb-4">Contenido Principal</h3>
+        <p class="text-muted-foreground">Aquí iría el contenido de tu aplicación.</p>
+      </div>
+    </div>
+  </ComponentPreview>
+
+</DocsLayout>

@@ -1,0 +1,50 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import ComponentPreview from '../../components/ComponentPreview.astro';
+import { 
+  Tabs, 
+  TabsList, 
+  TabsTrigger, 
+  TabsContent,
+  Typography 
+} from '@rubengvillar/design-system-astro';
+
+const tabsCode = `<Tabs defaultValue="account" class="w-[400px]">
+  <TabsList class="grid w-full grid-cols-2">
+    <TabsTrigger value="account">Cuenta</TabsTrigger>
+    <TabsTrigger value="password">Contraseña</TabsTrigger>
+  </TabsList>
+  <TabsContent value="account" class="border p-4 rounded-md">
+    <h3 class="text-lg font-medium">Cuenta</h3>
+    <p class="text-sm text-muted-foreground">Haz cambios en tu cuenta aquí.</p>
+  </TabsContent>
+  <TabsContent value="password" class="border p-4 rounded-md">
+    <h3 class="text-lg font-medium">Contraseña</h3>
+    <p class="text-sm text-muted-foreground">Cambia tu contraseña aquí.</p>
+  </TabsContent>
+</Tabs>`;
+---
+
+<DocsLayout title="Tabs (Pestañas)">
+  <Typography variant="lead" class="mb-8">
+    Componente de pestañas para organizar el contenido en diferentes vistas. Construido como Custom Element puro para máximo rendimiento.
+  </Typography>
+
+  <ComponentPreview title="Ejemplo Básico" code={tabsCode}>
+    <Tabs defaultValue="account" class="w-full max-w-[400px]">
+      <TabsList class="grid w-full grid-cols-2">
+        <TabsTrigger value="account">Cuenta</TabsTrigger>
+        <TabsTrigger value="password">Contraseña</TabsTrigger>
+      </TabsList>
+      <TabsContent value="account" class="border p-4 rounded-md bg-card mt-2">
+        <h3 class="text-lg font-medium">Cuenta</h3>
+        <p class="text-sm text-muted-foreground mt-2">Haz cambios en tu cuenta aquí. Haz clic en guardar cuando hayas terminado.</p>
+      </TabsContent>
+      <TabsContent value="password" class="border p-4 rounded-md bg-card mt-2">
+        <h3 class="text-lg font-medium">Contraseña</h3>
+        <p class="text-sm text-muted-foreground mt-2">Cambia tu contraseña aquí. Después de guardar, cerrarás sesión.</p>
+      </TabsContent>
+    </Tabs>
+  </ComponentPreview>
+
+</DocsLayout>

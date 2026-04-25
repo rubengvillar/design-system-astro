@@ -1,0 +1,23 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { classMerge } from "../../../utils/classMerge";
+
+interface Props extends HTMLAttributes<'a'> {
+  href: string;
+  active?: boolean;
+}
+
+const { href, active, class: className, ...rest } = Astro.props;
+---
+
+<a
+  href={href}
+  class={classMerge(
+    "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all hover:bg-muted hover:text-foreground",
+    active ? "bg-muted text-foreground" : "text-muted-foreground",
+    className
+  )}
+  {...rest}
+>
+  <slot />
+</a>

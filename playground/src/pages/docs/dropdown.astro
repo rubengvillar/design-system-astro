@@ -1,0 +1,55 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import ComponentPreview from '../../components/ComponentPreview.astro';
+import { 
+  DropdownMenu, 
+  DropdownMenuTrigger, 
+  DropdownMenuContent, 
+  DropdownMenuItem, 
+  DropdownMenuLabel, 
+  DropdownMenuSeparator,
+  Button,
+  Typography 
+} from '@rubengvillar/design-system-astro';
+
+const dropdownCode = `<DropdownMenu>
+  <DropdownMenuTrigger class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2">
+    Opciones
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuLabel>Mi Cuenta</DropdownMenuLabel>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem>Perfil</DropdownMenuItem>
+    <DropdownMenuItem>Facturación</DropdownMenuItem>
+    <DropdownMenuItem>Configuración</DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem class="text-red-500 focus:text-red-500">Cerrar sesión</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>`;
+---
+
+<DocsLayout title="DropdownMenu (Menú Desplegable)">
+  <Typography variant="lead" class="mb-8">
+    Muestra un menú contextual con opciones para el usuario.
+  </Typography>
+
+  <ComponentPreview title="Ejemplo Básico" code={dropdownCode}>
+    <div class="flex items-center justify-center py-12">
+        <DropdownMenu align="center">
+            <DropdownMenuTrigger class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2">
+                Abrir Menú
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+                <DropdownMenuLabel>Mi Cuenta</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>Perfil</DropdownMenuItem>
+                <DropdownMenuItem>Facturación</DropdownMenuItem>
+                <DropdownMenuItem>Configuración</DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem class="text-red-500 focus:text-red-500">Cerrar sesión</DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>
+    </div>
+  </ComponentPreview>
+
+</DocsLayout>

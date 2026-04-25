@@ -56,8 +56,52 @@ export { default as Input } from './components/ui/form/Input.astro';
 export { default as Label } from './components/ui/form/Label.astro';
 export { default as Textarea } from './components/ui/form/Textarea.astro';
 export { default as Checkbox } from './components/ui/form/Checkbox.astro';
+export { default as Switch } from './components/ui/form/Switch.astro';
 export { default as FormField } from './components/ui/form/FormField.astro';
 export { default as ErrorMessage } from './components/ui/form/ErrorMessage.astro';
+
+// Tabs Componibles
+export { default as Tabs } from './components/ui/tabs/Tabs.astro';
+export { default as TabsList } from './components/ui/tabs/TabsList.astro';
+export { default as TabsTrigger } from './components/ui/tabs/TabsTrigger.astro';
+export { default as TabsContent } from './components/ui/tabs/TabsContent.astro';
+
+// Table Componibles
+export { default as Table } from './components/ui/table/Table.astro';
+export { default as TableHeader } from './components/ui/table/TableHeader.astro';
+export { default as TableBody } from './components/ui/table/TableBody.astro';
+export { default as TableRow } from './components/ui/table/TableRow.astro';
+export { default as TableHead } from './components/ui/table/TableHead.astro';
+export { default as TableCell } from './components/ui/table/TableCell.astro';
+export { default as TableCaption } from './components/ui/table/TableCaption.astro';
+
+// Sidebar Componibles
+export { default as Sidebar } from './components/ui/sidebar/Sidebar.astro';
+export { default as SidebarHeader } from './components/ui/sidebar/SidebarHeader.astro';
+export { default as SidebarContent } from './components/ui/sidebar/SidebarContent.astro';
+export { default as SidebarFooter } from './components/ui/sidebar/SidebarFooter.astro';
+export { default as SidebarItem } from './components/ui/sidebar/SidebarItem.astro';
+
+// Modal Componibles
+export { default as Modal } from './components/ui/modal/Modal.astro';
+export { default as ModalTrigger } from './components/ui/modal/ModalTrigger.astro';
+export { default as ModalContent } from './components/ui/modal/ModalContent.astro';
+export { default as ModalHeader } from './components/ui/modal/ModalHeader.astro';
+export { default as ModalFooter } from './components/ui/modal/ModalFooter.astro';
+export { default as ModalTitle } from './components/ui/modal/ModalTitle.astro';
+export { default as ModalDescription } from './components/ui/modal/ModalDescription.astro';
+export { default as ModalClose } from './components/ui/modal/ModalClose.astro';
+
+// Dropdown Componibles
+export { default as DropdownMenu } from './components/ui/dropdown/DropdownMenu.astro';
+export { default as DropdownMenuTrigger } from './components/ui/dropdown/DropdownMenuTrigger.astro';
+export { default as DropdownMenuContent } from './components/ui/dropdown/DropdownMenuContent.astro';
+export { default as DropdownMenuItem } from './components/ui/dropdown/DropdownMenuItem.astro';
+export { default as DropdownMenuLabel } from './components/ui/dropdown/DropdownMenuLabel.astro';
+export { default as DropdownMenuSeparator } from './components/ui/dropdown/DropdownMenuSeparator.astro';
+
+// Tooltip
+export { default as Tooltip } from './components/ui/tooltip/Tooltip.astro';
 
 // elementos de SEO
 export { default as Seo } from './components/seo/SEO.astro';

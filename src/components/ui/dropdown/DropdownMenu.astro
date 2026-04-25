@@ -1,0 +1,85 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { classMerge } from "../../../utils/classMerge";
+
+interface Props extends HTMLAttributes<'ui-dropdown'> {
+  align?: 'start' | 'center' | 'end';
+}
+
+const { align = 'center', class: className, ...rest } = Astro.props;
+---
+
+<ui-dropdown data-align={align} class={classMerge("relative inline-block text-left", className)} {...rest}>
+  <slot />
+</ui-dropdown>
+
+<script>
+  class UIDropdown extends HTMLElement {
+    constructor() {
+      super();
+    }
+
+    connectedCallback() {
+      setTimeout(() => this.init(), 0);
+    }
+
+    init() {
+      const trigger = this.querySelector('[data-dropdown-trigger]');
+      const content = this.querySelector('[data-dropdown-content]') as HTMLElement;
+
+      if (!trigger || !content) return;
+
+      const toggleDropdown = () => {
+        const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+        if (isExpanded) {
+          closeDropdown();
+        } else {
+          openDropdown();
+        }
+      };
+
+      const openDropdown = () => {
+        trigger.setAttribute('aria-expanded', 'true');
+        content.classList.remove('hidden');
+        content.classList.add('flex');
+        
+        // alignment logic based on data-align
+        const align = this.dataset.align || 'center';
+        if (align === 'start') {
+          content.classList.add('left-0');
+        } else if (align === 'end') {
+          content.classList.add('right-0');
+        } else {
+          content.classList.add('left-1/2', '-translate-x-1/2');
+        }
+      };
+
+      const closeDropdown = () => {
+        trigger.setAttribute('aria-expanded', 'false');
+        content.classList.add('hidden');
+        content.classList.remove('flex', 'left-0', 'right-0', 'left-1/2', '-translate-x-1/2');
+      };
+
+      trigger.addEventListener('click', toggleDropdown);
+
+      // Close when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!this.contains(e.target as Node)) {
+          closeDropdown();
+        }
+      });
+
+      // Close on escape key
+      this.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeDropdown();
+          (trigger as HTMLElement).focus();
+        }
+      });
+    }
+  }
+
+  if (!customElements.get('ui-dropdown')) {
+    customElements.define('ui-dropdown', UIDropdown);
+  }
+</script>

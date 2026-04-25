@@ -6,6 +6,7 @@ import {
   Label, 
   Textarea, 
   Checkbox, 
+  Switch,
   FormField, 
   Typography 
 } from '@rubengvillar/design-system-astro';
@@ -33,6 +34,11 @@ const checkboxCode = `<Checkbox
   id="terms" 
   label="Acepto los términos y condiciones" 
 />`;
+// 5. Switch
+const switchCode = `<div class="flex items-center space-x-4">
+  <Switch id="airplane-mode" size="md" />
+  <Label for="airplane-mode">Modo Avión</Label>
+</div>`;
 ---
 
 <DocsLayout title="Forms (Formularios)">
@@ -66,6 +72,13 @@ const checkboxCode = `<Checkbox
   <ComponentPreview title="Checkbox" code={checkboxCode}>
     <div class="w-full max-w-sm">
       <Checkbox id="terms" label="Acepto los términos y condiciones" />
+    </div>
+  </ComponentPreview>
+
+  <ComponentPreview title="Switch" code={switchCode}>
+    <div class="flex items-center space-x-4">
+      <Switch id="airplane-mode" size="md" />
+      <Label for="airplane-mode">Modo Avión</Label>
     </div>
   </ComponentPreview>
 

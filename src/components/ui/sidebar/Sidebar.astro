@@ -1,0 +1,12 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { classMerge } from "../../../utils/classMerge";
+
+interface Props extends HTMLAttributes<'aside'> {}
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<aside class={classMerge("flex h-screen w-64 flex-col border-r bg-background", className)} {...rest}>
+  <slot />
+</aside>

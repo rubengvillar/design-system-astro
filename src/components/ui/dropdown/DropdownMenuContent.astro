@@ -1,0 +1,19 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { classMerge } from "../../../utils/classMerge";
+
+interface Props extends HTMLAttributes<'div'> {}
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<div
+  data-dropdown-content
+  class={classMerge(
+    "absolute top-full z-50 mt-2 hidden min-w-[8rem] flex-col overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md animate-in fade-in-80 slide-in-from-top-1",
+    className
+  )}
+  {...rest}
+>
+  <slot />
+</div>

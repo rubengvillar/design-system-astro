@@ -1,0 +1,74 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { classMerge } from "../../../utils/classMerge";
+
+interface Props extends HTMLAttributes<'ui-modal'> {
+  id: string;
+}
+
+const { id, class: className, ...rest } = Astro.props;
+---
+
+<ui-modal id={id} class={classMerge("contents", className)} {...rest}>
+  <slot />
+</ui-modal>
+
+<script>
+  class UIModal extends HTMLElement {
+    constructor() {
+      super();
+    }
+
+    connectedCallback() {
+      setTimeout(() => this.init(), 0);
+    }
+
+    init() {
+      const dialog = this.querySelector('dialog');
+      if (!dialog) return;
+
+      // Allow triggers from anywhere in the document pointing to this modal ID
+      const triggers = document.querySelectorAll(`[data-modal-target="${this.id}"]`);
+      const closeButtons = this.querySelectorAll('[data-modal-close]');
+
+      triggers.forEach(t => {
+        t.addEventListener('click', () => {
+          dialog.showModal();
+          document.body.style.overflow = 'hidden';
+        });
+      });
+
+      const closeDialog = () => {
+        dialog.close();
+        document.body.style.overflow = '';
+      };
+
+      closeButtons.forEach(b => {
+        b.addEventListener('click', closeDialog);
+      });
+
+      // Close on backdrop click (when clicking outside the dialog content box)
+      dialog.addEventListener('click', (e) => {
+        const rect = dialog.getBoundingClientRect();
+        const isInDialog = (
+            rect.top <= e.clientY && 
+            e.clientY <= rect.top + rect.height &&
+            rect.left <= e.clientX && 
+            e.clientX <= rect.left + rect.width
+        );
+        if (!isInDialog) {
+          closeDialog();
+        }
+      });
+      
+      // Native close event (like pressing ESC)
+      dialog.addEventListener('close', () => {
+          document.body.style.overflow = '';
+      });
+    }
+  }
+
+  if (!customElements.get('ui-modal')) {
+    customElements.define('ui-modal', UIModal);
+  }
+</script>

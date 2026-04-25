@@ -1,0 +1,12 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { classMerge } from "../../../utils/classMerge";
+
+interface Props extends HTMLAttributes<'h2'> {}
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<h2 class={classMerge("text-lg font-semibold leading-none tracking-tight", className)} {...rest}>
+  <slot />
+</h2>

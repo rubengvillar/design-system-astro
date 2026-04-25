@@ -1,0 +1,83 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import ComponentPreview from '../../components/ComponentPreview.astro';
+import { 
+  Table, 
+  TableHeader, 
+  TableBody, 
+  TableRow, 
+  TableHead, 
+  TableCell, 
+  TableCaption,
+  Typography 
+} from '@rubengvillar/design-system-astro';
+
+const tableCode = `<Table>
+  <TableCaption>A list of your recent invoices.</TableCaption>
+  <TableHeader>
+    <TableRow>
+      <TableHead class="w-[100px]">Invoice</TableHead>
+      <TableHead>Status</TableHead>
+      <TableHead>Method</TableHead>
+      <TableHead class="text-right">Amount</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell class="font-medium">INV001</TableCell>
+      <TableCell>Paid</TableCell>
+      <TableCell>Credit Card</TableCell>
+      <TableCell class="text-right">$250.00</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell class="font-medium">INV002</TableCell>
+      <TableCell>Pending</TableCell>
+      <TableCell>PayPal</TableCell>
+      <TableCell class="text-right">$150.00</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>`;
+---
+
+<DocsLayout title="Table (Tabla)">
+  <Typography variant="lead" class="mb-8">
+    Componente responsivo para mostrar datos tabulares de forma estructurada.
+  </Typography>
+
+  <ComponentPreview title="Ejemplo Básico" code={tableCode}>
+    <div class="border rounded-md overflow-hidden">
+        <Table>
+          <TableCaption class="mb-4">Una lista de tus facturas recientes.</TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead class="w-[100px]">Factura</TableHead>
+              <TableHead>Estado</TableHead>
+              <TableHead>Método</TableHead>
+              <TableHead class="text-right">Monto</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell class="font-medium">INV001</TableCell>
+              <TableCell>Pagado</TableCell>
+              <TableCell>Tarjeta de Crédito</TableCell>
+              <TableCell class="text-right">$250.00</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell class="font-medium">INV002</TableCell>
+              <TableCell>Pendiente</TableCell>
+              <TableCell>PayPal</TableCell>
+              <TableCell class="text-right">$150.00</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell class="font-medium">INV003</TableCell>
+              <TableCell>Fallido</TableCell>
+              <TableCell>Transferencia Bancaria</TableCell>
+              <TableCell class="text-right">$350.00</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+    </div>
+  </ComponentPreview>
+
+</DocsLayout>

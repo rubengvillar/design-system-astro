@@ -1,0 +1,25 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+import { Typewriter } from '@rubengvillar/design-system-astro';
+---
+
+<DocsLayout title="Typewriter" description="Simula el efecto de escribir texto a máquina.">
+  <section class="space-y-6">
+    <div>
+      <p class="text-muted-foreground mb-4">
+        El componente <code>&lt;Typewriter /&gt;</code> es un Web Component ligero que simula la escritura. Puede renderizar una sola cadena o iterar (en loop) a través de un array de frases.
+      </p>
+    </div>
+
+    <div class="space-y-4">
+      <h3 class="text-xl font-bold">Ejemplos</h3>
+      
+      <div class="space-y-8">
+        <div class="p-6 border rounded-lg text-2xl font-semibold">
+          <span class="text-muted-foreground">Soy un </span>
+          <Typewriter text={["Desarrollador Full-Stack", "Diseñador UI", "Creador de Contenido"]} loop={true} speed={80} delay={1000} class="text-primary" />
+        </div>
+      </div>
+    </div>
+  </section>
+</DocsLayout>

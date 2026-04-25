@@ -1,0 +1,104 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { twMerge } from 'tailwind-merge';
+
+interface Props extends HTMLAttributes<'span'> {
+  text: string | string[];
+  speed?: number;
+  delay?: number;
+  loop?: boolean;
+  cursor?: boolean;
+  deleteSpeed?: number;
+  pauseDuration?: number;
+}
+
+const {
+  text,
+  speed = 100,
+  delay = 500,
+  loop = false,
+  cursor = true,
+  deleteSpeed = 50,
+  pauseDuration = 2000,
+  class: className,
+  ...rest
+} = Astro.props;
+
+const strings = Array.isArray(text) ? text : [text];
+const stringsJson = JSON.stringify(strings);
+---
+
+<ui-typewriter
+  data-strings={stringsJson}
+  data-speed={speed}
+  data-delay={delay}
+  data-loop={loop.toString()}
+  data-delete-speed={deleteSpeed}
+  data-pause={pauseDuration}
+  class={twMerge('inline-block relative', className)}
+  {...rest}
+>
+  <span class="typewriter-content"></span>
+  {cursor && <span class="typewriter-cursor animate-pulse border-r-2 border-current ml-1 h-full inline-block align-middle" style="animation-duration: 0.8s;"></span>}
+</ui-typewriter>
+
+<script>
+  class UITypewriter extends HTMLElement {
+    constructor() {
+      super();
+      const content = this.querySelector('.typewriter-content');
+      if (!content) return;
+
+      const strings = JSON.parse(this.dataset.strings || '[]');
+      const speed = Number(this.dataset.speed) || 100;
+      const delay = Number(this.dataset.delay) || 500;
+      const loop = this.dataset.loop === 'true';
+      const deleteSpeed = Number(this.dataset.deleteSpeed) || 50;
+      const pauseDuration = Number(this.dataset.pause) || 2000;
+
+      let stringIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+
+      const type = () => {
+        const currentString = strings[stringIndex];
+        
+        if (isDeleting) {
+          charIndex--;
+        } else {
+          charIndex++;
+        }
+
+        content.textContent = currentString.substring(0, charIndex);
+
+        let typeSpeed = isDeleting ? deleteSpeed : speed;
+
+        if (!isDeleting && charIndex === currentString.length) {
+          typeSpeed = pauseDuration;
+          if (loop || stringIndex < strings.length - 1) {
+             isDeleting = true;
+          }
+        } else if (isDeleting && charIndex === 0) {
+          isDeleting = false;
+          stringIndex++;
+          if (stringIndex >= strings.length) {
+            stringIndex = 0;
+          }
+          typeSpeed = delay;
+        }
+
+        if (loop || stringIndex < strings.length || (stringIndex === strings.length - 1 && charIndex <= currentString.length)) {
+          if (!(!loop && stringIndex === strings.length - 1 && charIndex === currentString.length)) {
+            setTimeout(type, typeSpeed);
+          }
+        }
+      };
+
+      setTimeout(type, delay);
+    }
+  }
+
+  if (!customElements.get('ui-typewriter')) {
+    customElements.define('ui-typewriter', UITypewriter);
+  }
+</script>

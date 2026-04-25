@@ -1,0 +1,76 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+import { Reveal, Card, CardHeader, CardTitle, CardContent } from '@rubengvillar/design-system-astro';
+---
+
+<DocsLayout title="Reveal" description="Anima la aparición de elementos al hacer scroll.">
+  <section class="space-y-6">
+    <div>
+      <p class="text-muted-foreground mb-4">
+        El componente <code>&lt;Reveal /&gt;</code> utiliza Intersection Observer para animar la entrada de elementos cuando entran en el viewport. Es ideal para crear experiencias fluidas y dinámicas en páginas de aterrizaje y portafolios.
+      </p>
+    </div>
+
+    <div class="space-y-4">
+      <h3 class="text-xl font-bold">Ejemplos</h3>
+      
+      <div class="grid gap-4 md:grid-cols-2">
+        <Reveal direction="up" distance="4rem" duration={1000}>
+          <Card>
+            <CardHeader><CardTitle>Reveal Up</CardTitle></CardHeader>
+            <CardContent>Aparece desde abajo hacia arriba.</CardContent>
+          </Card>
+        </Reveal>
+
+        <Reveal direction="left" delay={200}>
+          <Card>
+            <CardHeader><CardTitle>Reveal Left con Delay</CardTitle></CardHeader>
+            <CardContent>Aparece desde la izquierda con un ligero retraso.</CardContent>
+          </Card>
+        </Reveal>
+      </div>
+    </div>
+
+    <div class="space-y-4 mt-8">
+      <h3 class="text-xl font-bold">Propiedades (Props)</h3>
+      <div class="relative w-full overflow-auto">
+        <table class="w-full caption-bottom text-sm border-collapse border">
+          <thead class="[&_tr]:border-b bg-muted/50">
+            <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+              <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground border-r">Propiedad</th>
+              <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground border-r">Tipo</th>
+              <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground border-r">Por defecto</th>
+              <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Descripción</th>
+            </tr>
+          </thead>
+          <tbody class="[&_tr:last-child]:border-0">
+            <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+              <td class="p-4 align-middle border-r"><code>direction</code></td>
+              <td class="p-4 align-middle border-r"><code>'up' | 'down' | 'left' | 'right'</code></td>
+              <td class="p-4 align-middle border-r"><code>'up'</code></td>
+              <td class="p-4 align-middle">La dirección desde la que entra el elemento.</td>
+            </tr>
+            <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+              <td class="p-4 align-middle border-r"><code>delay</code></td>
+              <td class="p-4 align-middle border-r"><code>number</code></td>
+              <td class="p-4 align-middle border-r"><code>0</code></td>
+              <td class="p-4 align-middle">Retraso en milisegundos antes de iniciar la animación.</td>
+            </tr>
+            <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+              <td class="p-4 align-middle border-r"><code>duration</code></td>
+              <td class="p-4 align-middle border-r"><code>number</code></td>
+              <td class="p-4 align-middle border-r"><code>700</code></td>
+              <td class="p-4 align-middle">Duración de la animación en ms.</td>
+            </tr>
+            <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+              <td class="p-4 align-middle border-r"><code>distance</code></td>
+              <td class="p-4 align-middle border-r"><code>string</code></td>
+              <td class="p-4 align-middle border-r"><code>'2rem'</code></td>
+              <td class="p-4 align-middle">La distancia de desplazamiento inicial.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</DocsLayout>

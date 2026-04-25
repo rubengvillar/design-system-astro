@@ -1,0 +1,29 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { twMerge } from 'tailwind-merge';
+
+interface Props extends HTMLAttributes<'div'> {
+  scale?: string; // e.g. "1.05"
+  shadow?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'none';
+}
+
+const {
+  scale = '1.02',
+  shadow = 'md',
+  class: className,
+  ...rest
+} = Astro.props;
+
+// We use an inline style variable for scale, and tailwind for shadow
+const shadowClass = shadow !== 'none' ? `hover:shadow-${shadow}` : '';
+---
+
+<div
+  class={twMerge(`transition-all duration-300 ease-in-out cursor-pointer hover:-translate-y-1 ${shadowClass}`, className)}
+  style={`--hover-scale: ${scale};`}
+  onmouseenter="this.style.transform = `translateY(-4px) scale(${this.style.getPropertyValue('--hover-scale')})`"
+  onmouseleave="this.style.transform = 'translateY(0) scale(1)'"
+  {...rest}
+>
+  <slot />
+</div>

@@ -1,0 +1,24 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+import { TextReveal } from '@rubengvillar/design-system-astro';
+---
+
+<DocsLayout title="Text Reveal" description="Animación de entrada palabra por palabra.">
+  <section class="space-y-6">
+    <div>
+      <p class="text-muted-foreground mb-4">
+        El componente <code>&lt;TextReveal /&gt;</code> es ideal para encabezados majestuosos (Hero Section). Oculta el texto y lo revela secuencialmente, creando un efecto de cascada ascendente muy elegante.
+      </p>
+    </div>
+
+    <div class="space-y-4">
+      <h3 class="text-xl font-bold">Ejemplos</h3>
+      
+      <div class="p-8 border rounded-lg overflow-hidden bg-muted/20">
+        <h2 class="text-4xl md:text-6xl font-extrabold tracking-tight">
+          <TextReveal text="Construye interfaces rápidas, modernas y accesibles." staggerDelay={100} duration={800} />
+        </h2>
+      </div>
+    </div>
+  </section>
+</DocsLayout>

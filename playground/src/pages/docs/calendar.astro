@@ -1,0 +1,42 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import ComponentPreview from '../../components/ComponentPreview.astro';
+import { Calendar, Typography } from '@rubengvillar/design-system-astro';
+
+// Dates for the example (Native JS Dates)
+const today = new Date();
+const tomorrow = new Date(today);
+tomorrow.setDate(today.getDate() + 1);
+
+const nextWeek = new Date(today);
+nextWeek.setDate(today.getDate() + 7);
+
+const markedDates = [today, tomorrow, nextWeek];
+
+const calendarCode = `import { Calendar } from '@rubengvillar/design-system-astro';
+
+const today = new Date();
+const markedDates = [
+  new Date(), 
+  new Date(today.getFullYear(), today.getMonth(), today.getDate() + 3)
+];
+
+<Calendar 
+  markedDates={markedDates} 
+  onSelect={(date) => console.log("Selected:", date)} 
+/>`;
+---
+
+<DocsLayout title="Calendar (React)">
+  <Typography variant="lead" class="mb-8">
+    Un componente interactivo de calendario, construido en React para manejar correctamente el estado de meses y fechas marcadas, utilizando el objeto Date nativo de JavaScript para mantener las dependencias al mínimo.
+  </Typography>
+
+  <ComponentPreview title="Calendario con Fechas Marcadas" code={calendarCode}>
+    <div class="flex items-center justify-center py-8">
+        {/* Usamos client:load para que el componente React se hidrate y sea interactivo */}
+        <Calendar client:load markedDates={markedDates} />
+    </div>
+  </ComponentPreview>
+
+</DocsLayout>

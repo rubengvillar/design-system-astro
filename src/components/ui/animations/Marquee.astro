@@ -1,0 +1,42 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { twMerge } from 'tailwind-merge';
+
+interface Props extends HTMLAttributes<'div'> {
+  direction?: 'left' | 'right';
+  speed?: 'slow' | 'normal' | 'fast' | number;
+  pauseOnHover?: boolean;
+  gap?: string;
+}
+
+const {
+  direction = 'left',
+  speed = 'normal',
+  pauseOnHover = false,
+  gap = '1rem',
+  class: className,
+  ...rest
+} = Astro.props;
+
+let duration = '20s';
+if (typeof speed === 'number') {
+  duration = `${speed}s`;
+} else if (speed === 'slow') {
+  duration = '40s';
+} else if (speed === 'fast') {
+  duration = '10s';
+}
+
+const directionClass = direction === 'right' ? '[animation-direction:reverse]' : '';
+const hoverClass = pauseOnHover ? 'hover:[animation-play-state:paused]' : '';
+
+---
+
+<div class={twMerge('flex overflow-hidden relative w-full', className)} style={`--gap: ${gap}; gap: var(--gap);`} {...rest}>
+  <div class={twMerge('flex shrink-0 min-w-full justify-around animate-marquee', directionClass, hoverClass)} style={`--duration: ${duration}; gap: var(--gap);`}>
+    <slot />
+  </div>
+  <div aria-hidden="true" class={twMerge('flex shrink-0 min-w-full justify-around animate-marquee', directionClass, hoverClass)} style={`--duration: ${duration}; gap: var(--gap);`}>
+    <slot />
+  </div>
+</div>

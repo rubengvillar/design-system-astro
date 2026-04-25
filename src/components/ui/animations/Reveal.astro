@@ -1,0 +1,72 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { twMerge } from 'tailwind-merge';
+
+interface Props extends HTMLAttributes<'div'> {
+  direction?: 'up' | 'down' | 'left' | 'right';
+  delay?: number;
+  duration?: number;
+  distance?: string;
+  threshold?: number;
+}
+
+const {
+  direction = 'up',
+  delay = 0,
+  duration = 700,
+  distance = '2rem',
+  threshold = 0.1,
+  class: className,
+  ...rest
+} = Astro.props;
+
+// Determine initial transform based on direction
+let initialTransform = '';
+if (direction === 'up') initialTransform = `translateY(${distance})`;
+if (direction === 'down') initialTransform = `translateY(-${distance})`;
+if (direction === 'left') initialTransform = `translateX(${distance})`;
+if (direction === 'right') initialTransform = `translateX(-${distance})`;
+---
+
+<ui-reveal
+  data-delay={delay}
+  data-duration={duration}
+  data-threshold={threshold}
+  class={twMerge('block', className)}
+  style={`opacity: 0; transform: ${initialTransform}; transition: all ${duration}ms cubic-bezier(0.5, 0, 0, 1);`}
+  {...rest}
+>
+  <slot />
+</ui-reveal>
+
+<script>
+  class UIReveal extends HTMLElement {
+    constructor() {
+      super();
+      const delay = Number(this.dataset.delay) || 0;
+      const duration = Number(this.dataset.duration) || 700;
+      const threshold = Number(this.dataset.threshold) || 0.1;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setTimeout(() => {
+                this.style.opacity = '1';
+                this.style.transform = 'translate(0, 0)';
+              }, delay);
+              observer.unobserve(this);
+            }
+          });
+        },
+        { threshold }
+      );
+
+      observer.observe(this);
+    }
+  }
+
+  if (!customElements.get('ui-reveal')) {
+    customElements.define('ui-reveal', UIReveal);
+  }
+</script>

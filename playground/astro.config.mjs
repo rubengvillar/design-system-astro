@@ -1,8 +1,9 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite'; // <--- Nuevo import
+import react from '@astrojs/react';
 
 export default defineConfig({
-  // Eliminamos "integrations: [tailwind()]"
+  integrations: [react()],
   vite: {
     plugins: [tailwindcss()], // <--- Añadimos el plugin aquí
     optimizeDeps: {

@@ -1,0 +1,30 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+import { Spinner, Button } from '@rubengvillar/design-system-astro';
+---
+
+<DocsLayout title="Spinner" description="Indicador de carga en progreso.">
+  <section class="space-y-6">
+    <div>
+      <p class="text-muted-foreground mb-4">
+        El componente <code>&lt;Spinner /&gt;</code> es un SVG optimizado que rota continuamente. Se usa para indicar que una acción está en progreso o los datos se están cargando.
+      </p>
+    </div>
+
+    <div class="space-y-4">
+      <h3 class="text-xl font-bold">Ejemplos</h3>
+      
+      <div class="flex flex-wrap items-center gap-6 p-6 border rounded-lg">
+        <Spinner size="sm" variant="muted" />
+        <Spinner size="md" variant="primary" />
+        <Spinner size="lg" variant="secondary" />
+        <Spinner size="xl" variant="current" />
+        
+        <Button disabled>
+          <Spinner size="sm" class="mr-2" />
+          Cargando...
+        </Button>
+      </div>
+    </div>
+  </section>
+</DocsLayout>

@@ -103,6 +103,18 @@ export { default as DropdownMenuSeparator } from './components/ui/dropdown/Dropd
 // Tooltip
 export { default as Tooltip } from './components/ui/tooltip/Tooltip.astro';
 
+// Calendar (React)
+export { Calendar, type CalendarProps } from './components/ui/calendar/Calendar.tsx';
+
+// Animaciones
+export { default as Reveal } from './components/ui/animations/Reveal.astro';
+export { default as BlurFade } from './components/ui/animations/BlurFade.astro';
+export { default as Marquee } from './components/ui/animations/Marquee.astro';
+export { default as Spinner } from './components/ui/animations/Spinner.astro';
+export { default as HoverLift } from './components/ui/animations/HoverLift.astro';
+export { default as Typewriter } from './components/ui/animations/Typewriter.astro';
+export { default as TextReveal } from './components/ui/animations/TextReveal.astro';
+
 // elementos de SEO
 export { default as Seo } from './components/seo/SEO.astro';
 export { default as ThemeScript } from './components/seo/ThemeScript.astro';

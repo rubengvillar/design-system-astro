@@ -1,0 +1,63 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { twMerge } from 'tailwind-merge';
+
+interface Props extends HTMLAttributes<'div'> {
+  delay?: number;
+  duration?: number;
+  blurSize?: string;
+  threshold?: number;
+}
+
+const {
+  delay = 0,
+  duration = 700,
+  blurSize = '8px',
+  threshold = 0.1,
+  class: className,
+  ...rest
+} = Astro.props;
+---
+
+<ui-blur-fade
+  data-delay={delay}
+  data-duration={duration}
+  data-threshold={threshold}
+  class={twMerge('block', className)}
+  style={`opacity: 0; filter: blur(${blurSize}); transform: translateY(10px); transition: all ${duration}ms ease-out;`}
+  {...rest}
+>
+  <slot />
+</ui-blur-fade>
+
+<script>
+  class UIBlurFade extends HTMLElement {
+    constructor() {
+      super();
+      const delay = Number(this.dataset.delay) || 0;
+      const threshold = Number(this.dataset.threshold) || 0.1;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setTimeout(() => {
+                this.style.opacity = '1';
+                this.style.filter = 'blur(0px)';
+                this.style.transform = 'translateY(0)';
+              }, delay);
+              observer.unobserve(this);
+            }
+          });
+        },
+        { threshold }
+      );
+
+      observer.observe(this);
+    }
+  }
+
+  if (!customElements.get('ui-blur-fade')) {
+    customElements.define('ui-blur-fade', UIBlurFade);
+  }
+</script>

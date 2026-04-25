@@ -1,0 +1,70 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { twMerge } from 'tailwind-merge';
+
+interface Props extends HTMLAttributes<'div'> {
+  text: string;
+  staggerDelay?: number;
+  duration?: number;
+}
+
+const {
+  text,
+  staggerDelay = 50,
+  duration = 700,
+  class: className,
+  ...rest
+} = Astro.props;
+
+const words = text.split(' ');
+---
+
+<ui-text-reveal
+  data-stagger={staggerDelay}
+  class={twMerge('inline-block', className)}
+  {...rest}
+>
+  {words.map((word, i) => (
+    <span class="inline-block overflow-hidden align-bottom mr-[0.25em] pb-1">
+      <span
+        class="inline-block translate-y-full opacity-0 text-reveal-word"
+        style={`transition: transform ${duration}ms cubic-bezier(0.5, 0, 0, 1), opacity ${duration}ms ease-out;`}
+      >
+        {word}
+      </span>
+    </span>
+  ))}
+</ui-text-reveal>
+
+<script>
+  class UITextReveal extends HTMLElement {
+    constructor() {
+      super();
+      const staggerDelay = Number(this.dataset.stagger) || 50;
+      const words = this.querySelectorAll('.text-reveal-word');
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              words.forEach((word: any, index) => {
+                setTimeout(() => {
+                  word.style.transform = 'translateY(0)';
+                  word.style.opacity = '1';
+                }, index * staggerDelay);
+              });
+              observer.unobserve(this);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      observer.observe(this);
+    }
+  }
+
+  if (!customElements.get('ui-text-reveal')) {
+    customElements.define('ui-text-reveal', UITextReveal);
+  }
+</script>

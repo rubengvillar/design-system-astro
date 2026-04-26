@@ -1,0 +1,62 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import { Notification, NotificationIndicator, Avatar, Typography, Button } from '@rubengvillar/design-system-astro';
+---
+
+<DocsLayout title="Notification">
+  <Typography variant="p" class="mb-8 text-muted-foreground">
+    Componentes para gestionar la comunicación de eventos al usuario, desde elementos de lista hasta indicadores visuales en iconos.
+  </Typography>
+
+  <section class="space-y-12">
+    <div>
+      <Typography variant="h3" class="mb-4">Notificación (Item)</Typography>
+      <div class="grid gap-4 max-w-2xl">
+        <Notification unread timestamp="Hace 2 min" variant="info">
+          <Avatar slot="avatar" src="https://github.com/shadcn.png" alt="User" size="sm" />
+          <span slot="title">Nuevo mensaje de Alex</span>
+          Te ha enviado un archivo adjunto para el proyecto de diseño.
+          <div slot="actions" class="flex gap-2">
+            <Button size="sm">Ver archivo</Button>
+            <Button size="sm" variant="ghost">Ignorar</Button>
+          </div>
+        </Notification>
+
+        <Notification timestamp="Hace 1 hora" variant="success">
+          <div slot="avatar" class="h-8 w-8 rounded-full bg-success/20 flex items-center justify-center text-success">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <span slot="title">Pago procesado</span>
+          Tu suscripción ha sido renovada correctamente. Gracias por confiar en nosotros.
+        </Notification>
+
+        <Notification variant="error" unread timestamp="Urgente">
+          <div slot="avatar" class="h-8 w-8 rounded-full bg-destructive/20 flex items-center justify-center text-destructive">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <span slot="title">Error de seguridad</span>
+          Se ha detectado un inicio de sesión sospechoso desde una ubicación desconocida.
+        </Notification>
+      </div>
+    </div>
+
+    <div>
+      <Typography variant="h3" class="mb-4">Indicador de Notificación (Badge/Dot)</Typography>
+      <div class="flex gap-8 p-8 border rounded-xl bg-card">
+        <NotificationIndicator count={5}>
+          <div class="p-2 bg-muted rounded-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+          </div>
+        </NotificationIndicator>
+
+        <NotificationIndicator pulse>
+          <Avatar src="https://github.com/shadcn.png" />
+        </NotificationIndicator>
+
+        <NotificationIndicator count={120} variant="primary">
+          <Button variant="outline">Mensajes</Button>
+        </NotificationIndicator>
+      </div>
+    </div>
+  </section>
+</DocsLayout>

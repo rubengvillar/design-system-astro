@@ -1,0 +1,46 @@
+---
+import { classMerge } from "../../utils/classMerge";
+
+interface Props {
+  count?: number;
+  variant?: 'primary' | 'destructive' | 'success';
+  class?: string;
+  pulse?: boolean;
+}
+
+const { 
+  count, 
+  variant = 'destructive', 
+  class: className,
+  pulse = false 
+} = Astro.props;
+
+const variantClasses = {
+  primary: "bg-primary text-primary-foreground",
+  destructive: "bg-destructive text-destructive-foreground",
+  success: "bg-success text-success-foreground",
+};
+
+const hasCount = typeof count === 'number' && count > 0;
+---
+
+<div class={classMerge(
+  "relative inline-flex",
+  className
+)}>
+  <slot />
+  <span class={classMerge(
+    "absolute -top-1 -right-1 flex items-center justify-center rounded-full ring-2 ring-background",
+    variantClasses[variant],
+    hasCount ? "min-w-[1.25rem] h-5 px-1.5 text-[10px] font-bold" : "h-3 w-3",
+    pulse ? "animate-pulse" : ""
+  )}>
+    {hasCount ? (count > 99 ? '99+' : count) : null}
+    {pulse && !hasCount && (
+       <span class={classMerge(
+         "absolute inset-0 rounded-full opacity-75 animate-ping",
+         variantClasses[variant]
+       )}></span>
+    )}
+  </span>
+</div>

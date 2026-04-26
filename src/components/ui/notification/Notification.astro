@@ -1,0 +1,87 @@
+---
+import { classMerge } from "../../../utils/classMerge";
+import { Typography } from "../Typography.astro";
+
+interface Props {
+  variant?: 'default' | 'info' | 'success' | 'warning' | 'error';
+  unread?: boolean;
+  href?: string;
+  class?: string;
+  timestamp?: string;
+}
+
+const { 
+  variant = 'default', 
+  unread = false, 
+  href, 
+  class: className,
+  timestamp,
+  ...rest 
+} = Astro.props;
+
+const Tag = href ? 'a' : 'div';
+
+const variantClasses = {
+  default: "bg-card hover:bg-accent/50 border-border",
+  info: "bg-primary/5 hover:bg-primary/10 border-primary/20",
+  success: "bg-success/5 hover:bg-success/10 border-success/20",
+  warning: "bg-warning/5 hover:bg-warning/10 border-warning/20",
+  error: "bg-destructive/5 hover:bg-destructive/10 border-destructive/20",
+};
+
+const dotClasses = {
+  default: "bg-muted-foreground",
+  info: "bg-primary",
+  success: "bg-success",
+  warning: "bg-warning",
+  error: "bg-destructive",
+};
+---
+
+<Tag 
+  href={href}
+  class={classMerge(
+    "relative flex items-start gap-4 p-4 rounded-xl border transition-all duration-200 group no-underline text-foreground",
+    variantClasses[variant],
+    unread ? "border-l-4 shadow-sm" : "opacity-80 grayscale-[0.2]",
+    unread && variant === 'info' ? "border-l-primary" : "",
+    unread && variant === 'success' ? "border-l-success" : "",
+    unread && variant === 'warning' ? "border-l-warning" : "",
+    unread && variant === 'error' ? "border-l-destructive" : "",
+    unread && variant === 'default' ? "border-l-border" : "",
+    className
+  )}
+  {...rest}
+>
+  <div class="flex-shrink-0 pt-0.5">
+    <slot name="avatar" />
+  </div>
+
+  <div class="flex-1 flex flex-col gap-1 min-w-0">
+    <div class="flex items-center justify-between gap-2">
+      <div class="font-semibold text-sm truncate group-hover:text-primary transition-colors">
+        <slot name="title" />
+      </div>
+      {timestamp && (
+        <span class="text-[10px] text-muted-foreground whitespace-nowrap">
+          {timestamp}
+        </span>
+      )}
+    </div>
+    
+    <div class="text-sm text-muted-foreground leading-snug line-clamp-2">
+      <slot />
+    </div>
+
+    <div class="mt-2 flex items-center gap-2">
+      <slot name="actions" />
+    </div>
+  </div>
+
+  {unread && (
+    <div class={classMerge(
+      "absolute top-4 right-4 h-2 w-2 rounded-full",
+      dotClasses[variant]
+    )} />
+  )}
+</Tag>

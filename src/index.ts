@@ -16,6 +16,11 @@ export { Button as ReactButton, type ButtonProps as ReactButtonProps } from './c
 export { default as Badge } from './components/ui/Badge.astro';
 export { default as ThemeToggle } from './components/ui/ThemeToggle.astro';
 export { default as Image } from './components/ui/Image.astro';
+export { default as Avatar } from './components/ui/Avatar.astro';
+
+// Notificaciones
+export { default as Notification } from './components/ui/notification/Notification.astro';
+export { default as NotificationIndicator } from './components/ui/notification/NotificationIndicator.astro';
 
 // Alert Componible
 export { default as Alert } from './components/ui/alert/Alert.astro';

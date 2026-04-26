@@ -1,0 +1,46 @@
+---
+import { classMerge } from "../../utils/classMerge";
+
+interface Props {
+  src?: string;
+  alt?: string;
+  fallback?: string;
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+  class?: string;
+}
+
+const { src, alt, fallback, size = 'md', class: className, ...rest } = Astro.props;
+
+const sizeClasses = {
+  sm: "h-8 w-8 text-xs",
+  md: "h-10 w-10 text-sm",
+  lg: "h-12 w-12 text-base",
+  xl: "h-16 w-16 text-xl",
+};
+---
+
+<div 
+  class={classMerge(
+    "relative flex shrink-0 overflow-hidden rounded-full bg-muted",
+    sizeClasses[size],
+    className
+  )}
+  {...rest}
+>
+  {src ? (
+    <img 
+      src={src} 
+      alt={alt} 
+      class="aspect-square h-full w-full object-cover"
+      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+    />
+  ) : null}
+  <div 
+    class={classMerge(
+      "flex h-full w-full items-center justify-center rounded-full font-medium uppercase text-muted-foreground",
+      src ? "hidden" : "flex"
+    )}
+  >
+    {fallback || alt?.charAt(0) || '?'}
+  </div>
+</div>

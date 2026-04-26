@@ -2,8 +2,9 @@
 import type { HTMLAttributes } from 'astro/types';
 import { classMerge } from "../../../utils/classMerge";
 
-interface Props extends HTMLAttributes<'ui-modal'> {
+interface Props extends HTMLAttributes<'div'> {
   id: string;
+  class?: string;
 }
 
 const { id, class: className, ...rest } = Astro.props;

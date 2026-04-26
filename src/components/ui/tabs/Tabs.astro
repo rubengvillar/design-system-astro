@@ -4,6 +4,7 @@ import { classMerge } from "../../../utils/classMerge";
 
 interface Props extends HTMLAttributes<'div'> {
   defaultValue?: string;
+  class?: string;
 }
 
 const { defaultValue, class: className, ...rest } = Astro.props;
@@ -31,7 +32,7 @@ const { defaultValue, class: className, ...rest } = Astro.props;
 
       let activeValue = defaultValue;
 
-      const activateTab = (value: string | null) => {
+      const activateTab = (value: string | undefined) => {
         if (!value) return;
         triggers.forEach(t => {
           if ((t as HTMLElement).dataset.value === value) {
@@ -57,13 +58,13 @@ const { defaultValue, class: className, ...rest } = Astro.props;
       triggers.forEach(trigger => {
         trigger.addEventListener('click', (e) => {
           const value = (e.currentTarget as HTMLElement).dataset.value;
-          activateTab(value || null);
+          activateTab(value || undefined);
         });
       });
 
       // Activate initial
       if (!activeValue && triggers.length > 0) {
-        activeValue = (triggers[0] as HTMLElement).dataset.value || null;
+        activeValue = (triggers[0] as HTMLElement).dataset.value || undefined;
       }
       activateTab(activeValue);
     }

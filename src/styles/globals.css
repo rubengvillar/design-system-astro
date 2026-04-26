@@ -25,10 +25,16 @@
   
   /* Animación personalizada (opcional, si quieres ajustar la intensidad) */
   --animate-skeleton-pulse: skeleton-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-marquee: marquee var(--duration, 20s) linear infinite;
 
   @keyframes skeleton-pulse {
     0%, 100% { opacity: 1; }
     50% { opacity: .5; }
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(-100% - var(--gap, 1rem))); }
   }
 }
 

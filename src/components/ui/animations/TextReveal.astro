@@ -27,8 +27,8 @@ const words = text.split(' ');
   {words.map((word, i) => (
     <span class="inline-block overflow-hidden align-bottom mr-[0.25em] pb-1">
       <span
-        class="inline-block translate-y-full opacity-0 text-reveal-word"
-        style={`transition: transform ${duration}ms cubic-bezier(0.5, 0, 0, 1), opacity ${duration}ms ease-out;`}
+        class="inline-block text-reveal-word"
+        style={`transform: translateY(100%); opacity: 0; transition: transform ${duration}ms cubic-bezier(0.5, 0, 0, 1), opacity ${duration}ms ease-out;`}
       >
         {word}
       </span>

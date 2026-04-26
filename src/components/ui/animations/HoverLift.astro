@@ -15,7 +15,16 @@ const {
 } = Astro.props;
 
 // We use an inline style variable for scale, and tailwind for shadow
-const shadowClass = shadow !== 'none' ? `hover:shadow-${shadow}` : '';
+const shadowMap: Record<string, string> = {
+  sm: 'hover:shadow-sm',
+  md: 'hover:shadow-md',
+  lg: 'hover:shadow-lg',
+  xl: 'hover:shadow-xl',
+  '2xl': 'hover:shadow-2xl',
+  none: '',
+};
+
+const shadowClass = shadowMap[shadow] || '';
 ---
 
 <div

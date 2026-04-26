@@ -12,6 +12,7 @@ export { default as Typography } from './components/ui/Typography.astro';
 
 // Componentes de UI visuales atomicos
 export { default as Button } from './components/ui/Button.astro';
+export { Button as ReactButton, type ButtonProps as ReactButtonProps } from './components/ui/react/Button.tsx';
 export { default as Badge } from './components/ui/Badge.astro';
 export { default as ThemeToggle } from './components/ui/ThemeToggle.astro';
 export { default as Image } from './components/ui/Image.astro';

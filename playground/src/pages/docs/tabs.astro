@@ -1,15 +1,16 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
 import ComponentPreview from '../../components/ComponentPreview.astro';
-import { 
-  Tabs, 
+import * as DesignSystem from '@rubengvillar/design-system-astro';
+const { 
+  Tabs: TabsComponent, 
   TabsList, 
   TabsTrigger, 
   TabsContent,
   Typography 
-} from '@rubengvillar/design-system-astro';
+} = DesignSystem;
 
-const tabsCode = `<Tabs defaultValue="account" class="w-[400px]">
+const tabsCode = `<TabsComponent defaultValue="account" class="w-[400px]">
   <TabsList class="grid w-full grid-cols-2">
     <TabsTrigger value="account">Cuenta</TabsTrigger>
     <TabsTrigger value="password">Contraseña</TabsTrigger>
@@ -22,7 +23,7 @@ const tabsCode = `<Tabs defaultValue="account" class="w-[400px]">
     <h3 class="text-lg font-medium">Contraseña</h3>
     <p class="text-sm text-muted-foreground">Cambia tu contraseña aquí.</p>
   </TabsContent>
-</Tabs>`;
+</TabsComponent>`;
 ---
 
 <DocsLayout title="Tabs (Pestañas)">
@@ -31,7 +32,7 @@ const tabsCode = `<Tabs defaultValue="account" class="w-[400px]">
   </Typography>
 
   <ComponentPreview title="Ejemplo Básico" code={tabsCode}>
-    <Tabs defaultValue="account" class="w-full max-w-[400px]">
+    <TabsComponent defaultValue="account" class="w-full max-w-[400px]">
       <TabsList class="grid w-full grid-cols-2">
         <TabsTrigger value="account">Cuenta</TabsTrigger>
         <TabsTrigger value="password">Contraseña</TabsTrigger>
@@ -44,7 +45,7 @@ const tabsCode = `<Tabs defaultValue="account" class="w-[400px]">
         <h3 class="text-lg font-medium">Contraseña</h3>
         <p class="text-sm text-muted-foreground mt-2">Cambia tu contraseña aquí. Después de guardar, cerrarás sesión.</p>
       </TabsContent>
-    </Tabs>
+    </TabsComponent>
   </ComponentPreview>
 
 </DocsLayout>

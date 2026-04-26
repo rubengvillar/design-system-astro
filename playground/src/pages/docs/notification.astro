@@ -1,6 +1,7 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
-import { Notification, NotificationIndicator, Avatar, Typography, Button } from '@rubengvillar/design-system-astro';
+import * as DesignSystem from '@rubengvillar/design-system-astro';
+const { Notification: NotificationComponent, NotificationIndicator, Avatar, Typography, Button } = DesignSystem;
 ---
 
 <DocsLayout title="Notification">
@@ -12,7 +13,7 @@ import { Notification, NotificationIndicator, Avatar, Typography, Button } from 
     <div>
       <Typography variant="h3" class="mb-4">Notificación (Item)</Typography>
       <div class="grid gap-4 max-w-2xl">
-        <Notification unread timestamp="Hace 2 min" variant="info">
+        <NotificationComponent unread timestamp="Hace 2 min" variant="info">
           <Avatar slot="avatar" src="https://github.com/shadcn.png" alt="User" size="sm" />
           <span slot="title">Nuevo mensaje de Alex</span>
           Te ha enviado un archivo adjunto para el proyecto de diseño.
@@ -20,23 +21,23 @@ import { Notification, NotificationIndicator, Avatar, Typography, Button } from 
             <Button size="sm">Ver archivo</Button>
             <Button size="sm" variant="ghost">Ignorar</Button>
           </div>
-        </Notification>
+        </NotificationComponent>
 
-        <Notification timestamp="Hace 1 hora" variant="success">
+        <NotificationComponent timestamp="Hace 1 hora" variant="success">
           <div slot="avatar" class="h-8 w-8 rounded-full bg-success/20 flex items-center justify-center text-success">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
           <span slot="title">Pago procesado</span>
           Tu suscripción ha sido renovada correctamente. Gracias por confiar en nosotros.
-        </Notification>
+        </NotificationComponent>
 
-        <Notification variant="error" unread timestamp="Urgente">
+        <NotificationComponent variant="error" unread timestamp="Urgente">
           <div slot="avatar" class="h-8 w-8 rounded-full bg-destructive/20 flex items-center justify-center text-destructive">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
           </div>
           <span slot="title">Error de seguridad</span>
           Se ha detectado un inicio de sesión sospechoso desde una ubicación desconocida.
-        </Notification>
+        </NotificationComponent>
       </div>
     </div>
 

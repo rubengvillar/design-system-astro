@@ -1,6 +1,7 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
-import { Avatar, Typography, Grid } from '@rubengvillar/design-system-astro';
+import * as DesignSystem from '@rubengvillar/design-system-astro';
+const { Avatar: AvatarComponent, Typography, Grid } = DesignSystem;
 ---
 
 <DocsLayout title="Avatar">
@@ -12,26 +13,26 @@ import { Avatar, Typography, Grid } from '@rubengvillar/design-system-astro';
     <div>
       <Typography variant="h3" class="mb-4">Tamaños</Typography>
       <div class="flex items-end gap-4 p-6 border rounded-xl bg-card">
-        <Avatar size="sm" fallback="SM" />
-        <Avatar size="md" fallback="MD" />
-        <Avatar size="lg" fallback="LG" />
-        <Avatar size="xl" fallback="XL" />
+        <AvatarComponent size="sm" fallback="SM" />
+        <AvatarComponent size="md" fallback="MD" />
+        <AvatarComponent size="lg" fallback="LG" />
+        <AvatarComponent size="xl" fallback="XL" />
       </div>
     </div>
 
     <div>
       <Typography variant="h3" class="mb-4">Con Imagen y Fallback</Typography>
       <div class="flex gap-4 p-6 border rounded-xl bg-card">
-        <Avatar 
+        <AvatarComponent 
           src="https://github.com/shadcn.png" 
           alt="@shadcn" 
         />
-        <Avatar 
+        <AvatarComponent 
           src="invalid-link" 
           alt="Ruben Villar" 
           fallback="RV"
         />
-        <Avatar fallback="JD" class="bg-primary/10 text-primary" />
+        <AvatarComponent fallback="JD" class="bg-primary/10 text-primary" />
       </div>
     </div>
   </section>

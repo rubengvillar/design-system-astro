@@ -1,8 +1,9 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
 import ComponentPreview from '../../components/ComponentPreview.astro';
-import { 
-  Modal, 
+import * as DesignSystem from '@rubengvillar/design-system-astro';
+const { 
+  Modal: ModalComponent, 
   ModalTrigger, 
   ModalContent, 
   ModalHeader, 
@@ -12,13 +13,13 @@ import {
   ModalClose,
   Button,
   Typography 
-} from '@rubengvillar/design-system-astro';
+} = DesignSystem;
 
 const modalCode = `<ModalTrigger target="example-modal" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2">
   Abrir Modal
 </ModalTrigger>
 
-<Modal id="example-modal">
+<ModalComponent id="example-modal">
   <ModalContent>
     <ModalHeader>
       <ModalTitle>¿Estás completamente seguro?</ModalTitle>
@@ -31,11 +32,11 @@ const modalCode = `<ModalTrigger target="example-modal" class="inline-flex items
     </div>
     <ModalFooter>
       <Button variant="outline" data-modal-close>Cancelar</Button>
-      <Button variant="default">Continuar</Button>
+      <Button variant="primary">Continuar</Button>
     </ModalFooter>
     <ModalClose />
   </ModalContent>
-</Modal>`;
+</ModalComponent>`;
 ---
 
 <DocsLayout title="Modal (Dialog)">
@@ -49,7 +50,7 @@ const modalCode = `<ModalTrigger target="example-modal" class="inline-flex items
             Abrir Modal
         </ModalTrigger>
 
-        <Modal id="example-modal">
+        <ModalComponent id="example-modal">
             <ModalContent>
                 <ModalHeader>
                 <ModalTitle>¿Estás completamente seguro?</ModalTitle>
@@ -62,11 +63,11 @@ const modalCode = `<ModalTrigger target="example-modal" class="inline-flex items
                 </div>
                 <ModalFooter>
                 <Button variant="outline" data-modal-close>Cancelar</Button>
-                <Button variant="default">Continuar</Button>
+                <Button variant="primary">Continuar</Button>
                 </ModalFooter>
                 <ModalClose />
             </ModalContent>
-        </Modal>
+        </ModalComponent>
     </div>
   </ComponentPreview>
 

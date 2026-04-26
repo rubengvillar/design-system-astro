@@ -1,16 +1,17 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
 import ComponentPreview from '../../components/ComponentPreview.astro';
-import { 
-  Tooltip,
+import * as DesignSystem from '@rubengvillar/design-system-astro';
+const { 
+  Tooltip: TooltipComponent,
   Typography 
-} from '@rubengvillar/design-system-astro';
+} = DesignSystem;
 
-const tooltipCode = `<Tooltip content="Agregar a favoritos" position="top">
+const tooltipCode = `<TooltipComponent content="Agregar a favoritos" position="top">
   <button class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2">
     Pasa el ratón
   </button>
-</Tooltip>`;
+</TooltipComponent>`;
 ---
 
 <DocsLayout title="Tooltip">
@@ -20,23 +21,23 @@ const tooltipCode = `<Tooltip content="Agregar a favoritos" position="top">
 
   <ComponentPreview title="Ejemplo Básico" code={tooltipCode}>
     <div class="flex items-center justify-center py-12 space-x-4">
-        <Tooltip content="Tooltip superior" position="top">
+        <TooltipComponent content="Tooltip superior" position="top">
             <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2">
                 Top
             </button>
-        </Tooltip>
+        </TooltipComponent>
 
-        <Tooltip content="Tooltip inferior" position="bottom">
+        <TooltipComponent content="Tooltip inferior" position="bottom">
             <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2">
                 Bottom
             </button>
-        </Tooltip>
+        </TooltipComponent>
 
-        <Tooltip content="Tooltip lateral" position="right">
+        <TooltipComponent content="Tooltip lateral" position="right">
             <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2">
                 Right
             </button>
-        </Tooltip>
+        </TooltipComponent>
     </div>
   </ComponentPreview>
 

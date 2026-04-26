@@ -1,17 +1,18 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
 import ComponentPreview from '../../components/ComponentPreview.astro';
-import { 
-  Sidebar, 
+import * as DesignSystem from '@rubengvillar/design-system-astro';
+const { 
+  Sidebar: SidebarComponent, 
   SidebarHeader, 
   SidebarContent, 
   SidebarFooter, 
   SidebarItem,
   Typography 
-} from '@rubengvillar/design-system-astro';
+} = DesignSystem;
 
 const sidebarCode = `<div class="flex h-[400px] border rounded-md overflow-hidden relative">
-  <Sidebar class="h-full w-48 relative border-r-0 border-r-border">
+  <SidebarComponent class="h-full w-48 relative border-r-0 border-r-border">
     <SidebarHeader>
       <h2 class="font-bold">Dashboard</h2>
     </SidebarHeader>
@@ -26,7 +27,7 @@ const sidebarCode = `<div class="flex h-[400px] border rounded-md overflow-hidde
     <SidebarFooter>
       <SidebarItem href="#">Cerrar sesión</SidebarItem>
     </SidebarFooter>
-  </Sidebar>
+  </SidebarComponent>
   <div class="flex-1 p-6 bg-muted/20">
     Contenido principal...
   </div>
@@ -40,7 +41,7 @@ const sidebarCode = `<div class="flex h-[400px] border rounded-md overflow-hidde
 
   <ComponentPreview title="Ejemplo Básico" code={sidebarCode}>
     <div class="flex h-[400px] w-full max-w-2xl border rounded-md overflow-hidden relative">
-      <Sidebar class="h-full w-48 relative border-r-0 border-r-border">
+      <SidebarComponent class="h-full w-48 relative border-r-0 border-r-border">
         <SidebarHeader>
           <h2 class="font-bold">Dashboard</h2>
         </SidebarHeader>
@@ -55,7 +56,7 @@ const sidebarCode = `<div class="flex h-[400px] border rounded-md overflow-hidde
         <SidebarFooter>
           <SidebarItem href="#">Cerrar sesión</SidebarItem>
         </SidebarFooter>
-      </Sidebar>
+      </SidebarComponent>
       <div class="flex-1 p-6 bg-muted/20">
         <h3 class="text-xl font-medium mb-4">Contenido Principal</h3>
         <p class="text-muted-foreground">Aquí iría el contenido de tu aplicación.</p>

@@ -1,8 +1,9 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
 import ComponentPreview from '../../components/ComponentPreview.astro';
-import { 
-  Table, 
+import * as DesignSystem from '@rubengvillar/design-system-astro';
+const { 
+  Table: TableComponent, 
   TableHeader, 
   TableBody, 
   TableRow, 
@@ -10,9 +11,9 @@ import {
   TableCell, 
   TableCaption,
   Typography 
-} from '@rubengvillar/design-system-astro';
+} = DesignSystem;
 
-const tableCode = `<Table>
+const tableCode = `<TableComponent>
   <TableCaption>A list of your recent invoices.</TableCaption>
   <TableHeader>
     <TableRow>
@@ -36,7 +37,7 @@ const tableCode = `<Table>
       <TableCell class="text-right">$150.00</TableCell>
     </TableRow>
   </TableBody>
-</Table>`;
+</TableComponent>`;
 ---
 
 <DocsLayout title="Table (Tabla)">
@@ -46,7 +47,7 @@ const tableCode = `<Table>
 
   <ComponentPreview title="Ejemplo Básico" code={tableCode}>
     <div class="border rounded-md overflow-hidden">
-        <Table>
+        <TableComponent>
           <TableCaption class="mb-4">Una lista de tus facturas recientes.</TableCaption>
           <TableHeader>
             <TableRow>
@@ -76,7 +77,7 @@ const tableCode = `<Table>
               <TableCell class="text-right">$350.00</TableCell>
             </TableRow>
           </TableBody>
-        </Table>
+        </TableComponent>
     </div>
   </ComponentPreview>
 

@@ -1,0 +1,41 @@
+---
+import { classMerge } from '../../../utils/classMerge';
+import type { HTMLAttributes } from 'astro/types';
+
+export interface Props extends HTMLAttributes<'span'> {
+  type?: 'increase' | 'decrease' | 'neutral';
+}
+
+const { type = 'neutral', class: className, ...rest } = Astro.props;
+
+const typeStyles = {
+  increase: "text-emerald-500",
+  decrease: "text-rose-500",
+  neutral: "text-muted-foreground",
+};
+
+const baseStyles = "inline-flex items-center justify-center font-medium";
+---
+
+<span class={classMerge(baseStyles, typeStyles[type], className)} {...rest}>
+  <slot name="icon">
+    {type === 'increase' && (
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m5 12 7-7 7 7"/>
+        <path d="M12 19V5"/>
+      </svg>
+    )}
+    {type === 'decrease' && (
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 5v14"/>
+        <path d="m19 12-7 7-7-7"/>
+      </svg>
+    )}
+    {type === 'neutral' && (
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14"/>
+      </svg>
+    )}
+  </slot>
+  <slot />
+</span>

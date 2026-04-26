@@ -109,6 +109,14 @@ export { default as DropdownMenuSeparator } from './components/ui/dropdown/Dropd
 // Tooltip
 export { default as Tooltip } from './components/ui/tooltip/Tooltip.astro';
 
+// Estadísticas (Stats)
+export { default as Stat } from './components/ui/stat/Stat.astro';
+export { default as StatGroup } from './components/ui/stat/StatGroup.astro';
+export { default as StatLabel } from './components/ui/stat/StatLabel.astro';
+export { default as StatNumber } from './components/ui/stat/StatNumber.astro';
+export { default as StatHelpText } from './components/ui/stat/StatHelpText.astro';
+export { default as StatIndicator } from './components/ui/stat/StatIndicator.astro';
+
 // Calendar (React)
 export { Calendar, type CalendarProps } from './components/ui/calendar/Calendar.tsx';
 

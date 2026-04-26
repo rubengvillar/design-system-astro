@@ -1,0 +1,118 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import ComponentPreview from '../../components/ComponentPreview.astro';
+import { 
+  Stat, 
+  StatGroup, 
+  StatLabel, 
+  StatNumber, 
+  StatHelpText, 
+  StatIndicator, 
+  Typography 
+} from '@rubengvillar/design-system-astro';
+
+const defaultCode = `<StatGroup cols={3}>
+  <Stat>
+    <StatLabel>Usuarios Activos</StatLabel>
+    <StatNumber>45,231</StatNumber>
+    <StatHelpText>
+      <StatIndicator type="increase" />
+      20.5% respecto al mes anterior
+    </StatHelpText>
+  </Stat>
+
+  <Stat>
+    <StatLabel>Ingresos Mensuales</StatLabel>
+    <StatNumber>$12,450</StatNumber>
+    <StatHelpText>
+      <StatIndicator type="decrease" />
+      5.2% respecto al mes anterior
+    </StatHelpText>
+  </Stat>
+
+  <Stat>
+    <StatLabel>Nuevas Suscripciones</StatLabel>
+    <StatNumber>1,234</StatNumber>
+    <StatHelpText>
+      <StatIndicator type="neutral" />
+      Sin cambios
+    </StatHelpText>
+  </Stat>
+</StatGroup>`;
+
+const customIconCode = `<Stat>
+  <StatLabel>Tasa de Rebote</StatLabel>
+  <StatNumber>42.3%</StatNumber>
+  <StatHelpText>
+    <StatIndicator type="decrease">
+      <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-rose-500">
+        <path d="m21 16-4 4-4-4"/>
+        <path d="M17 20V4"/>
+        <path d="m3 8 4-4 4 4"/>
+        <path d="M7 4v16"/>
+      </svg>
+    </StatIndicator>
+    Empeoró un 2%
+  </StatHelpText>
+</Stat>`;
+---
+
+<DocsLayout title="Stat">
+  <Typography variant="lead" class="mb-8">
+    Componentes para mostrar métricas y estadísticas clave de manera clara y consistente.
+  </Typography>
+
+  <ComponentPreview title="Grupo de Estadísticas (StatGroup)" code={defaultCode}>
+    <div class="w-full">
+      <StatGroup cols={3}>
+        <Stat>
+          <StatLabel>Usuarios Activos</StatLabel>
+          <StatNumber>45,231</StatNumber>
+          <StatHelpText>
+            <StatIndicator type="increase" />
+            20.5% respecto al mes anterior
+          </StatHelpText>
+        </Stat>
+
+        <Stat>
+          <StatLabel>Ingresos Mensuales</StatLabel>
+          <StatNumber>$12,450</StatNumber>
+          <StatHelpText>
+            <StatIndicator type="decrease" />
+            5.2% respecto al mes anterior
+          </StatHelpText>
+        </Stat>
+
+        <Stat>
+          <StatLabel>Nuevas Suscripciones</StatLabel>
+          <StatNumber>1,234</StatNumber>
+          <StatHelpText>
+            <StatIndicator type="neutral" />
+            Sin cambios
+          </StatHelpText>
+        </Stat>
+      </StatGroup>
+    </div>
+  </ComponentPreview>
+
+  <ComponentPreview title="Iconos Personalizados" code={customIconCode}>
+    <div class="w-full max-w-sm">
+      <Stat>
+        <StatLabel>Tasa de Rebote</StatLabel>
+        <StatNumber>42.3%</StatNumber>
+        <StatHelpText>
+          <StatIndicator type="decrease">
+            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-rose-500">
+              <path d="m21 16-4 4-4-4"/>
+              <path d="M17 20V4"/>
+              <path d="m3 8 4-4 4 4"/>
+              <path d="M7 4v16"/>
+            </svg>
+          </StatIndicator>
+          Empeoró un 2%
+        </StatHelpText>
+      </Stat>
+    </div>
+  </ComponentPreview>
+
+</DocsLayout>

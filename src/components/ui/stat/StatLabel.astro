@@ -1,0 +1,14 @@
+---
+import { classMerge } from '../../../utils/classMerge';
+import type { HTMLAttributes } from 'astro/types';
+
+export interface Props extends HTMLAttributes<'dt'> {}
+
+const { class: className, ...rest } = Astro.props;
+
+const baseStyles = "text-sm font-medium text-muted-foreground";
+---
+
+<dt class={classMerge(baseStyles, className)} {...rest}>
+  <slot />
+</dt>

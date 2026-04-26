@@ -1,0 +1,23 @@
+---
+import { classMerge } from '../../../utils/classMerge';
+import type { HTMLAttributes } from 'astro/types';
+
+export interface Props extends HTMLAttributes<'div'> {
+  cols?: 1 | 2 | 3 | 4;
+}
+
+const { cols = 3, class: className, ...rest } = Astro.props;
+
+const gridCols = {
+  1: "grid-cols-1",
+  2: "grid-cols-1 sm:grid-cols-2",
+  3: "grid-cols-1 sm:grid-cols-2 md:grid-cols-3",
+  4: "grid-cols-1 sm:grid-cols-2 md:grid-cols-4",
+};
+
+const baseStyles = "grid gap-4 w-full";
+---
+
+<div class={classMerge(baseStyles, gridCols[cols], className)} {...rest}>
+  <slot />
+</div>

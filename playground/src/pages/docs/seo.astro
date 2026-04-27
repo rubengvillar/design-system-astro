@@ -1,0 +1,112 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import ComponentPreview from '../../components/ComponentPreview.astro';
+import { Typography } from '@rubengvillar/design-system-astro';
+
+// 1. Componente Unificado
+const seoCode = `---
+import { Seo } from '@rubengvillar/design-system-astro';
+---
+
+<head>
+  <Seo 
+    title="Mi Página Increíble"
+    description="Esta es una descripción optimizada para motores de búsqueda."
+    image="/images/og-cover.png"
+    canonicalURL="https://midominio.com/mi-pagina"
+  />
+</head>`;
+
+// 2. MetaTags Atómicos
+const metaTagsCode = `---
+import { MetaTags, OpenGraph, TwitterCard } from '@rubengvillar/design-system-astro';
+---
+
+<head>
+  <MetaTags 
+    title="Título Específico" 
+    description="Descripción Específica" 
+    canonicalURL="https://midominio.com" 
+  />
+  
+  <OpenGraph 
+    title="Título OG" 
+    description="Descripción OG" 
+    image="/og-image.png"
+    type="article"
+  />
+  
+  <TwitterCard 
+    title="Título Twitter" 
+    description="Descripción Twitter" 
+    image="/twitter-image.png"
+    cardType="summary_large_image"
+  />
+</head>`;
+
+// 3. JsonLd (Schema.org)
+const jsonLdCode = `---
+import { JsonLd } from '@rubengvillar/design-system-astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Mi Sistema de Diseño",
+  "url": "https://midominio.com/"
+};
+---
+
+<head>
+  <JsonLd schema={schema} />
+</head>`;
+
+// 4. MetaRobots y Favicons
+const botsFaviconsCode = `---
+import { MetaRobots, Favicons } from '@rubengvillar/design-system-astro';
+---
+
+<head>
+  <MetaRobots 
+    index={true} 
+    follow={true} 
+    maxSnippet={-1} 
+    maxImagePreview="large" 
+  />
+  
+  <Favicons 
+    basePath="/" 
+    themeColor="#000000" 
+  />
+</head>`;
+---
+
+<DocsLayout title="SEO">
+  <Typography variant="lead" class="mb-8">
+    Componentes para la optimización en motores de búsqueda (SEO) siguiendo el principio de composición sobre configuración.
+  </Typography>
+
+  <ComponentPreview title="Componente Unificado (<Seo />)" code={seoCode}>
+    <div class="p-6 text-sm bg-muted rounded-md text-muted-foreground w-full max-w-2xl text-center border border-border">
+      Estos componentes inyectan etiquetas en el <code>&lt;head&gt;</code> de la página.<br/> Revisa la pestaña de código para ver cómo usarlos.
+    </div>
+  </ComponentPreview>
+
+  <ComponentPreview title="Composición con Componentes Atómicos" code={metaTagsCode}>
+    <div class="p-6 text-sm bg-muted rounded-md text-muted-foreground w-full max-w-2xl text-center border border-border">
+      Usa <code>&lt;MetaTags&gt;</code>, <code>&lt;OpenGraph&gt;</code> y <code>&lt;TwitterCard&gt;</code> por separado para tener control granular.
+    </div>
+  </ComponentPreview>
+
+  <ComponentPreview title="Datos Estructurados (<JsonLd />)" code={jsonLdCode}>
+    <div class="p-6 text-sm bg-muted rounded-md text-muted-foreground w-full max-w-2xl text-center border border-border">
+      Genera scripts JSON-LD de forma segura y tipada.
+    </div>
+  </ComponentPreview>
+
+  <ComponentPreview title="Control de Indexación y Favicons" code={botsFaviconsCode}>
+    <div class="p-6 text-sm bg-muted rounded-md text-muted-foreground w-full max-w-2xl text-center border border-border">
+      Controla a los robots de búsqueda con <code>&lt;MetaRobots&gt;</code> y maneja los iconos con <code>&lt;Favicons&gt;</code>.
+    </div>
+  </ComponentPreview>
+
+</DocsLayout>

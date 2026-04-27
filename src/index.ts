@@ -132,6 +132,12 @@ export { default as TextReveal } from './components/ui/animations/TextReveal.ast
 // elementos de SEO
 export { default as Seo } from './components/seo/SEO.astro';
 export { default as ThemeScript } from './components/seo/ThemeScript.astro';
+export { default as MetaTags } from './components/seo/MetaTags.astro';
+export { default as OpenGraph } from './components/seo/OpenGraph.astro';
+export { default as TwitterCard } from './components/seo/TwitterCard.astro';
+export { default as JsonLd } from './components/seo/JsonLd.astro';
+export { default as MetaRobots } from './components/seo/MetaRobots.astro';
+export { default as Favicons } from './components/seo/Favicons.astro';
 
 // Utilidades
 export { toggleTheme } from './utils/theme';

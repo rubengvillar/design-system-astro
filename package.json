@@ -1,6 +1,6 @@
 {
   "name": "@rubengvillar/design-system-astro",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Mi sistema de diseño personal",
   "main": "src/index.ts",
   "types": "src/index.ts",

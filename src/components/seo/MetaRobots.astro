@@ -1,0 +1,40 @@
+---
+interface Props {
+  index?: boolean;
+  follow?: boolean;
+  noarchive?: boolean;
+  nosnippet?: boolean;
+  maxSnippet?: number;
+  maxImagePreview?: 'none' | 'standard' | 'large';
+  maxVideoPreview?: number;
+}
+
+const { 
+  index = true, 
+  follow = true, 
+  noarchive = false,
+  nosnippet = false,
+  maxSnippet,
+  maxImagePreview,
+  maxVideoPreview
+} = Astro.props;
+
+const directives = [];
+
+if (index) directives.push('index');
+else directives.push('noindex');
+
+if (follow) directives.push('follow');
+else directives.push('nofollow');
+
+if (noarchive) directives.push('noarchive');
+if (nosnippet) directives.push('nosnippet');
+if (maxSnippet !== undefined) directives.push(`max-snippet:${maxSnippet}`);
+if (maxImagePreview) directives.push(`max-image-preview:${maxImagePreview}`);
+if (maxVideoPreview !== undefined) directives.push(`max-video-preview:${maxVideoPreview}`);
+
+const robotsContent = directives.join(', ');
+---
+
+<meta name="robots" content={robotsContent} />
+<meta name="googlebot" content={robotsContent} />

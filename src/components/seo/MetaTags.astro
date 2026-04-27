@@ -1,0 +1,23 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonicalURL?: string;
+  charset?: string;
+  viewport?: string;
+}
+
+const { 
+  title, 
+  description, 
+  canonicalURL = Astro.url.href,
+  charset = "UTF-8",
+  viewport = "width=device-width, initial-scale=1.0"
+} = Astro.props;
+---
+
+<meta charset={charset} />
+<meta name="viewport" content={viewport} />
+<title>{title}</title>
+<meta name="description" content={description} />
+{canonicalURL && <link rel="canonical" href={canonicalURL} />}

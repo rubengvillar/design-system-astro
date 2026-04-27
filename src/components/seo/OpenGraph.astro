@@ -1,0 +1,31 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  image?: string | URL;
+  url?: string | URL;
+  type?: 'website' | 'article' | 'profile' | 'book';
+  locale?: string;
+  siteName?: string;
+}
+
+const { 
+  title, 
+  description, 
+  image = '/og-image.png',
+  url = Astro.url.href,
+  type = 'website',
+  locale = 'es_ES',
+  siteName
+} = Astro.props;
+
+const imageUrl = typeof image === 'string' && !image.startsWith('http') ? new URL(image, Astro.site || Astro.url.origin) : image;
+---
+
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:url" content={url} />
+<meta property="og:type" content={type} />
+<meta property="og:locale" content={locale} />
+{siteName && <meta property="og:site_name" content={siteName} />}

@@ -1,0 +1,30 @@
+---
+interface Props {
+  basePath?: string;
+  themeColor?: string;
+  maskColor?: string;
+  faviconIco?: string;
+  faviconSvg?: string;
+  appleTouchIcon?: string;
+  manifest?: string;
+}
+
+const { 
+  basePath = '/',
+  themeColor = '#ffffff',
+  maskColor = '#000000',
+  faviconIco = 'favicon.ico',
+  faviconSvg = 'favicon.svg',
+  appleTouchIcon = 'apple-touch-icon.png',
+  manifest = 'site.webmanifest'
+} = Astro.props;
+
+const resolvePath = (path: string) => path.startsWith('http') || path.startsWith('/') ? path : `${basePath}${path}`;
+---
+
+<link rel="icon" type="image/x-icon" href={resolvePath(faviconIco)} />
+<link rel="icon" type="image/svg+xml" href={resolvePath(faviconSvg)} />
+<link rel="apple-touch-icon" href={resolvePath(appleTouchIcon)} />
+<link rel="manifest" href={resolvePath(manifest)} />
+<link rel="mask-icon" href={resolvePath(faviconSvg)} color={maskColor} />
+<meta name="theme-color" content={themeColor} />

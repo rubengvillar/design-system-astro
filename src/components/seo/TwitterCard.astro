@@ -1,0 +1,28 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  image?: string | URL;
+  cardType?: 'summary' | 'summary_large_image' | 'app' | 'player';
+  creator?: string; // e.g. @username
+  site?: string; // e.g. @username
+}
+
+const { 
+  title, 
+  description, 
+  image = '/og-image.png',
+  cardType = 'summary_large_image',
+  creator,
+  site
+} = Astro.props;
+
+const imageUrl = typeof image === 'string' && !image.startsWith('http') ? new URL(image, Astro.site || Astro.url.origin) : image;
+---
+
+<meta name="twitter:card" content={cardType} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
+{site && <meta name="twitter:site" content={site} />}
+{creator && <meta name="twitter:creator" content={creator} />}

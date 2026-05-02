@@ -38,8 +38,8 @@ const { class: className, ...rest } = Astro.props;
         }
 
         if (!isExpanded) {
-          menu?.classList.remove('grid-rows-[0fr]', 'opacity-0');
-          menu?.classList.add('grid-rows-[1fr]', 'opacity-100', 'border-b');
+          menu?.classList.remove('grid-rows-[0fr]', 'opacity-0', 'h-0');
+          menu?.classList.add('grid-rows-[1fr]', 'opacity-100', 'h-auto');
           
           iconMenu?.classList.add('rotate-90', 'opacity-0', 'scale-50');
           iconClose?.classList.remove('opacity-0', 'scale-50');

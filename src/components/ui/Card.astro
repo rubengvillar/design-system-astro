@@ -3,6 +3,6 @@ import { classMerge } from "../../utils/classMerge";
 interface Props { class?: string; }
 const { class: className } = Astro.props;
 ---
-<div class={classMerge(["rounded-[var(--radius)] border bg-card text-card-foreground shadow-sm", className])}>
+<div class={classMerge(["rounded-[var(--radius)] border bg-card text-card-foreground shadow-sm overflow-hidden", className])}>
   <slot />
 </div>

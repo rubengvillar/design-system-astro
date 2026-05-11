@@ -1,0 +1,65 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import ComponentPreview from '../../playground-components/ComponentPreview.astro';
+import { Collapse, CollapseHeader, CollapseContent, Typography, Button } from '@rubengvillar/design-system-astro';
+
+const codeExample = `
+import { Collapse, CollapseHeader, CollapseContent } from '@rubengvillar/design-system-astro';
+
+<Collapse>
+  <CollapseHeader>¿Es accesible?</CollapseHeader>
+  <CollapseContent>
+    Sí. Sigue los patrones de diseño WAI-ARIA para acordeones.
+  </CollapseContent>
+</Collapse>
+`;
+---
+
+<DocsLayout 
+  title="Collapse" 
+  description="Un componente para mostrar y ocultar contenido de forma animada."
+>
+  <Typography as="h2" variant="h2">Uso básico</Typography>
+  <Typography as="p" variant="p">
+    El componente Collapse es ideal para preguntas frecuentes o para organizar información secundaria que no necesita estar visible todo el tiempo.
+  </Typography>
+
+  <ComponentPreview code={codeExample}>
+    <div class="w-full max-w-md bg-card p-6 rounded-xl border shadow-sm">
+      <Collapse>
+        <CollapseHeader>Pregunta 1: ¿Cómo funciona?</CollapseHeader>
+        <CollapseContent>
+          Utiliza Custom Elements de Astro para manejar el estado de forma ligera y performante.
+        </CollapseContent>
+      </Collapse>
+      <Collapse>
+        <CollapseHeader>Pregunta 2: ¿Puedo usarlo en el Sidebar?</CollapseHeader>
+        <CollapseContent>
+          ¡Claro! De hecho, este Design System lo utiliza para organizar sus categorías de componentes.
+        </CollapseContent>
+      </Collapse>
+      <Collapse>
+        <CollapseHeader>Pregunta 3: ¿Soporta animaciones?</CollapseHeader>
+        <CollapseContent>
+          Sí, tiene transiciones suaves de altura y opacidad integradas por defecto.
+        </CollapseContent>
+      </Collapse>
+    </div>
+  </ComponentPreview>
+
+  <Typography as="h2" variant="h2">Abierto por defecto</Typography>
+  <Typography as="p" variant="p">
+    Puedes usar la prop <code>open</code> para que el componente esté expandido inicialmente.
+  </Typography>
+
+  <ComponentPreview code="<Collapse open> ... </Collapse>">
+    <div class="w-full max-w-md bg-card p-6 rounded-xl border shadow-sm">
+      <Collapse open>
+        <CollapseHeader>Este está abierto</CollapseHeader>
+        <CollapseContent>
+          Contenido visible desde el primer momento.
+        </CollapseContent>
+      </Collapse>
+    </div>
+  </ComponentPreview>
+</DocsLayout>

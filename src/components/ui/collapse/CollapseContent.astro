@@ -1,0 +1,18 @@
+---
+import { classMerge } from "../../../utils/classMerge";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {}
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<div
+  data-collapse-content
+  class={classMerge("text-sm", className)}
+  {...rest}
+>
+  <div class="pb-4">
+    <slot />
+  </div>
+</div>

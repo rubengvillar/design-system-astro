@@ -1,0 +1,79 @@
+---
+import { classMerge } from "../../../utils/classMerge";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {
+  open?: boolean;
+}
+
+const { open = false, class: className, ...rest } = Astro.props;
+---
+
+<ui-collapse data-open={open.toString()} class={classMerge("block w-full border-b border-border/50 last:border-0", className)} {...rest}>
+  <slot />
+</ui-collapse>
+
+<script>
+  class UiCollapse extends HTMLElement {
+    constructor() {
+      super();
+      const header = this.querySelector('[data-collapse-header]');
+      const content = this.querySelector('[data-collapse-content]') as HTMLElement;
+      
+      if (!header || !content) return;
+
+      const toggle = () => {
+        const isOpen = this.getAttribute('data-open') === 'true';
+        this.setAttribute('data-open', (!isOpen).toString());
+        this.updateState(!isOpen, content, header);
+      };
+
+      header.addEventListener('click', toggle);
+
+      // Initial state
+      const initialOpen = this.getAttribute('data-open') === 'true';
+      this.updateState(initialOpen, content, header, true);
+    }
+
+    updateState(isOpen: boolean, content: HTMLElement, header: Element, isInitial = false) {
+      const icon = header.querySelector('[data-collapse-icon]');
+      
+      if (isOpen) {
+        content.style.height = 'auto';
+        const height = content.scrollHeight + 'px';
+        content.style.height = '0px';
+        // Force reflow
+        content.offsetHeight;
+        content.style.height = height;
+        content.style.opacity = '1';
+        
+        if (icon) icon.classList.add('rotate-180');
+        header.setAttribute('aria-expanded', 'true');
+      } else {
+        if (!isInitial) {
+          content.style.height = content.scrollHeight + 'px';
+          content.offsetHeight; // reflow
+          content.style.height = '0px';
+          content.style.opacity = '0';
+        } else {
+          content.style.height = '0px';
+          content.style.opacity = '0';
+        }
+        
+        if (icon) icon.classList.remove('rotate-180');
+        header.setAttribute('aria-expanded', 'false');
+      }
+    }
+  }
+
+  if (!customElements.get('ui-collapse')) {
+    customElements.define('ui-collapse', UiCollapse);
+  }
+</script>
+
+<style>
+  ui-collapse [data-collapse-content] {
+    transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+    overflow: hidden;
+  }
+</style>

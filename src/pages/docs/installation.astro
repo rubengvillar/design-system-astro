@@ -1,0 +1,94 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import { Typography, Card, CardHeader, CardTitle, CardDescription, Code, Tabs, TabsList, TabsTrigger, TabsContent } from '@rubengvillar/design-system-astro';
+
+const tailwindConfig = `
+@import "tailwindcss";
+@reference "../../node_modules/@rubengvillar/design-system-astro/src/styles/globals.css";
+
+/* Importa las variables del sistema */
+@import "../../node_modules/@rubengvillar/design-system-astro/src/styles/globals.css";
+`;
+
+const usageExample = `
+---
+import { Button } from '@rubengvillar/design-system-astro';
+---
+
+<Button>Mi Botón</Button>
+`;
+---
+
+<DocsLayout 
+  title="Instalación" 
+  description="Guía paso a paso para integrar el sistema de diseño en tu proyecto Astro."
+>
+  <section class="space-y-6">
+    <Typography as="h2" variant="h2">1. Instala el paquete</Typography>
+    <Typography as="p" variant="p">
+      Añade la librería a tu proyecto utilizando tu gestor de paquetes preferido.
+    </Typography>
+
+    <Tabs defaultValue="pnpm">
+      <TabsList>
+        <TabsTrigger value="pnpm">pnpm</TabsTrigger>
+        <TabsTrigger value="npm">npm</TabsTrigger>
+        <TabsTrigger value="yarn">yarn</TabsTrigger>
+      </TabsList>
+      <TabsContent value="pnpm">
+        <div class="bg-zinc-950 p-4 rounded-lg border text-sm font-mono text-zinc-300">
+          pnpm add @rubengvillar/design-system-astro
+        </div>
+      </TabsContent>
+      <TabsContent value="npm">
+        <div class="bg-zinc-950 p-4 rounded-lg border text-sm font-mono text-zinc-300">
+          npm install @rubengvillar/design-system-astro
+        </div>
+      </TabsContent>
+      <TabsContent value="yarn">
+        <div class="bg-zinc-950 p-4 rounded-lg border text-sm font-mono text-zinc-300">
+          yarn add @rubengvillar/design-system-astro
+        </div>
+      </TabsContent>
+    </Tabs>
+  </section>
+
+  <section class="space-y-6 mt-12">
+    <Typography as="h2" variant="h2">2. Configura Tailwind CSS v4</Typography>
+    <Typography as="p" variant="p">
+      Para que los estilos se apliquen correctamente, debes referenciar el archivo global de estilos de la librería en tu CSS principal.
+    </Typography>
+    
+    <Card class="bg-zinc-900/50 border-zinc-800">
+      <CardHeader>
+        <CardTitle class="text-sm font-mono">src/styles/globals.css</CardTitle>
+      </CardHeader>
+      <div class="px-6 pb-6 overflow-x-auto text-sm leading-relaxed [&_pre]:!bg-transparent [&_pre]:!m-0 [&_pre]:!p-0">
+        <Code code={tailwindConfig} lang="css" theme="github-dark" />
+      </div>
+    </Card>
+  </section>
+
+  <section class="space-y-6 mt-12">
+    <Typography as="h2" variant="h2">3. Uso de componentes</Typography>
+    <Typography as="p" variant="p">
+      ¡Ya estás listo! Importa cualquier componente y empieza a construir tu interfaz.
+    </Typography>
+    
+    <Card class="bg-zinc-900/50 border-zinc-800">
+      <CardHeader>
+        <CardTitle class="text-sm font-mono">index.astro</CardTitle>
+      </CardHeader>
+      <div class="px-6 pb-6 overflow-x-auto text-sm leading-relaxed [&_pre]:!bg-transparent [&_pre]:!m-0 [&_pre]:!p-0">
+        <Code code={usageExample} lang="astro" theme="github-dark" />
+      </div>
+    </Card>
+  </section>
+
+  <section class="mt-12 p-8 rounded-2xl bg-primary/5 border border-primary/10">
+    <Typography as="h3" variant="h3" class="text-primary mb-2">¿Necesitas ayuda?</Typography>
+    <Typography as="p" variant="p" class="text-muted-foreground">
+      Si encuentras algún problema durante la instalación, puedes revisar nuestro repositorio en <a href="https://github.com/rubengvillar/design-system-astro" class="text-primary hover:underline">GitHub</a> o abrir un issue.
+    </Typography>
+  </section>
+</DocsLayout>

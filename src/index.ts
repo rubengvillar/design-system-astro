@@ -109,6 +109,11 @@ export { default as DropdownMenuSeparator } from './components/ui/dropdown/Dropd
 // Tooltip
 export { default as Tooltip } from './components/ui/tooltip/Tooltip.astro';
 
+// Collapse
+export { default as Collapse } from './components/ui/collapse/Collapse.astro';
+export { default as CollapseHeader } from './components/ui/collapse/CollapseHeader.astro';
+export { default as CollapseContent } from './components/ui/collapse/CollapseContent.astro';
+
 // Estadísticas (Stats)
 export { default as Stat } from './components/ui/stat/Stat.astro';
 export { default as StatGroup } from './components/ui/stat/StatGroup.astro';

@@ -36,9 +36,6 @@
   },
   "author": "Ruben Villar",
   "license": "ISC",
-  "publishConfig": {
-    "@rubengvillar:registry": "https://npm.pkg.github.com/"
-  },
   "exports": {
     ".": "./src/index.ts",
     "./styles.css": "./src/styles/globals.css"

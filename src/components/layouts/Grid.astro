@@ -1,6 +1,8 @@
 ---
+import { classMerge } from "../../utils/classMerge";
+
 interface Props {
-  cols?: string; // Ej: "1 md:2 lg:3"
+  cols?: string | number; // Ej: "1 md:2 lg:3" o 3
   gap?: 'sm' | 'md' | 'lg';
   class?: string;
 }
@@ -16,15 +18,32 @@ const gapStyles = {
   md: 'gap-4',
   lg: 'gap-8',
 };
+
+const getColsClasses = () => {
+  if (typeof cols === 'number') return `grid-cols-${cols}`;
+  
+  const parts = cols.toString().split(' ');
+  let classes = '';
+  
+  parts.forEach(part => {
+    if (part.includes('md:')) {
+      classes += ` md:grid-cols-${part.replace('md:', '')}`;
+    } else if (part.includes('lg:')) {
+      classes += ` lg:grid-cols-${part.replace('lg:', '')}`;
+    } else {
+      classes += ` grid-cols-${part}`;
+    }
+  });
+  
+  return classes.trim();
+};
 ---
 
-<div class:list={[
+<div class={classMerge(
   "grid w-full",
-  `grid-cols-${cols.split(' ')[0]}`, // Base (Mobile)
-  cols.includes('md:') ? `md:grid-cols-${cols.split('md:')[1].trim().split(' ')[0]}` : '',
-  cols.includes('lg:') ? `lg:grid-cols-${cols.split('lg:')[1].trim().split(' ')[0]}` : '',
+  getColsClasses(),
   gapStyles[gap],
   className
-]}>
+)}>
   <slot />
 </div>

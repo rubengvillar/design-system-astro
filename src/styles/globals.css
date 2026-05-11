@@ -23,6 +23,21 @@
   --color-skeleton: var(--color-neutral-200);
   --color-skeleton-dark: var(--color-neutral-800);
 
+  /* Colores vibrantes para efectos */
+  --color-glow-primary: hsla(var(--primary) / 0.15);
+  --color-glow-secondary: hsla(280 100% 70% / 0.15);
+}
+
+@utility glass {
+  @apply backdrop-blur-md bg-background/70 border border-white/10 dark:border-white/5;
+}
+
+@utility glass-dark {
+  @apply backdrop-blur-md bg-black/40 border border-white/5;
+}
+
+@utility subtle-glow {
+  box-shadow: 0 0 40px -10px var(--color-glow-primary);
 }
 
 /* 2. Variables por Defecto */
@@ -100,7 +115,17 @@
     --bg-skeleton: var(--color-skeleton-dark);
 
     /* Card */
-    --card: 0 10% 100%;
-    --card-foreground: 222 47% 11%;
+    --card: 222 47% 14%;
+    --card-foreground: 210 40% 98%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
 }

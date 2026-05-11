@@ -38,19 +38,26 @@ const { class: className, ...rest } = Astro.props;
         }
 
         if (!isExpanded) {
-          menu?.classList.remove('grid-rows-[0fr]', 'opacity-0', 'h-[0]');
-          menu?.classList.add('grid-rows-[1fr]', 'opacity-100', 'h-auto');
+          menu?.classList.remove('opacity-0', 'invisible', 'pointer-events-none', 'h-0');
+          menu?.classList.add('opacity-100', 'h-auto');
           
           iconMenu?.classList.add('rotate-90', 'opacity-0', 'scale-50');
           iconClose?.classList.remove('opacity-0', 'scale-50');
           iconClose?.classList.add('rotate-0', 'opacity-100', 'scale-100');
         } else {
-          menu?.classList.remove('grid-rows-[1fr]', 'opacity-100', 'h-auto');
-          menu?.classList.add('grid-rows-[0fr]', 'opacity-0', 'h-[0]');
+          menu?.classList.remove('opacity-100', 'h-auto');
+          menu?.classList.add('opacity-0', 'invisible', 'pointer-events-none', 'h-0');
           
           iconMenu?.classList.remove('rotate-90', 'opacity-0', 'scale-50');
           iconClose?.classList.add('opacity-0', 'scale-50');
           iconClose?.classList.remove('rotate-0', 'opacity-100', 'scale-100');
+        }
+      });
+
+      // Close menu on resize if screen becomes desktop
+      window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768 && this.getAttribute("data-expanded") === "true") {
+          this.dispatchEvent(new CustomEvent('navbar-toggle'));
         }
       });
     }

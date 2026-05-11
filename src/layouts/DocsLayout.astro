@@ -175,7 +175,7 @@ const currentPath = Astro.url.pathname;
     
     <header class="sticky top-0 z-50 glass">
       <Navbar>
-        <div class="container mx-auto flex h-16 items-center justify-between px-4">
+        <div class="container mx-auto flex h-16 items-center justify-between px-6">
           <NavbarBrand>
             <a href="/" class="font-extrabold text-2xl tracking-tighter hover:text-primary transition-colors">
               System<span class="text-primary">Docs</span>
@@ -196,9 +196,11 @@ const currentPath = Astro.url.pathname;
         </div>
 
         <NavbarMenu>
-          <NavbarLink href="/" class="py-4 border-b border-border/50">Inicio</NavbarLink>
-          <NavbarLink href="/docs/button" class="py-4 border-b border-border/50">Componentes</NavbarLink>
-          <a href="https://github.com/rubengvillar/design-system-astro" target="_blank" class="py-4 text-sm font-medium text-muted-foreground">GitHub</a>
+          <div class="flex flex-col gap-4 py-8">
+            <NavbarLink href="/" class="text-xl font-bold">Inicio</NavbarLink>
+            <NavbarLink href="/docs/installation" class="text-xl font-bold">Documentación</NavbarLink>
+            <a href="https://github.com/rubengvillar/design-system-astro" target="_blank" class="text-xl font-bold text-muted-foreground hover:text-primary transition-colors">GitHub</a>
+          </div>
         </NavbarMenu>
       </Navbar>
     </header>
@@ -237,6 +239,46 @@ const currentPath = Astro.url.pathname;
 
       <main class="relative py-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
         <div class="mx-auto w-full min-w-0 max-w-4xl">
+          
+          <!-- Mobile Sidebar (Categorized) -->
+          <div class="md:hidden mb-8">
+            <Collapse>
+              <CollapseHeader class="flex items-center gap-2 px-4 py-3 bg-secondary/30 rounded-xl border border-border/50 text-primary font-semibold">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18"/><path d="M3 15h18"/><path d="M3 21h18"/><path d="M3 3h18"/></svg>
+                Menú de Componentes
+              </CollapseHeader>
+              <CollapseContent class="mt-2 bg-background border border-border/50 rounded-xl overflow-hidden">
+                <div class="p-2 space-y-1">
+                  {categories.map((category) => {
+                    const isCategoryActive = category.items.some(item => item.url === currentPath);
+                    return (
+                      <Collapse open={isCategoryActive}>
+                        <CollapseHeader class="px-3 py-2 text-xs font-bold uppercase tracking-widest text-muted-foreground/80">
+                          {category.name}
+                        </CollapseHeader>
+                        <CollapseContent>
+                          <nav class="grid gap-1 px-1 border-l-2 border-border/30 ml-4 mb-2">
+                            {category.items.map((item) => (
+                              <a 
+                                href={item.url} 
+                                class:list={[
+                                  "flex w-full items-center rounded-lg px-3 py-2 text-sm transition-all",
+                                  currentPath === item.url ? "text-primary font-semibold bg-primary/5" : "text-muted-foreground"
+                                ]}
+                              >
+                                {item.name}
+                              </a>
+                            ))}
+                          </nav>
+                        </CollapseContent>
+                      </Collapse>
+                    );
+                  })}
+                </div>
+              </CollapseContent>
+            </Collapse>
+          </div>
+
           <header class="mb-10">
             <h1 class="text-4xl font-extrabold tracking-tight lg:text-6xl mb-4 bg-gradient-to-br from-foreground to-foreground/50 bg-clip-text text-transparent">
               {title}
@@ -253,12 +295,14 @@ const currentPath = Astro.url.pathname;
     </div>
 
     <Footer class="mt-20 border-t border-border/50 bg-background/50 backdrop-blur-md">
-      <FooterBottom>
-        <p class="text-sm text-muted-foreground">
-          &copy; {new Date().getFullYear()} @rubengvillar/design-system-astro. 
-          Creado por <a href="https://rubenvillar.vercel.app" target="_blank" class="text-primary hover:underline font-medium">Ruben Villar</a>.
-        </p>
-      </FooterBottom>
+      <div class="container mx-auto px-6">
+        <FooterBottom>
+          <p class="text-sm text-muted-foreground">
+            &copy; {new Date().getFullYear()} @rubengvillar/design-system-astro. 
+            Creado por <a href="https://rubenvillar.vercel.app" target="_blank" class="text-primary hover:underline font-medium">Ruben Villar</a>.
+          </p>
+        </FooterBottom>
+      </div>
     </Footer>
 
     <Toaster />

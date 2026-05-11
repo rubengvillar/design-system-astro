@@ -30,6 +30,13 @@ const { open = false, class: className, ...rest } = Astro.props;
 
       header.addEventListener('click', toggle);
 
+      // Handle transition end to set height to auto
+      content.addEventListener('transitionend', (e) => {
+        if (e.propertyName === 'height' && this.getAttribute('data-open') === 'true') {
+          content.style.height = 'auto';
+        }
+      });
+
       // Initial state
       const initialOpen = this.getAttribute('data-open') === 'true';
       this.updateState(initialOpen, content, header, true);
@@ -39,25 +46,43 @@ const { open = false, class: className, ...rest } = Astro.props;
       const icon = header.querySelector('[data-collapse-icon]');
       
       if (isOpen) {
-        content.style.height = 'auto';
-        const height = content.scrollHeight + 'px';
-        content.style.height = '0px';
-        // Force reflow
-        content.offsetHeight;
-        content.style.height = height;
-        content.style.opacity = '1';
+        content.classList.remove('invisible', 'pointer-events-none');
+        if (isInitial) {
+          content.style.height = 'auto';
+          content.style.opacity = '1';
+        } else {
+          content.style.height = '0px';
+          content.offsetHeight; // force reflow
+          content.style.height = content.scrollHeight + 'px';
+          content.style.opacity = '1';
+        }
         
         if (icon) icon.classList.add('rotate-180');
         header.setAttribute('aria-expanded', 'true');
       } else {
         if (!isInitial) {
-          content.style.height = content.scrollHeight + 'px';
-          content.offsetHeight; // reflow
+          const currentHeight = content.offsetHeight;
+          content.style.height = currentHeight + 'px';
+          content.offsetHeight; // force reflow
           content.style.height = '0px';
           content.style.opacity = '0';
         } else {
           content.style.height = '0px';
           content.style.opacity = '0';
+        }
+        
+        // Add invisible after transition or immediately if initial
+        if (isInitial) {
+          content.classList.add('invisible', 'pointer-events-none');
+        } else {
+          // We wait for the transition to end to add invisible, 
+          // but pointer-events-none can be added immediately to avoid blocking
+          content.classList.add('pointer-events-none');
+          content.addEventListener('transitionend', () => {
+            if (this.getAttribute('data-open') === 'false') {
+              content.classList.add('invisible');
+            }
+          }, { once: true });
         }
         
         if (icon) icon.classList.remove('rotate-180');

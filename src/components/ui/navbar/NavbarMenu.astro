@@ -9,7 +9,7 @@ const { class: className, ...rest } = Astro.props;
 <nav
   data-navbar-menu
   class={classMerge(
-    "flex flex-col px-4 text-sm font-medium md:hidden opacity-0 transition-all duration-200 ease-in-out w-full h-[0] overflow-hidden",
+    "flex flex-col px-4 text-sm font-medium md:hidden opacity-0 invisible pointer-events-none transition-all duration-200 ease-in-out w-full h-0 overflow-y-auto max-h-[calc(100vh-4rem)] scrollbar-hide",
     className
   )}
   {...rest}

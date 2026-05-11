@@ -1,19 +1,19 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
-import { Typography, Card, CardHeader, CardTitle, CardDescription, Tabs, TabsList, TabsTrigger, TabsContent } from '@rubengvillar/design-system-astro';
+import { Typography, Card, CardHeader, CardTitle, CardDescription, Tabs, TabsList, TabsTrigger, TabsContent } from '@rubenvillar/design-system-astro';
 import { Code } from 'astro:components';
 
 const tailwindConfig = `
 @import "tailwindcss";
-@reference "../../node_modules/@rubengvillar/design-system-astro/src/styles/globals.css";
+@reference "../../node_modules/@rubenvillar/design-system-astro/src/styles/globals.css";
 
 /* Importa las variables del sistema */
-@import "../../node_modules/@rubengvillar/design-system-astro/src/styles/globals.css";
+@import "../../node_modules/@rubenvillar/design-system-astro/src/styles/globals.css";
 `;
 
 const usageExample = `
 ---
-import { Button } from '@rubengvillar/design-system-astro';
+import { Button } from '@rubenvillar/design-system-astro';
 ---
 
 <Button>Mi Botón</Button>
@@ -38,17 +38,17 @@ import { Button } from '@rubengvillar/design-system-astro';
       </TabsList>
       <TabsContent value="pnpm">
         <div class="bg-zinc-950 p-4 rounded-lg border text-sm font-mono text-zinc-300">
-          pnpm add @rubengvillar/design-system-astro
+          pnpm add @rubenvillar/design-system-astro
         </div>
       </TabsContent>
       <TabsContent value="npm">
         <div class="bg-zinc-950 p-4 rounded-lg border text-sm font-mono text-zinc-300">
-          npm install @rubengvillar/design-system-astro
+          npm install @rubenvillar/design-system-astro
         </div>
       </TabsContent>
       <TabsContent value="yarn">
         <div class="bg-zinc-950 p-4 rounded-lg border text-sm font-mono text-zinc-300">
-          yarn add @rubengvillar/design-system-astro
+          yarn add @rubenvillar/design-system-astro
         </div>
       </TabsContent>
     </Tabs>

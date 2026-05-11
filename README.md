@@ -1,4 +1,4 @@
-# @rubengvillar/design-system-astro
+# @rubenvillar/design-system-astro
 
 Un sistema de diseño premium, moderno y altamente composible construido con **Astro**, **React** y **Tailwind CSS v4**. Diseñado para ofrecer una estética excepcional y un rendimiento óptimo.
 
@@ -8,13 +8,13 @@ Esta librería está disponible de forma pública en el registro de NPM. Puedes 
 
 ```bash
 # Con pnpm
-pnpm add @rubengvillar/design-system-astro
+pnpm add @rubenvillar/design-system-astro
 
 # Con npm
-npm install @rubengvillar/design-system-astro
+npm install @rubenvillar/design-system-astro
 
 # Con yarn
-yarn add @rubengvillar/design-system-astro
+yarn add @rubenvillar/design-system-astro
 ```
 
 ## 🛠️ Configuración (Tailwind CSS v4)
@@ -25,10 +25,10 @@ En tu archivo principal de CSS (ej: `src/styles/globals.css`), añade la referen
 
 ```css
 @import "tailwindcss";
-@reference "../../node_modules/@rubengvillar/design-system-astro/src/styles/globals.css";
+@reference "../../node_modules/@rubenvillar/design-system-astro/src/styles/globals.css";
 
 /* Opcional: importa los estilos base si no quieres definirlos manualmente */
-@import "../../node_modules/@rubengvillar/design-system-astro/src/styles/globals.css";
+@import "../../node_modules/@rubenvillar/design-system-astro/src/styles/globals.css";
 ```
 
 ## 💡 Uso Básico
@@ -37,7 +37,7 @@ Importa los componentes directamente desde el paquete:
 
 ```astro
 ---
-import { Button, Typography, Card } from '@rubengvillar/design-system-astro';
+import { Button, Typography, Card } from '@rubenvillar/design-system-astro';
 ---
 
 <Card>

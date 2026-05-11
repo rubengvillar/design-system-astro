@@ -3,7 +3,7 @@
   "compilerOptions": {
     "paths": {
       "@/*": ["./src/*"],
-      "@rubengvillar/design-system-astro": ["./src/index.ts"]
+      "@rubenvillar/design-system-astro": ["./src/index.ts"]
     },
     "target": "ESNext",
     "module": "ESNext",

@@ -1,7 +1,7 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
 import ComponentPreview from '../../playground-components/ComponentPreview.astro';
-import { Calendar, Typography } from '@rubengvillar/design-system-astro';
+import { Calendar, Typography } from '@rubenvillar/design-system-astro';
 
 // Dates for the example (Native JS Dates)
 const today = new Date();
@@ -13,7 +13,7 @@ nextWeek.setDate(today.getDate() + 7);
 
 const markedDates = [today, tomorrow, nextWeek];
 
-const calendarCode = `import { Calendar } from '@rubengvillar/design-system-astro';
+const calendarCode = `import { Calendar } from '@rubenvillar/design-system-astro';
 
 const today = new Date();
 const markedDates = [

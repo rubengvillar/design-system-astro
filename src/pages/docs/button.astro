@@ -1,7 +1,7 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
 import ComponentPreview from '../../playground-components/ComponentPreview.astro';
-import { Button as ButtonComponent, Typography } from '@rubengvillar/design-system-astro';
+import { Button as ButtonComponent, Typography } from '@rubenvillar/design-system-astro';
 
 // Definimos los fragmentos de código en variables para mantener el HTML limpio
 const primaryCode = `<Button>
@@ -50,7 +50,7 @@ const disabledCode = `<Button disabled>
       Si necesitas interactividad del lado del cliente en un componente React (por ejemplo, usar <code>onClick</code>), Astro no permite inyectar componentes nativos dentro de React. Para ello, el sistema de diseño exporta una versión exacta hecha en React llamada <code>ReactButton</code>.
     </Typography>
     <div class="bg-muted p-4 rounded-md overflow-x-auto text-sm">
-      <pre><code>{`import { ReactButton as Button } from '@rubengvillar/design-system-astro';
+      <pre><code>{`import { ReactButton as Button } from '@rubenvillar/design-system-astro';
 
 export default function LoginForm() {
   return (

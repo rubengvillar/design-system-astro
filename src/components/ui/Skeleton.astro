@@ -2,7 +2,9 @@
 import type { HTMLAttributes } from "astro/types";
 import { classMerge } from "../../utils/classMerge";
 
-interface Props extends HTMLAttributes<"div"> {}
+interface Props extends HTMLAttributes<"div"> {
+  class?: string;
+}
 
 const { class: className, ...rest } = Astro.props;
 ---
@@ -16,3 +18,13 @@ const { class: className, ...rest } = Astro.props;
   aria-hidden="true"
 >
 </div>
+
+<style define:vars={{}}>
+  /* Animación personalizada (opcional, si quieres ajustar la intensidad) */
+  --animate-skeleton-pulse: skeleton-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+  @keyframes skeleton-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: .5; }
+  }  
+</style>

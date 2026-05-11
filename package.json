@@ -5,7 +5,11 @@
   "main": "src/index.ts",
   "types": "src/index.ts",
   "files": [
-    "src"
+    "src/components",
+    "src/styles",
+    "src/utils",
+    "src/index.ts",
+    "src/env.d.ts"
   ],
   "peerDependencies": {
     "astro": "^4.0.0 || ^5.0.0 || ^6.0.0",
@@ -13,16 +17,21 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.0",
+    "@astrojs/react": "^5.0.4",
+    "@tailwindcss/vite": "^4.2.2",
     "@types/react": "^19.2.14",
-    "astro": "^6.0.0",
+    "astro": "^6.1.8",
     "prettier": "^3.0.0",
     "prettier-plugin-astro": "^0.14.0",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
-    "tailwindcss": "^4.0.0",
+    "tailwindcss": "^4.2.2",
     "typescript": "^5.0.0"
   },
   "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
     "check": "astro check"
   },
   "author": "Ruben Villar",

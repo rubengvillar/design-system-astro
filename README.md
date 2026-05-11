@@ -81,9 +81,9 @@ pnpm update @tu-usuario/design-system
 ## 📦 Desarrollo (Para el autor)
 Si necesitas modificar componentes:
 
-1. Haz los cambios en la carpeta src/.
+1. Haz los cambios en la carpeta `src/`.
 
-2. Prueba los cambios en la carpeta playground/.
+2. Prueba los cambios ejecutando `npm run dev` en la raíz (el entorno de pruebas/playground está integrado en `src/pages/`).
 
 3. Actualiza la versión en package.json (ej: npm version patch).
 
@@ -98,5 +98,5 @@ Si necesitas modificar componentes:
 2.  **Seguridad:** Recuerda añadir `.npmrc` a tu `.gitignore` en todos tus proyectos para que nunca subas tu token de acceso a GitHub.
 3.  **Expansión:** Si en el futuro ves que tienes muchos componentes, organiza tu `index.ts` exportando carpetas, por ejemplo: `export * as UI from './components/ui/index.js'`.
 
-¿Quieres que hagamos una última revisión de cómo se vería tu archivo `.gitignore` final para asegurarnos de que no estás subiendo archivos innecesarios (como los de la carpeta `playground` de pruebas) al repositorio?
+¿Quieres que hagamos una última revisión de cómo se vería tu archivo `.gitignore` final para asegurarnos de que no estás subiendo archivos innecesarios al repositorio?
 ```

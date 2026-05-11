@@ -1,7 +1,0 @@
-@import "tailwindcss";
-
-/* 1. Importamos tus variables base (esto sí funciona bien con el nombre del paquete) */
-@import "@rubengvillar/design-system-astro/styles.css";
-
-/* 2. Escaneamos los archivos DIRECTAMENTE por su ruta física en el disco */
-@source "../../../src";

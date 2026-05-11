@@ -17,6 +17,7 @@ Este documento establece las reglas base y el contexto que los asistentes de IA 
     - Se debe extender siempre de los atributos nativos del DOM correspondientes (por ejemplo, `HTMLAttributes<'button'>`) para garantizar el paso de atributos estándar (`aria-*`, `data-*`, `disabled`, etc.) mediante un operador rest (`...rest`).
 - **Accesibilidad (A11y):** Es mandatorio incluir roles semánticos y atributos `aria` cuando corresponda para asegurar que la librería sea usable por todos.
 - **Nomenclatura y Estructura:** Mantener las convenciones documentadas en `SYSTEM_ARCHITECTURE.md`. Los componentes UI puros residen en `src/components/ui/`.
+- **Playground Integrado:** El proyecto contiene un entorno de pruebas visuales y documentación ("playground") alojado directamente en `src/pages/` y `src/playground-components/`. Asegurarse de que el código de la librería central (`src/components/`, `src/utils/`, etc.) no dependa en absoluto del código del playground. El playground es únicamente un consumidor de la librería.
 
 ## 4. Funcionalidades Reutilizables y Lógica
 - **Extracción de Utilidades:** Cualquier lógica compartida, utilidades matemáticas, de formateo o helpers (como la lógica de cambio de temas) debe residir como funciones modulares en la carpeta `src/utils/`.

@@ -8,7 +8,10 @@ src/
 ├── components/
 │   ├── ui/         # Componentes visuales puros (Button, Card, etc.)
 │   ├── seo/        # Componentes de lógica (SEO, ThemeScript)
-│   └── layouts/    # Esqueletos de página
+│   └── layouts/    # Esqueletos de página exportables
+├── playground-components/ # Componentes exclusivos del entorno de pruebas (no se exportan)
+├── pages/          # Páginas del playground (rutas de Astro)
+├── layouts/        # Layouts exclusivos del playground
 ├── styles/
 │   └── globals.css # Variables CSS y estilos base
 ├── utils/

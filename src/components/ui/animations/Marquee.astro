@@ -36,7 +36,13 @@ const hoverClass = pauseOnHover ? 'hover:[animation-play-state:paused]' : '';
   <div class={twMerge('flex shrink-0 min-w-full justify-around animate-marquee', directionClass, hoverClass)} style={`--duration: ${duration}; gap: var(--gap);`}>
     <slot />
   </div>
-  <div aria-hidden="true" class={twMerge('flex shrink-0 min-w-full justify-around animate-marquee', directionClass, hoverClass)} style={`--duration: ${duration}; gap: var(--gap);`}>
-    <slot />
-  </div>
 </div>
+
+<style define:vars={{direction}}>
+  
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(-100% - var(--gap, 1rem))); }
+  }
+</style>

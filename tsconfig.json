@@ -2,7 +2,8 @@
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@rubengvillar/design-system-astro": ["./src/index.ts"]
     },
     "target": "ESNext",
     "module": "ESNext",
@@ -14,5 +15,5 @@
     "esModuleInterop": true,
     "resolveJsonModule": true
   },
-  "include": ["src/**/*", "env.d.ts"]
+  "include": ["src/**/*", "env.d.ts", "**/*.astro", ".astro/types.d.ts"]
 }

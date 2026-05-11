@@ -15,6 +15,7 @@ import {
   StatLabel
 } from '@rubengvillar/design-system-astro';
 import DocsLayout from '../layouts/DocsLayout.astro';
+import { version } from '../../package.json';
 ---
 
 <DocsLayout title="Diseña con Velocidad y Estilo">
@@ -23,7 +24,7 @@ import DocsLayout from '../layouts/DocsLayout.astro';
     <section class="text-center space-y-8 max-w-3xl mx-auto mb-20">
       <BlurFade>
         <Badge variant="outline" class="px-4 py-1.5 text-xs font-semibold tracking-wider uppercase mb-6 border-primary/20 bg-primary/5 text-primary">
-          v1.0.0 ya disponible
+          v{version} ya disponible
         </Badge>
         <Typography as="h1" variant="h1" class="text-5xl md:text-7xl font-extrabold tracking-tighter mb-6 bg-gradient-to-br from-foreground to-foreground/50 bg-clip-text text-transparent leading-tight">
           La base para tus <span class="text-primary">mejores interfaces</span>.

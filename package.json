@@ -1,5 +1,5 @@
 {
-  "name": "@rubengvillar/design-system-astro",
+  "name": "@rubenvillar/design-system-astro",
   "version": "3.0.4",
   "description": "Mi sistema de diseño personal",
   "main": "src/index.ts",

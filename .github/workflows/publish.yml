@@ -1,31 +1,32 @@
-name: Publish Package
+name: Publish to NPM
 
 on:
   push:
-    branches:
-      - main # O la rama que uses para producción
+    tags:
+      - 'v*' # Se activa cuando subes un tag que empieza por v (ej: v1.1.0)
 
 jobs:
   publish:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
-        with:
-          version: 9
-      - uses: actions/setup-node@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@rubengvillar' # Cambia esto por tu usuario
-      - run: pnpm install
-      # Esta es la parte importante: auto-incrementa la versión y publica
-      - name: Publish
-        run: |
-          npm version patch --no-git-tag-version # Incrementa versión automáticamente
-          pnpm publish --no-git-checks
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Publish to NPM
+        run: pnpm publish --access public --no-git-checks
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

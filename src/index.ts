@@ -147,3 +147,5 @@ export { default as Favicons } from './components/seo/Favicons.astro';
 // Utilidades
 export { toggleTheme } from './utils/theme';
 export { classMerge } from './utils/classMerge';
+
+// mas componentes.

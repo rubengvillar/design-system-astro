@@ -1,23 +1,24 @@
 ---
-interface Props {
-  title: string;
-  description: string;
-  canonicalURL?: string;
+import type { MetaTagsProps } from './types';
+
+interface Props extends Omit<MetaTagsProps, 'charset' | 'viewport'> {
   charset?: string;
   viewport?: string;
 }
 
-const { 
-  title, 
-  description, 
-  canonicalURL = Astro.url.href,
-  charset = "UTF-8",
-  viewport = "width=device-width, initial-scale=1.0"
+const {
+  title,
+  description,
+  canonicalURL,
+  charset = 'UTF-8',
+  viewport = 'width=device-width, initial-scale=1.0'
 } = Astro.props;
 ---
 
-<meta charset={charset} />
-<meta name="viewport" content={viewport} />
-<title>{title}</title>
-<meta name="description" content={description} />
-{canonicalURL && <link rel="canonical" href={canonicalURL} />}
+<meta charset={charset} data-seo="charset" />
+<meta name="viewport" content={viewport} data-seo="viewport" />
+<title data-seo="title">{title}</title>
+<meta name="description" content={description} data-seo="description" />
+<link rel="canonical" href={canonicalURL} data-seo="canonical" />
+<slot name="prepend" />
+<slot />

@@ -2,43 +2,50 @@
 import MetaTags from './MetaTags.astro';
 import OpenGraph from './OpenGraph.astro';
 import TwitterCard from './TwitterCard.astro';
+import type { SEOProps } from './types';
 
-interface Props {
-  title: string;
-  description: string;
-  image?: string; // URL de la imagen para redes sociales
-  canonicalURL?: string;
-  type?: 'website' | 'article' | 'profile' | 'book';
-  twitterCardType?: 'summary' | 'summary_large_image' | 'app' | 'player';
-}
+interface Props extends SEOProps {}
 
-const { 
-  title, 
-  description, 
-  image = '/og-image.png', // Ruta por defecto a tu imagen de preview
+const {
+  title,
+  description,
+  image,
   canonicalURL = Astro.url.href,
   type = 'website',
-  twitterCardType = 'summary_large_image'
+  twitterCardType = 'summary_large_image',
+  locale,
+  siteName
 } = Astro.props;
 ---
 
-<MetaTags 
-  title={title} 
-  description={description} 
-  canonicalURL={canonicalURL} 
-/>
+<MetaTags
+  title={title}
+  description={description}
+  canonicalURL={canonicalURL}
+>
+  <slot name="metatags-prepend" slot="prepend" />
+</MetaTags>
 
-<OpenGraph 
-  title={title} 
-  description={description} 
-  image={image} 
+<OpenGraph
+  title={title}
+  description={description}
+  image={image}
   url={canonicalURL}
-  type={type} 
-/>
+  type={type}
+  locale={locale}
+  siteName={siteName}
+>
+  <slot name="opengraph" slot="og" />
+</OpenGraph>
 
-<TwitterCard 
-  title={title} 
-  description={description} 
-  image={image} 
-  cardType={twitterCardType} 
-/>
+<TwitterCard
+  title={title}
+  description={description}
+  image={image}
+  cardType={twitterCardType}
+>
+  <slot name="twitter" slot="twitter" />
+</TwitterCard>
+
+<slot name="json-ld" />
+<slot />

@@ -1,31 +1,33 @@
 ---
-interface Props {
-  title: string;
-  description: string;
-  image?: string | URL;
-  url?: string | URL;
-  type?: 'website' | 'article' | 'profile' | 'book';
+import type { OpenGraphProps } from './types';
+
+interface Props extends OpenGraphProps {
   locale?: string;
-  siteName?: string;
 }
 
-const { 
-  title, 
-  description, 
-  image = '/og-image.png',
-  url = Astro.url.href,
+const {
+  title,
+  description,
+  image,
+  url,
   type = 'website',
-  locale = 'es_ES',
+  locale,
   siteName
 } = Astro.props;
 
-const imageUrl = typeof image === 'string' && !image.startsWith('http') ? new URL(image, Astro.site || Astro.url.origin) : image;
+const imageUrl = image
+  ? (typeof image === 'string' && !image.startsWith('http')
+    ? new URL(image, Astro.site || Astro.url.origin)
+    : image)
+  : undefined;
 ---
 
-<meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
-<meta property="og:image" content={imageUrl} />
-<meta property="og:url" content={url} />
-<meta property="og:type" content={type} />
-<meta property="og:locale" content={locale} />
-{siteName && <meta property="og:site_name" content={siteName} />}
+<meta property="og:title" content={title} data-seo="og:title" />
+<meta property="og:description" content={description} data-seo="og:description" />
+{imageUrl && <meta property="og:image" content={imageUrl.toString()} data-seo="og:image" />}
+{url && <meta property="og:url" content={url.toString()} data-seo="og:url" />}
+<meta property="og:type" content={type} data-seo="og:type" />
+{locale && <meta property="og:locale" content={locale} data-seo="og:locale" />}
+{siteName && <meta property="og:site_name" content={siteName} data-seo="og:site_name" />}
+<slot name="og" />
+<slot />

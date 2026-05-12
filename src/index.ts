@@ -1,8 +1,5 @@
 // src/index.ts
 // SEO y metadata
-export { default as SEO } from './components/seo/SEO.astro';
-
-// Componentes de Layouts
 export { default as Container } from './components/layouts/Container.astro';
 export { default as Grid } from './components/layouts/Grid.astro';
 export { default as GridItem } from './components/layouts/GridItem.astro';
@@ -135,14 +132,15 @@ export { default as Typewriter } from './components/ui/animations/Typewriter.ast
 export { default as TextReveal } from './components/ui/animations/TextReveal.astro';
 
 // elementos de SEO
-export { default as Seo } from './components/seo/SEO.astro';
+export { default as SEO, type SEOProps } from './components/seo/SEO.astro';
 export { default as ThemeScript } from './components/seo/ThemeScript.astro';
-export { default as MetaTags } from './components/seo/MetaTags.astro';
-export { default as OpenGraph } from './components/seo/OpenGraph.astro';
-export { default as TwitterCard } from './components/seo/TwitterCard.astro';
-export { default as JsonLd } from './components/seo/JsonLd.astro';
-export { default as MetaRobots } from './components/seo/MetaRobots.astro';
-export { default as Favicons } from './components/seo/Favicons.astro';
+export { default as MetaTags, type MetaTagsProps } from './components/seo/MetaTags.astro';
+export { default as OpenGraph, type OpenGraphProps } from './components/seo/OpenGraph.astro';
+export { default as TwitterCard, type TwitterCardProps } from './components/seo/TwitterCard.astro';
+export { default as JsonLd, type JsonLdSchema } from './components/seo/JsonLd.astro';
+export { default as MetaRobots, type MetaRobotsProps } from './components/seo/MetaRobots.astro';
+export { default as Favicons, type FaviconsProps, type FaviconItem } from './components/seo/Favicons.astro';
+export * from './components/seo/types';
 
 // Utilidades
 export { toggleTheme } from './utils/theme';

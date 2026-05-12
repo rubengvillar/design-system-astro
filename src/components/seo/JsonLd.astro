@@ -1,9 +1,26 @@
 ---
+import type { JsonLdSchema } from './types';
+
 interface Props {
-  schema: Record<string, any> | Record<string, any>[];
+  schema: JsonLdSchema;
 }
 
 const { schema } = Astro.props;
+
+const validateSchema = (schema: JsonLdSchema): boolean => {
+  if (!schema || typeof schema !== 'object') return false;
+  if (!('@context' in schema) && !('@type' in schema)) return false;
+  return true;
+};
+
+const isValid = validateSchema(schema);
+const jsonString = JSON.stringify(schema);
 ---
 
-<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+{isValid && (
+  <script type="application/ld+json" data-seo="json-ld" set:html={jsonString} />
+)}
+{!isValid && (
+  <!-- SEO: Invalid JSON-LD schema provided -->
+)}
+<slot />

@@ -1,28 +1,31 @@
 ---
-interface Props {
-  title: string;
-  description: string;
-  image?: string | URL;
+import type { TwitterCardProps } from './types';
+
+interface Props extends TwitterCardProps {
   cardType?: 'summary' | 'summary_large_image' | 'app' | 'player';
-  creator?: string; // e.g. @username
-  site?: string; // e.g. @username
 }
 
-const { 
-  title, 
-  description, 
-  image = '/og-image.png',
+const {
+  title,
+  description,
+  image,
   cardType = 'summary_large_image',
   creator,
   site
 } = Astro.props;
 
-const imageUrl = typeof image === 'string' && !image.startsWith('http') ? new URL(image, Astro.site || Astro.url.origin) : image;
+const imageUrl = image
+  ? (typeof image === 'string' && !image.startsWith('http')
+    ? new URL(image, Astro.site || Astro.url.origin)
+    : image)
+  : undefined;
 ---
 
-<meta name="twitter:card" content={cardType} />
-<meta name="twitter:title" content={title} />
-<meta name="twitter:description" content={description} />
-<meta name="twitter:image" content={imageUrl} />
-{site && <meta name="twitter:site" content={site} />}
-{creator && <meta name="twitter:creator" content={creator} />}
+<meta name="twitter:card" content={cardType} data-seo="twitter:card" />
+<meta name="twitter:title" content={title} data-seo="twitter:title" />
+<meta name="twitter:description" content={description} data-seo="twitter:description" />
+{imageUrl && <meta name="twitter:image" content={imageUrl.toString()} data-seo="twitter:image" />}
+{site && <meta name="twitter:site" content={site} data-seo="twitter:site" />}
+{creator && <meta name="twitter:creator" content={creator} data-seo="twitter:creator" />}
+<slot name="twitter" />
+<slot />

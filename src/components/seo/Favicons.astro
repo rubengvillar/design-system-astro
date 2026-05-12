@@ -1,30 +1,38 @@
 ---
+import type { FaviconItem } from './types';
+
 interface Props {
-  basePath?: string;
+  items: FaviconItem[];
   themeColor?: string;
-  maskColor?: string;
-  faviconIco?: string;
-  faviconSvg?: string;
-  appleTouchIcon?: string;
-  manifest?: string;
 }
 
-const { 
-  basePath = '/',
-  themeColor = '#ffffff',
-  maskColor = '#000000',
-  faviconIco = 'favicon.ico',
-  faviconSvg = 'favicon.svg',
-  appleTouchIcon = 'apple-touch-icon.png',
-  manifest = 'site.webmanifest'
-} = Astro.props;
+const { items, themeColor } = Astro.props;
 
-const resolvePath = (path: string) => path.startsWith('http') || path.startsWith('/') ? path : `${basePath}${path}`;
+const resolveHref = (href: string): string => {
+  if (href.startsWith('http') || href.startsWith('/')) return href;
+  return `/${href}`;
+};
+
+const validateHref = (href: string): boolean => {
+  if (href.startsWith('http')) return true;
+  if (href.startsWith('/') && !href.includes('..')) return true;
+  return false;
+};
 ---
 
-<link rel="icon" type="image/x-icon" href={resolvePath(faviconIco)} />
-<link rel="icon" type="image/svg+xml" href={resolvePath(faviconSvg)} />
-<link rel="apple-touch-icon" href={resolvePath(appleTouchIcon)} />
-<link rel="manifest" href={resolvePath(manifest)} />
-<link rel="mask-icon" href={resolvePath(faviconSvg)} color={maskColor} />
-<meta name="theme-color" content={themeColor} />
+{items.map((item) => {
+  if (!validateHref(item.href)) return null;
+  return (
+    <link
+      rel={item.rel}
+      type={item.type}
+      href={resolveHref(item.href)}
+      color={item.color}
+      sizes={item.sizes}
+      data-seo={`favicon-${item.rel}`}
+    />
+  );
+})}
+{themeColor && <meta name="theme-color" content={themeColor} data-seo="theme-color" />}
+<slot />
+<slot />

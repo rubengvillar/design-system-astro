@@ -51,14 +51,39 @@ Para formularios, utiliza la combinación de estos átomos:
 * `FormField`: Wrapper que une Label, Input y ErrorMessage.
 * `ErrorMessage`: Bloque de texto para validación.
 
-## 4. Gestión de Temas (Modo Oscuro)
+### E. SEO y Metadata
+El sistema proporciona componentes SEO modulares y composables:
+
+| Componente | Descripción |
+| :--- | :--- |
+| `SEO` | Orquestador principal con slots para extensión |
+| `MetaTags` | Title, description, canonical, viewport |
+| `OpenGraph` | Facebook/LinkedIn social meta tags |
+| `TwitterCard` | Twitter social meta tags |
+| `JsonLd` | Structured data (Article, Product, FAQ, etc.) |
+| `MetaRobots` | Crawl directives para搜索引擎 |
+| `Favicons` | Iconos y manifest para PWA |
+| `ThemeScript` | Inline script anti-FOUC para tema |
+
+**Tipos TypeScript disponibles:**
+- `ArticleSchema`, `ProductSchema`, `FAQPageSchema`, `BreadcrumbListSchema`, `OrganizationSchema`
+- `SEOProps`, `MetaTagsProps`, `OpenGraphProps`, `TwitterCardProps`
+- `FaviconItem`, `FaviconsProps`
+
+**Slots disponibles en SEO:**
+- `metatags-prepend`: Contenido antes de meta tags
+- `opengraph`: Meta tags OG custom
+- `twitter`: Meta tags Twitter custom
+- `json-ld`: JSON-LD adicional
+
+## 5. Gestión de Temas (Modo Oscuro)
 El sistema utiliza una estrategia híbrida:
 1.  **Lógica:** `utils/theme.ts` maneja el estado en `localStorage`.
 2.  **Script de Prevención:** `components/seo/ThemeScript.astro` (inyectado en el `<head>`) evita el parpadeo blanco inicial.
 3.  **UI:** `ThemeToggle.astro` dispara la lógica de cambio de clase `dark` en `<html>`.
 4.  **Estilos:** Todo el sistema se basa en variables CSS definidas en `globals.css` (ej: `--background`, `--foreground`).
 
-## 5. Reglas de Desarrollo (Para el Autor)
+## 6. Reglas de Desarrollo (Para el Autor)
 
 ### Cómo crear un nuevo componente:
 1.  **Props:** Define siempre una interfaz `Props` extendiendo las nativas de Astro (`HTMLAttributes<'button'>`, etc.) cuando sea posible.

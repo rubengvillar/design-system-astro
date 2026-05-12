@@ -1,112 +1,271 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
 import ComponentPreview from '../../playground-components/ComponentPreview.astro';
-import { Typography } from '@rubenvillar/design-system-astro';
+import { Typography, JsonLd, MetaRobots, Favicons, type ArticleSchema } from '@rubengvillar/design-system-astro';
 
-// 1. Componente Unificado
+const siteSchema: ArticleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Design System Documentation',
+  description: 'Complete guide to using our Astro component library',
+  author: { '@type': 'Person', name: 'Ruben Villar' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Design System Astro',
+    logo: '/logo.png'
+  },
+  datePublished: '2024-01-15',
+  dateModified: '2024-01-20'
+};
+
+const faviconItems = [
+  { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+  { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
+  { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
+  { rel: 'manifest', href: '/site.webmanifest' }
+];
+
+// 1. Componente Unificado SEO
 const seoCode = `---
-import { Seo } from '@rubenvillar/design-system-astro';
+import { SEO } from '@rubengvillar/design-system-astro';
 ---
 
-<head>
-  <Seo 
-    title="Mi Página Increíble"
-    description="Esta es una descripción optimizada para motores de búsqueda."
-    image="/images/og-cover.png"
-    canonicalURL="https://midominio.com/mi-pagina"
-  />
-</head>`;
+<SEO 
+  title="Mi Página Increíble"
+  description="Descripción optimizada para SEO"
+  image="/images/og-cover.png"
+  canonicalURL="https://midominio.com/mi-pagina"
+  type="article"
+  twitterCardType="summary_large_image"
+  locale="es-ES"
+  siteName="Mi Sitio"
+/>`;
 
-// 2. MetaTags Atómicos
-const metaTagsCode = `---
-import { MetaTags, OpenGraph, TwitterCard } from '@rubenvillar/design-system-astro';
+// 2. SEO con Slots y JsonLd
+const seoWithJsonLdCode = `---
+import { SEO, JsonLd, type ArticleSchema } from '@rubengvillar/design-system-astro';
+
+const schema: ArticleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Mi Artículo',
+  description: 'Descripción del artículo',
+  author: { '@type': 'Person', name: 'Autor' },
+  datePublished: '2024-01-15'
+};
+---
+
+<SEO
+  title="Artículo SEO"
+  description="Optimiza tu contenido"
+  type="article"
+  locale="es-ES"
+>
+  <JsonLd slot="json-ld" schema={schema} />
+</SEO>`;
+
+// 3. Componentes Atómicos
+const atomicCode = `---
+import { MetaTags, OpenGraph, TwitterCard, JsonLd } from '@rubengvillar/design-system-astro';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Mi Sitio',
+  url: 'https://midominio.com'
+};
 ---
 
 <head>
   <MetaTags 
-    title="Título Específico" 
-    description="Descripción Específica" 
-    canonicalURL="https://midominio.com" 
+    title="Título" 
+    description="Descripción" 
+    canonicalURL="https://midominio.com"
+    charset="UTF-8"
+    viewport="width=device-width, initial-scale=1.0"
   />
   
   <OpenGraph 
     title="Título OG" 
     description="Descripción OG" 
     image="/og-image.png"
-    type="article"
+    type="website"
+    locale="es_ES"
+    siteName="Mi Sitio"
   />
   
   <TwitterCard 
     title="Título Twitter" 
     description="Descripción Twitter" 
-    image="/twitter-image.png"
     cardType="summary_large_image"
+    site="@micuenta"
+    creator="@autor"
   />
-</head>`;
 
-// 3. JsonLd (Schema.org)
-const jsonLdCode = `---
-import { JsonLd } from '@rubenvillar/design-system-astro';
-
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Mi Sistema de Diseño",
-  "url": "https://midominio.com/"
-};
----
-
-<head>
   <JsonLd schema={schema} />
 </head>`;
 
 // 4. MetaRobots y Favicons
-const botsFaviconsCode = `---
-import { MetaRobots, Favicons } from '@rubenvillar/design-system-astro';
+const robotsFaviconsCode = `---
+import { MetaRobots, Favicons } from '@rubengvillar/design-system-astro';
+
+const faviconItems = [
+  { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+  { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
+  { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
+  { rel: 'manifest', href: '/site.webmanifest' }
+];
 ---
 
 <head>
   <MetaRobots 
     index={true} 
-    follow={true} 
-    maxSnippet={-1} 
-    maxImagePreview="large" 
+    follow={true}
+    noarchive={false}
+    maxImagePreview="large"
   />
   
   <Favicons 
-    basePath="/" 
-    themeColor="#000000" 
+    items={faviconItems}
+    themeColor="#000000"
   />
 </head>`;
+
+// 5. Tipos TypeScript
+const typesCode = `import { 
+  type ArticleSchema,
+  type ProductSchema,
+  type FAQPageSchema,
+  type BreadcrumbListSchema,
+  type SEOProps,
+  type MetaTagsProps,
+  type OpenGraphProps,
+  type TwitterCardProps,
+  type FaviconItem
+} from '@rubengvillar/design-system-astro';
+
+// Usar tipos para validar schemas
+const articleSchema: ArticleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Título del artículo',
+  description: 'Descripción',
+  author: { '@type': 'Person', name: 'Autor' }
+};`;
 ---
 
-<DocsLayout title="SEO">
+<DocsLayout 
+  title="SEO" 
+  description="Componentes para optimización en motores de búsqueda con tipado TypeScript fuerte"
+  type="website"
+  locale="es-ES"
+  siteName="Design System Docs"
+  image="/og-docs.png"
+>
   <Typography variant="lead" class="mb-8">
-    Componentes para la optimización en motores de búsqueda (SEO) siguiendo el principio de composición sobre configuración.
+    Componentes modulares para SEO siguiendo el principio de composición sobre configuración. 
+    Totalmente tipados con TypeScript y extensibles mediante slots.
   </Typography>
 
-  <ComponentPreview title="Componente Unificado (<Seo />)" code={seoCode}>
+  <ComponentPreview title="Componente Unificado (<SEO />)" code={seoCode}>
     <div class="p-6 text-sm bg-muted rounded-md text-muted-foreground w-full max-w-2xl text-center border border-border">
-      Estos componentes inyectan etiquetas en el <code>&lt;head&gt;</code> de la página.<br/> Revisa la pestaña de código para ver cómo usarlos.
+      Componente orquestador que incluye MetaTags, OpenGraph y TwitterCard.
     </div>
   </ComponentPreview>
 
-  <ComponentPreview title="Composición con Componentes Atómicos" code={metaTagsCode}>
+  <ComponentPreview title="SEO con JsonLd (Slots)" code={seoWithJsonLdCode}>
     <div class="p-6 text-sm bg-muted rounded-md text-muted-foreground w-full max-w-2xl text-center border border-border">
-      Usa <code>&lt;MetaTags&gt;</code>, <code>&lt;OpenGraph&gt;</code> y <code>&lt;TwitterCard&gt;</code> por separado para tener control granular.
+      Usa el slot <code>json-ld</code> para inyectar structured data.
     </div>
   </ComponentPreview>
 
-  <ComponentPreview title="Datos Estructurados (<JsonLd />)" code={jsonLdCode}>
+  <ComponentPreview title="Composición Atómica" code={atomicCode}>
     <div class="p-6 text-sm bg-muted rounded-md text-muted-foreground w-full max-w-2xl text-center border border-border">
-      Genera scripts JSON-LD de forma segura y tipada.
+      Usa componentes separados para control granular sobre cada meta tag.
     </div>
   </ComponentPreview>
 
-  <ComponentPreview title="Control de Indexación y Favicons" code={botsFaviconsCode}>
+  <ComponentPreview title="MetaRobots y Favicons" code={robotsFaviconsCode}>
     <div class="p-6 text-sm bg-muted rounded-md text-muted-foreground w-full max-w-2xl text-center border border-border">
-      Controla a los robots de búsqueda con <code>&lt;MetaRobots&gt;</code> y maneja los iconos con <code>&lt;Favicons&gt;</code>.
+      Controla indexación y define iconos de forma tipada.
     </div>
   </ComponentPreview>
+
+  <ComponentPreview title="Tipos TypeScript" code={typesCode}>
+    <div class="p-6 text-sm bg-muted rounded-md text-muted-foreground w-full max-w-2xl text-center border border-border">
+      Utiliza los tipos para validar schemas y props en tu IDE.
+    </div>
+  </ComponentPreview>
+
+  <div class="mt-12 p-6 bg-muted/50 rounded-lg border border-border">
+    <h3 class="text-lg font-semibold mb-4">Props del Componente SEO</h3>
+    <div class="grid gap-4 text-sm">
+      <div class="grid grid-cols-[200px_1fr] gap-4 p-3 bg-background rounded border">
+        <code class="text-primary">title *</code>
+        <span class="text-muted-foreground">Título de la página (requerido)</span>
+      </div>
+      <div class="grid grid-cols-[200px_1fr] gap-4 p-3 bg-background rounded border">
+        <code class="text-primary">description *</code>
+        <span class="text-muted-foreground">Descripción meta (requerido)</span>
+      </div>
+      <div class="grid grid-cols-[200px_1fr] gap-4 p-3 bg-background rounded border">
+        <code class="text-primary">canonicalURL</code>
+        <span class="text-muted-foreground">URL canónica (default: Astro.url.href)</span>
+      </div>
+      <div class="grid grid-cols-[200px_1fr] gap-4 p-3 bg-background rounded border">
+        <code class="text-primary">image</code>
+        <span class="text-muted-foreground">URL de imagen OG/Twitter</span>
+      </div>
+      <div class="grid grid-cols-[200px_1fr] gap-4 p-3 bg-background rounded border">
+        <code class="text-primary">type</code>
+        <span class="text-muted-foreground">'website' | 'article' | 'profile' | 'book'</span>
+      </div>
+      <div class="grid grid-cols-[200px_1fr] gap-4 p-3 bg-background rounded border">
+        <code class="text-primary">twitterCardType</code>
+        <span class="text-muted-foreground">'summary' | 'summary_large_image' | 'app' | 'player'</span>
+      </div>
+      <div class="grid grid-cols-[200px_1fr] gap-4 p-3 bg-background rounded border">
+        <code class="text-primary">locale</code>
+        <span class="text-muted-foreground">Locale OG (ej: 'es-ES')</span>
+      </div>
+      <div class="grid grid-cols-[200px_1fr] gap-4 p-3 bg-background rounded border">
+        <code class="text-primary">siteName</code>
+        <span class="text-muted-foreground">Nombre del sitio para OG</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-12 p-6 bg-muted/50 rounded-lg border border-border">
+    <h3 class="text-lg font-semibold mb-4">Slots Disponibles</h3>
+    <div class="grid gap-4 text-sm">
+      <div class="grid grid-cols-[200px_1fr] gap-4 p-3 bg-background rounded border">
+        <code class="text-primary">metatags-prepend</code>
+        <span class="text-muted-foreground">Contenido antes de meta tags base</span>
+      </div>
+      <div class="grid grid-cols-[200px_1fr] gap-4 p-3 bg-background rounded border">
+        <code class="text-primary">opengraph</code>
+        <span class="text-muted-foreground">Meta tags OG custom adicionales</span>
+      </div>
+      <div class="grid grid-cols-[200px_1fr] gap-4 p-3 bg-background rounded border">
+        <code class="text-primary">twitter</code>
+        <span class="text-muted-foreground">Meta tags Twitter custom</span>
+      </div>
+      <div class="grid grid-cols-[200px_1fr] gap-4 p-3 bg-background rounded border">
+        <code class="text-primary">json-ld</code>
+        <span class="text-muted-foreground">JSON-LD structured data</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-12 p-6 bg-muted/50 rounded-lg border border-border">
+    <h3 class="text-lg font-semibold mb-4">Tipos JSON-LD Disponibles</h3>
+    <div class="grid gap-3 text-sm font-mono">
+      <code class="p-2 bg-background rounded">ArticleSchema</code>
+      <code class="p-2 bg-background rounded">ProductSchema</code>
+      <code class="p-2 bg-background rounded">FAQPageSchema</code>
+      <code class="p-2 bg-background rounded">BreadcrumbListSchema</code>
+      <code class="p-2 bg-background rounded">OrganizationSchema</code>
+    </div>
+  </div>
 
 </DocsLayout>

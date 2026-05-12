@@ -7,22 +7,33 @@ import {
   NavbarMenuToggle, 
   NavbarMenu, 
   NavbarLink, 
-  ThemeScript, 
+  ThemeScript,
   ThemeToggle,
   Toaster,
   Collapse,
   CollapseHeader,
   CollapseContent,
   Footer,
-  FooterBottom
-} from '@rubenvillar/design-system-astro';
+  FooterBottom,
+  SEO,
+  type SEOProps
+} from '@rubengvillar/design-system-astro';
 
-interface Props {
+interface Props extends SEOProps {
   title: string;
   description?: string;
 }
 
-const { title, description } = Astro.props;
+const { 
+  title, 
+  description,
+  image,
+  canonicalURL,
+  type,
+  twitterCardType,
+  locale,
+  siteName
+} = Astro.props;
 
 const categories = [
   {
@@ -100,12 +111,17 @@ const currentPath = Astro.url.pathname;
 
 <html lang="es">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>{title} | Design System Docs</title>
-    <meta name="description" content={description} />
-    <link rel="icon" href="/favicon.ico" />
-    
+    <SEO
+      title={`${title} | Design System Docs`}
+      description={description}
+      image={image}
+      canonicalURL={canonicalURL || Astro.url.href}
+      type={type}
+      twitterCardType={twitterCardType}
+      locale={locale}
+      siteName={siteName || 'Design System Docs'}
+    />
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

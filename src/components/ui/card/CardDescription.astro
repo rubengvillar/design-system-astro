@@ -1,5 +1,13 @@
 ---
+import type { HTMLTag } from "astro/types";
+import type { PolymorphicProps } from "../../../types/polymorphic";
 import { classMerge } from "../../../utils/classMerge";
+
+type Props<T extends HTMLTag = "p"> = PolymorphicProps<T>;
+
+const { as: Tag = "p", class: className, ...rest } = Astro.props;
 ---
 
-<p class={classMerge("text-sm text-muted-foreground")}><slot /></p>
+<Tag class={classMerge("text-sm text-muted-foreground", className)} {...rest}>
+  <slot />
+</Tag>

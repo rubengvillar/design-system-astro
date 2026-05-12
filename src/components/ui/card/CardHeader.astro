@@ -1,9 +1,13 @@
 ---
+import type { HTMLTag } from "astro/types";
+import type { PolymorphicProps } from "../../../types/polymorphic";
 import { classMerge } from "../../../utils/classMerge";
 
-const { class: className } = Astro.props;
+type Props<T extends HTMLTag = "div"> = PolymorphicProps<T>;
+
+const { as: Tag = "div", class: className, ...rest } = Astro.props;
 ---
 
-<div class:list={classMerge("flex flex-col space-y-1.5 p-6", className)}>
+<Tag class={classMerge("flex flex-col space-y-1.5 p-6", className)} {...rest}>
   <slot />
-</div>
+</Tag>

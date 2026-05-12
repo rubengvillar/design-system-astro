@@ -17,7 +17,8 @@ import {
   FooterBottom,
   SEO,
   type SEOProps
-} from '@rubengvillar/design-system-astro';
+} from '@rubenvillar/design-system-astro';
+import A11yAuditor from '../playground-components/A11yAuditor.astro';
 
 interface Props extends SEOProps {
   title: string;
@@ -322,5 +323,6 @@ const currentPath = Astro.url.pathname;
     </Footer>
 
     <Toaster />
+    <A11yAuditor />
   </body>
 </html>

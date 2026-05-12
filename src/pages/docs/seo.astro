@@ -1,7 +1,7 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
 import ComponentPreview from '../../playground-components/ComponentPreview.astro';
-import { Typography, JsonLd, MetaRobots, Favicons, type ArticleSchema } from '@rubengvillar/design-system-astro';
+import { Typography, JsonLd, MetaRobots, Favicons, type ArticleSchema } from '@rubenvillar/design-system-astro';
 
 const siteSchema: ArticleSchema = {
   '@context': 'https://schema.org',
@@ -27,7 +27,7 @@ const faviconItems = [
 
 // 1. Componente Unificado SEO
 const seoCode = `---
-import { SEO } from '@rubengvillar/design-system-astro';
+import { SEO } from '@rubenvillar/design-system-astro';
 ---
 
 <SEO 
@@ -43,7 +43,7 @@ import { SEO } from '@rubengvillar/design-system-astro';
 
 // 2. SEO con Slots y JsonLd
 const seoWithJsonLdCode = `---
-import { SEO, JsonLd, type ArticleSchema } from '@rubengvillar/design-system-astro';
+import { SEO, JsonLd, type ArticleSchema } from '@rubenvillar/design-system-astro';
 
 const schema: ArticleSchema = {
   '@context': 'https://schema.org',
@@ -66,7 +66,7 @@ const schema: ArticleSchema = {
 
 // 3. Componentes Atómicos
 const atomicCode = `---
-import { MetaTags, OpenGraph, TwitterCard, JsonLd } from '@rubengvillar/design-system-astro';
+import { MetaTags, OpenGraph, TwitterCard, JsonLd } from '@rubenvillar/design-system-astro';
 
 const schema = {
   '@context': 'https://schema.org',
@@ -107,7 +107,7 @@ const schema = {
 
 // 4. MetaRobots y Favicons
 const robotsFaviconsCode = `---
-import { MetaRobots, Favicons } from '@rubengvillar/design-system-astro';
+import { MetaRobots, Favicons } from '@rubenvillar/design-system-astro';
 
 const faviconItems = [
   { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -142,7 +142,7 @@ const typesCode = `import {
   type OpenGraphProps,
   type TwitterCardProps,
   type FaviconItem
-} from '@rubengvillar/design-system-astro';
+} from '@rubenvillar/design-system-astro';
 
 // Usar tipos para validar schemas
 const articleSchema: ArticleSchema = {

@@ -1,47 +1,57 @@
 ---
-import type { HTMLTag, Polymorphic } from 'astro/types';
-import { classMerge } from "../../utils/classMerge";
+import type { HTMLTag } from "astro/types";
+import type { PolymorphicProps } from "../../types/polymorphic";
+import { createVariants } from "../../utils/variants";
 
-// Definimos las variantes permitidas
-type Variant = 'h1' | 'h2' | 'h3' | 'p' | 'lead' | 'large' | 'small' | 'muted';
+const typographyVariants = createVariants("", {
+  variant: {
+    h1: "scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl",
+    h2: "scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0",
+    h3: "scroll-m-20 text-2xl font-semibold tracking-tight",
+    h4: "scroll-m-20 text-xl font-semibold tracking-tight",
+    p: "leading-7 [&:not(:first-child)]:mt-6",
+    blockquote: "mt-6 border-l-2 pl-6 italic",
+    lead: "text-xl text-muted-foreground",
+    large: "text-lg font-semibold",
+    small: "text-sm font-medium leading-none",
+    muted: "text-sm text-muted-foreground",
+  },
+});
 
-// Mapeamos cada variante a una etiqueta HTML por defecto para mantener la semántica
+type Variant =
+  | "h1"
+  | "h2"
+  | "h3"
+  | "h4"
+  | "p"
+  | "blockquote"
+  | "lead"
+  | "large"
+  | "small"
+  | "muted";
+
 const defaultTags: Record<Variant, HTMLTag> = {
-  h1: 'h1',
-  h2: 'h2',
-  h3: 'h3',
-  p: 'p',
-  lead: 'p',
-  large: 'div',
-  small: 'small',
-  muted: 'p',
+  h1: "h1",
+  h2: "h2",
+  h3: "h3",
+  h4: "h4",
+  p: "p",
+  blockquote: "blockquote",
+  lead: "p",
+  large: "div",
+  small: "small",
+  muted: "p",
 };
 
-// Usamos el tipo Polymorphic nativo de Astro para que TypeScript entienda las props
-type Properties<Tag extends HTMLTag = HTMLTag> = Polymorphic<{ as: Tag }> & {
+type Props<T extends HTMLTag = HTMLTag> = PolymorphicProps<T> & {
   variant?: Variant;
 };
 
-interface Props extends Properties { }
+const { as, variant = "p", class: className, ...rest } = Astro.props;
 
-const { as, variant = 'p', class: className, ...rest } = Astro.props;
-
-// La etiqueta final será la que pase el usuario (as="span") o la que dicte la variante
-const Tag = as || defaultTags[variant as Variant];
-
-// Diccionario de clases de Tailwind para cada variante (Estilo Shadcn UI)
-const variantClasses: Record<Variant, string> = {
-  h1: "scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl",
-  h2: "scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0",
-  h3: "scroll-m-20 text-2xl font-semibold tracking-tight",
-  p: "leading-7 [&:not(:first-child)]:mt-6",
-  lead: "text-xl text-muted-foreground",
-  large: "text-lg font-semibold",
-  small: "text-sm font-medium leading-none",
-  muted: "text-sm text-muted-foreground",
-};
+const Tag = as || defaultTags[variant];
 ---
 
-<Tag class={classMerge([variantClasses[variant as Variant], className])} {...rest}>
+<Tag class={typographyVariants({ variant, class: className })} {...rest}>
   <slot />
 </Tag>

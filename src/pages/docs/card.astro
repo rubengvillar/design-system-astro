@@ -41,4 +41,18 @@ const basicCardCode = `<Card class="w-[350px]">
       </CardFooter>
     </Card>
   </ComponentPreview>
+  <div class="mt-12 space-y-4">
+    <h3 class="text-2xl font-semibold tracking-tight">Composición Polimórfica</h3>
+    <Typography variant="p" class="text-muted-foreground mb-4">
+      Todos los subcomponentes de la Card (Header, Title, etc.) aceptan la prop <code>as</code>. Esto permite, por ejemplo, que un <code>CardTitle</code> sea semánticamente un <code>h2</code> pero visualmente mantenga el estilo de la librería.
+    </Typography>
+    <ComponentPreview title="Card como Section" code={`<Card as="section">\n  <CardHeader>\n    <CardTitle as="h2">Sección de Título</CardTitle>\n  </CardHeader>\n</Card>`}>
+      <Card as="section" class="w-[350px]">
+        <CardHeader>
+          <CardTitle as="h2">Sección de Título</CardTitle>
+          <CardDescription>Esta tarjeta usa una etiqueta section y el título es un h2.</CardDescription>
+        </CardHeader>
+      </Card>
+    </ComponentPreview>
+  </div>
 </DocsLayout>

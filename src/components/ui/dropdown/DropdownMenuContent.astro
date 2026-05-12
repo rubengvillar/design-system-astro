@@ -1,14 +1,17 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
+import type { HTMLTag } from "astro/types";
+import type { PolymorphicProps } from "../../../types/polymorphic";
 import { classMerge } from "../../../utils/classMerge";
 
-interface Props extends HTMLAttributes<'div'> {}
+type Props<T extends HTMLTag = "div"> = PolymorphicProps<T>;
 
-const { class: className, ...rest } = Astro.props;
+const { class: className, as: Tag = "div", ...rest } = Astro.props;
 ---
 
-<div
+<Tag
   data-dropdown-content
+  role="menu"
+  aria-orientation="vertical"
   class={classMerge(
     "absolute top-full z-50 mt-2 hidden min-w-[8rem] flex-col overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md animate-in fade-in-80 slide-in-from-top-1",
     className
@@ -16,4 +19,4 @@ const { class: className, ...rest } = Astro.props;
   {...rest}
 >
   <slot />
-</div>
+</Tag>

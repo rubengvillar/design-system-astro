@@ -1,17 +1,19 @@
 ---
 import { classMerge } from "../../../utils/classMerge";
-import type { HTMLAttributes } from "astro/types";
+import type { HTMLTag } from "astro/types";
+import type { PolymorphicProps } from "../../types/polymorphic";
 
-interface Props extends HTMLAttributes<"button"> {}
+type Props<T extends HTMLTag = "button"> = PolymorphicProps<T>;
 
-const { class: className, ...rest } = Astro.props;
+const { class: className, as: Tag = "button", ...rest } = Astro.props;
 ---
 
-<button
+<Tag
   data-collapse-header
-  type="button"
+  type={Tag === "button" ? "button" : undefined}
+  aria-expanded="false"
   class={classMerge(
-    "flex w-full items-center justify-between py-4 text-sm font-medium transition-all hover:text-primary",
+    "flex w-full items-center justify-between py-4 text-sm font-medium transition-all hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm",
     className
   )}
   {...rest}
@@ -32,4 +34,4 @@ const { class: className, ...rest } = Astro.props;
   >
     <path d="m6 9 6 6 6-6"></path>
   </svg>
-</button>
+</Tag>

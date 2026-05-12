@@ -1,13 +1,13 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
+import type { HTMLTag } from "astro/types";
+import type { PolymorphicProps } from "../../types/polymorphic";
 import { classMerge } from "../../../utils/classMerge";
 
-interface Props extends HTMLAttributes<'div'> {
+type Props<T extends HTMLTag = "div"> = PolymorphicProps<T> & {
   id: string;
-  class?: string;
-}
+};
 
-const { id, class: className, ...rest } = Astro.props;
+const { id, class: className, as: Tag = "div", ...rest } = Astro.props;
 ---
 
 <ui-modal id={id} class={classMerge("contents", className)} {...rest}>
@@ -16,41 +16,38 @@ const { id, class: className, ...rest } = Astro.props;
 
 <script>
   class UIModal extends HTMLElement {
+    private dialog: HTMLDialogElement | null = null;
+    private triggers: NodeListOf<Element> | null = null;
+    private closeButtons: NodeListOf<Element> | null = null;
+
     constructor() {
       super();
     }
 
     connectedCallback() {
+      // Delay initialization
       setTimeout(() => this.init(), 0);
     }
 
     init() {
-      const dialog = this.querySelector('dialog');
-      if (!dialog) return;
+      this.dialog = this.querySelector('dialog');
+      if (!this.dialog) return;
 
-      // Allow triggers from anywhere in the document pointing to this modal ID
-      const triggers = document.querySelectorAll(`[data-modal-target="${this.id}"]`);
-      const closeButtons = this.querySelectorAll('[data-modal-close]');
+      this.triggers = document.querySelectorAll(`[data-modal-target="${this.id}"]`);
+      this.closeButtons = this.querySelectorAll('[data-modal-close]');
 
-      triggers.forEach(t => {
-        t.addEventListener('click', () => {
-          dialog.showModal();
-          document.body.style.overflow = 'hidden';
-        });
+      this.triggers.forEach(t => {
+        t.addEventListener('click', () => this.open());
       });
 
-      const closeDialog = () => {
-        dialog.close();
-        document.body.style.overflow = '';
-      };
-
-      closeButtons.forEach(b => {
-        b.addEventListener('click', closeDialog);
+      this.closeButtons.forEach(b => {
+        b.addEventListener('click', () => this.close());
       });
 
-      // Close on backdrop click (when clicking outside the dialog content box)
-      dialog.addEventListener('click', (e) => {
-        const rect = dialog.getBoundingClientRect();
+      // Close on backdrop click
+      this.dialog.addEventListener('click', (e) => {
+        if (!this.dialog) return;
+        const rect = this.dialog.getBoundingClientRect();
         const isInDialog = (
             rect.top <= e.clientY && 
             e.clientY <= rect.top + rect.height &&
@@ -58,14 +55,28 @@ const { id, class: className, ...rest } = Astro.props;
             e.clientX <= rect.left + rect.width
         );
         if (!isInDialog) {
-          closeDialog();
+          this.close();
         }
       });
       
-      // Native close event (like pressing ESC)
-      dialog.addEventListener('close', () => {
+      this.dialog.addEventListener('close', () => {
           document.body.style.overflow = '';
+          this.dispatchEvent(new CustomEvent('modal-closed'));
       });
+    }
+
+    open() {
+      if (this.dialog && !this.dialog.open) {
+        this.dialog.showModal();
+        document.body.style.overflow = 'hidden';
+        this.dispatchEvent(new CustomEvent('modal-opened'));
+      }
+    }
+
+    close() {
+      if (this.dialog && this.dialog.open) {
+        this.dialog.close();
+      }
     }
   }
 

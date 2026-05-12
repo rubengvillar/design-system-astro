@@ -15,7 +15,7 @@ const {
   Typography 
 } = DesignSystem;
 
-const modalCode = `<ModalTrigger target="example-modal" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2">
+const modalCode = `<ModalTrigger target="example-modal" as={Button}>
   Abrir Modal
 </ModalTrigger>
 
@@ -27,7 +27,7 @@ const modalCode = `<ModalTrigger target="example-modal" class="inline-flex items
         Esta acción no se puede deshacer. Esto eliminará permanentemente tu cuenta y removerá los datos de nuestros servidores.
       </ModalDescription>
     </ModalHeader>
-    <div class="py-4 flex items-center gap-4">
+    <div class="py-4">
         Contenido del modal va aquí.
     </div>
     <ModalFooter>
@@ -46,7 +46,7 @@ const modalCode = `<ModalTrigger target="example-modal" class="inline-flex items
 
   <ComponentPreview title="Ejemplo Básico" code={modalCode}>
     <div class="flex items-center justify-center py-8">
-        <ModalTrigger target="example-modal" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2">
+        <ModalTrigger target="example-modal" as={Button}>
             Abrir Modal
         </ModalTrigger>
 

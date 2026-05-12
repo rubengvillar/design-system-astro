@@ -1,92 +1,112 @@
 ---
 import { classMerge } from "../../../utils/classMerge";
-import type { HTMLAttributes } from "astro/types";
+import type { HTMLTag } from "astro/types";
+import type { PolymorphicProps } from "../../types/polymorphic";
+import { generateId } from "../../utils/id";
 
-interface Props extends HTMLAttributes<"div"> {
+type Props<T extends HTMLTag = "div"> = PolymorphicProps<T> & {
   open?: boolean;
-}
+};
 
-const { open = false, class: className, ...rest } = Astro.props;
+const { open = false, class: className, as: Tag = "div", ...rest } = Astro.props;
 ---
 
-<ui-collapse data-open={open.toString()} class={classMerge("block w-full border-b border-border/50 last:border-0", className)} {...rest}>
+<ui-collapse
+  data-open={open.toString()}
+  class={classMerge("block w-full border-b border-border/50 last:border-0", className)}
+  {...rest}
+>
   <slot />
 </ui-collapse>
 
 <script>
+  import { generateId } from "../../utils/id";
+
   class UiCollapse extends HTMLElement {
+    private header: HTMLElement | null = null;
+    private content: HTMLElement | null = null;
+
     constructor() {
       super();
-      const header = this.querySelector('[data-collapse-header]');
-      const content = this.querySelector('[data-collapse-content]') as HTMLElement;
+    }
+
+    connectedCallback() {
+      this.header = this.querySelector('[data-collapse-header]');
+      this.content = this.querySelector('[data-collapse-content]');
       
-      if (!header || !content) return;
+      if (!this.header || !this.content) return;
 
-      const toggle = () => {
-        const isOpen = this.getAttribute('data-open') === 'true';
-        this.setAttribute('data-open', (!isOpen).toString());
-        this.updateState(!isOpen, content, header);
-      };
+      // Link for A11y
+      const id = this.id || generateId("collapse");
+      const contentId = `${id}-content`;
+      this.content.id = contentId;
+      this.header.setAttribute('aria-controls', contentId);
 
-      header.addEventListener('click', toggle);
-
-      // Handle transition end to set height to auto
-      content.addEventListener('transitionend', (e) => {
-        if (e.propertyName === 'height' && this.getAttribute('data-open') === 'true') {
-          content.style.height = 'auto';
+      this.header.addEventListener('click', () => this.toggle());
+      
+      this.content.addEventListener('transitionend', (e) => {
+        if (e.propertyName === 'height' && this.dataset.open === 'true') {
+          if (this.content) this.content.style.height = 'auto';
         }
       });
 
-      // Initial state
-      const initialOpen = this.getAttribute('data-open') === 'true';
-      this.updateState(initialOpen, content, header, true);
+      const initialOpen = this.dataset.open === 'true';
+      this.updateState(initialOpen, true);
     }
 
-    updateState(isOpen: boolean, content: HTMLElement, header: Element, isInitial = false) {
-      const icon = header.querySelector('[data-collapse-icon]');
+    toggle() {
+      const isOpen = this.dataset.open === 'true';
+      this.dataset.open = (!isOpen).toString();
+      this.updateState(!isOpen);
+    }
+
+    updateState(isOpen: boolean, isInitial = false) {
+      if (!this.header || !this.content) return;
+      
+      const icon = this.header.querySelector('[data-collapse-icon]');
       
       if (isOpen) {
-        content.classList.remove('invisible', 'pointer-events-none');
+        this.content.classList.remove('invisible', 'pointer-events-none');
+        this.content.setAttribute('aria-hidden', 'false');
+        
         if (isInitial) {
-          content.style.height = 'auto';
-          content.style.opacity = '1';
+          this.content.style.height = 'auto';
+          this.content.style.opacity = '1';
         } else {
-          content.style.height = '0px';
-          content.offsetHeight; // force reflow
-          content.style.height = content.scrollHeight + 'px';
-          content.style.opacity = '1';
+          this.content.style.height = '0px';
+          this.content.offsetHeight; // reflow
+          this.content.style.height = this.content.scrollHeight + 'px';
+          this.content.style.opacity = '1';
         }
         
         if (icon) icon.classList.add('rotate-180');
-        header.setAttribute('aria-expanded', 'true');
+        this.header.setAttribute('aria-expanded', 'true');
       } else {
+        this.content.setAttribute('aria-hidden', 'true');
         if (!isInitial) {
-          const currentHeight = content.offsetHeight;
-          content.style.height = currentHeight + 'px';
-          content.offsetHeight; // force reflow
-          content.style.height = '0px';
-          content.style.opacity = '0';
+          const currentHeight = this.content.offsetHeight;
+          this.content.style.height = currentHeight + 'px';
+          this.content.offsetHeight; // reflow
+          this.content.style.height = '0px';
+          this.content.style.opacity = '0';
         } else {
-          content.style.height = '0px';
-          content.style.opacity = '0';
+          this.content.style.height = '0px';
+          this.content.style.opacity = '0';
         }
         
-        // Add invisible after transition or immediately if initial
         if (isInitial) {
-          content.classList.add('invisible', 'pointer-events-none');
+          this.content.classList.add('invisible', 'pointer-events-none');
         } else {
-          // We wait for the transition to end to add invisible, 
-          // but pointer-events-none can be added immediately to avoid blocking
-          content.classList.add('pointer-events-none');
-          content.addEventListener('transitionend', () => {
-            if (this.getAttribute('data-open') === 'false') {
-              content.classList.add('invisible');
+          this.content.classList.add('pointer-events-none');
+          this.content.addEventListener('transitionend', () => {
+            if (this.dataset.open === 'false' && this.content) {
+              this.content.classList.add('invisible');
             }
           }, { once: true });
         }
         
         if (icon) icon.classList.remove('rotate-180');
-        header.setAttribute('aria-expanded', 'false');
+        this.header.setAttribute('aria-expanded', 'false');
       }
     }
   }
@@ -96,7 +116,7 @@ const { open = false, class: className, ...rest } = Astro.props;
   }
 </script>
 
-<style>
+<style is:global>
   ui-collapse [data-collapse-content] {
     transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
     overflow: hidden;

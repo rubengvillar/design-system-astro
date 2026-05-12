@@ -1,31 +1,91 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
+import type { HTMLTag } from "astro/types";
+import type { PolymorphicProps } from "../../types/polymorphic";
 import { classMerge } from "../../../utils/classMerge";
+import { generateId } from "../../utils/id";
 
-interface Props extends HTMLAttributes<'div'> {
+type Props<T extends HTMLTag = "div"> = PolymorphicProps<T> & {
   content: string;
-  position?: 'top' | 'bottom' | 'left' | 'right';
-}
+  position?: "top" | "bottom" | "left" | "right";
+};
 
-const { content, position = 'top', class: className, ...rest } = Astro.props;
+const {
+  content,
+  position = "top",
+  class: className,
+  as: Tag = "div",
+  ...rest
+} = Astro.props;
+
+const tooltipId = generateId("tooltip");
 
 const positionClasses = {
-  top: 'bottom-full left-1/2 -translate-x-1/2 mb-2',
-  bottom: 'top-full left-1/2 -translate-x-1/2 mt-2',
-  left: 'right-full top-1/2 -translate-y-1/2 mr-2',
-  right: 'left-full top-1/2 -translate-y-1/2 ml-2',
+  top: "bottom-full left-1/2 -translate-x-1/2 mb-2",
+  bottom: "top-full left-1/2 -translate-x-1/2 mt-2",
+  left: "right-full top-1/2 -translate-y-1/2 mr-2",
+  right: "left-full top-1/2 -translate-y-1/2 ml-2",
 };
 ---
 
-<div class={classMerge("group relative inline-block", className)} {...rest}>
+<ui-tooltip class={classMerge("relative inline-block", className)} {...rest}>
   <slot />
   <div
+    id={tooltipId}
     role="tooltip"
     class={classMerge(
-      "pointer-events-none absolute z-50 whitespace-nowrap rounded-md bg-primary px-3 py-1.5 text-xs text-primary-foreground opacity-0 transition-opacity group-hover:opacity-100",
+      "pointer-events-none absolute z-50 whitespace-nowrap rounded-md bg-primary px-3 py-1.5 text-xs text-primary-foreground opacity-0 transition-opacity duration-200 ui-tooltip-visible:opacity-100",
       positionClasses[position]
     )}
   >
     {content}
+    <div
+      class={classMerge(
+        "absolute h-2 w-2 rotate-45 bg-primary",
+        position === "top" && "bottom-[-4px] left-1/2 -translate-x-1/2",
+        position === "bottom" && "top-[-4px] left-1/2 -translate-x-1/2",
+        position === "left" && "right-[-4px] top-1/2 -translate-y-1/2",
+        position === "right" && "left-[-4px] top-1/2 -translate-y-1/2"
+      )}
+    >
+    </div>
   </div>
-</div>
+</ui-tooltip>
+
+<script>
+  class UITooltip extends HTMLElement {
+    private trigger: HTMLElement | null = null;
+    private tooltip: HTMLElement | null = null;
+
+    connectedCallback() {
+      this.trigger = this.firstElementChild as HTMLElement;
+      this.tooltip = this.querySelector('[role="tooltip"]');
+
+      if (!this.trigger || !this.tooltip) return;
+
+      this.trigger.setAttribute('aria-describedby', this.tooltip.id);
+      
+      const show = () => this.setAttribute('data-visible', 'true');
+      const hide = () => this.removeAttribute('data-visible');
+
+      this.trigger.addEventListener('mouseenter', show);
+      this.trigger.addEventListener('mouseleave', hide);
+      this.trigger.addEventListener('focus', show);
+      this.trigger.addEventListener('blur', hide);
+      
+      // Close on Escape
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') hide();
+      });
+    }
+  }
+
+  if (!customElements.get('ui-tooltip')) {
+    customElements.define('ui-tooltip', UITooltip);
+  }
+</script>
+
+<style is:global>
+  ui-tooltip[data-visible] [role="tooltip"] {
+    opacity: 1;
+  }
+</style>

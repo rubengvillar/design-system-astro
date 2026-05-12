@@ -1,18 +1,21 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
+import type { HTMLTag } from "astro/types";
+import type { PolymorphicProps } from "../../types/polymorphic";
 import { classMerge } from "../../../utils/classMerge";
 
-interface Props extends HTMLAttributes<'input'> {
+type Props<T extends HTMLTag = "input"> = PolymorphicProps<T> & {
   error?: boolean;
-}
+};
 
-const { error, class: className, ...rest } = Astro.props;
+const { error, class: className, as: Tag = "input", ...rest } = Astro.props;
 ---
 
-<input
+<Tag
   class={classMerge(
-    "flex h-10 w-full rounded-[var(--radius)] border border-[var(--input)] bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
-    error ? "border-red-500 focus-visible:ring-red-500" : "focus-visible:ring-primary",
+    "flex h-10 w-full rounded-[var(--radius)] border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+    error
+      ? "border-destructive focus-visible:ring-destructive"
+      : "focus-visible:ring-primary",
     className
   )}
   {...rest}

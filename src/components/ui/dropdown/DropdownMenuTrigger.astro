@@ -1,18 +1,20 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
+import type { HTMLTag } from "astro/types";
+import type { PolymorphicProps } from "../../../types/polymorphic";
 import { classMerge } from "../../../utils/classMerge";
 
-interface Props extends HTMLAttributes<'button'> {}
+type Props<T extends HTMLTag = "button"> = PolymorphicProps<T>;
 
-const { class: className, ...rest } = Astro.props;
+const { class: className, as: Tag = "button", ...rest } = Astro.props;
 ---
 
-<button
+<Tag
   data-dropdown-trigger
   aria-haspopup="true"
   aria-expanded="false"
-  class={className}
+  type={Tag === "button" ? "button" : undefined}
+  class={classMerge("focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm", className)}
   {...rest}
 >
   <slot />
-</button>
+</Tag>

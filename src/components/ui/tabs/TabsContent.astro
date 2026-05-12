@@ -1,23 +1,26 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
+import type { HTMLTag } from "astro/types";
+import type { PolymorphicProps } from "../../../types/polymorphic";
 import { classMerge } from "../../../utils/classMerge";
 
-interface Props extends HTMLAttributes<'div'> {
+type Props<T extends HTMLTag = "div"> = PolymorphicProps<T> & {
   value: string;
-}
+};
 
-const { value, class: className, ...rest } = Astro.props;
+const { value, class: className, as: Tag = "div", ...rest } = Astro.props;
 ---
 
-<div
+<Tag
   role="tabpanel"
   data-value={value}
   data-state="inactive"
+  tabindex="0"
+  hidden
   class={classMerge(
-    "mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 hidden data-[state=active]:block",
+    "mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-[state=active]:block",
     className
   )}
   {...rest}
 >
   <slot />
-</div>
+</Tag>

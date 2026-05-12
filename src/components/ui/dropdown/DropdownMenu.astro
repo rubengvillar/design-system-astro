@@ -1,82 +1,136 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
+import type { HTMLTag } from "astro/types";
+import type { PolymorphicProps } from "../../../types/polymorphic";
 import { classMerge } from "../../../utils/classMerge";
 
-interface Props extends HTMLAttributes<'div'> {
-  align?: 'start' | 'center' | 'end';
-  class?: string;
-}
+type Props<T extends HTMLTag = "div"> = PolymorphicProps<T> & {
+  align?: "start" | "center" | "end";
+};
 
-const { align = 'center', class: className, ...rest } = Astro.props;
+const { align = "center", class: className, as: Tag = "div", ...rest } = Astro.props;
 ---
 
-<ui-dropdown data-align={align} class={classMerge("relative inline-block text-left", className)} {...rest}>
+<ui-dropdown
+  data-align={align}
+  class={classMerge("relative inline-block text-left", className)}
+  {...rest}
+>
   <slot />
 </ui-dropdown>
 
 <script>
   class UIDropdown extends HTMLElement {
-    constructor() {
-      super();
-    }
+    private trigger: HTMLElement | null = null;
+    private content: HTMLElement | null = null;
+    private items: HTMLElement[] = [];
 
     connectedCallback() {
       setTimeout(() => this.init(), 0);
     }
 
     init() {
-      const trigger = this.querySelector('[data-dropdown-trigger]');
-      const content = this.querySelector('[data-dropdown-content]') as HTMLElement;
+      this.trigger = this.querySelector('[data-dropdown-trigger]');
+      this.content = this.querySelector('[data-dropdown-content]');
 
-      if (!trigger || !content) return;
+      if (!this.trigger || !this.content) return;
 
-      const toggleDropdown = () => {
-        const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
-        if (isExpanded) {
-          closeDropdown();
-        } else {
-          openDropdown();
-        }
-      };
-
-      const openDropdown = () => {
-        trigger.setAttribute('aria-expanded', 'true');
-        content.classList.remove('hidden');
-        content.classList.add('flex');
-        
-        // alignment logic based on data-align
-        const align = this.dataset.align || 'center';
-        if (align === 'start') {
-          content.classList.add('left-0');
-        } else if (align === 'end') {
-          content.classList.add('right-0');
-        } else {
-          content.classList.add('left-1/2', '-translate-x-1/2');
-        }
-      };
-
-      const closeDropdown = () => {
-        trigger.setAttribute('aria-expanded', 'false');
-        content.classList.add('hidden');
-        content.classList.remove('flex', 'left-0', 'right-0', 'left-1/2', '-translate-x-1/2');
-      };
-
-      trigger.addEventListener('click', toggleDropdown);
+      this.trigger.addEventListener('click', () => this.toggle());
+      this.addEventListener('keydown', (e) => this.handleKeyDown(e));
 
       // Close when clicking outside
       document.addEventListener('click', (e) => {
         if (!this.contains(e.target as Node)) {
-          closeDropdown();
+          this.close();
         }
       });
+    }
 
-      // Close on escape key
-      this.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          closeDropdown();
-          (trigger as HTMLElement).focus();
+    toggle() {
+      const isExpanded = this.trigger?.getAttribute('aria-expanded') === 'true';
+      if (isExpanded) {
+        this.close();
+      } else {
+        this.open();
+      }
+    }
+
+    open() {
+      if (!this.trigger || !this.content) return;
+      this.trigger.setAttribute('aria-expanded', 'true');
+      this.content.classList.remove('hidden');
+      this.content.classList.add('flex');
+      
+      const align = this.dataset.align || 'center';
+      this.content.classList.remove('left-0', 'right-0', 'left-1/2', '-translate-x-1/2');
+      
+      if (align === 'start') {
+        this.content.classList.add('left-0');
+      } else if (align === 'end') {
+        this.content.classList.add('right-0');
+      } else {
+        this.content.classList.add('left-1/2', '-translate-x-1/2');
+      }
+
+      this.items = Array.from(this.querySelectorAll('[role="menuitem"]'));
+      this.dispatchEvent(new CustomEvent('dropdown-opened'));
+    }
+
+    close() {
+      if (!this.trigger || !this.content) return;
+      this.trigger.setAttribute('aria-expanded', 'false');
+      this.content.classList.add('hidden');
+      this.content.classList.remove('flex');
+      this.dispatchEvent(new CustomEvent('dropdown-closed'));
+    }
+
+    handleKeyDown(e: KeyboardEvent) {
+      const isExpanded = this.trigger?.getAttribute('aria-expanded') === 'true';
+
+      if (e.key === 'Escape') {
+        this.close();
+        this.trigger?.focus();
+        return;
+      }
+
+      if (!isExpanded) {
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp' || e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.open();
+          setTimeout(() => {
+            if (this.items.length > 0) {
+              this.items[0].focus();
+            }
+          }, 0);
         }
-      });
+        return;
+      }
+
+      const activeElement = document.activeElement as HTMLElement;
+      const index = this.items.indexOf(activeElement);
+
+      switch (e.key) {
+        case 'ArrowDown':
+          e.preventDefault();
+          const nextIndex = (index + 1) % this.items.length;
+          this.items[nextIndex].focus();
+          break;
+        case 'ArrowUp':
+          e.preventDefault();
+          const prevIndex = (index - 1 + this.items.length) % this.items.length;
+          this.items[prevIndex].focus();
+          break;
+        case 'Home':
+          e.preventDefault();
+          this.items[0].focus();
+          break;
+        case 'End':
+          e.preventDefault();
+          this.items[this.items.length - 1].focus();
+          break;
+        case 'Tab':
+          this.close();
+          break;
+      }
     }
   }
 

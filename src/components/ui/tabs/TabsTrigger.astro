@@ -1,18 +1,21 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
+import type { HTMLTag } from "astro/types";
+import type { PolymorphicProps } from "../../../types/polymorphic";
 import { classMerge } from "../../../utils/classMerge";
 
-interface Props extends HTMLAttributes<'button'> {
+type Props<T extends HTMLTag = "button"> = PolymorphicProps<T> & {
   value: string;
-}
+};
 
-const { value, class: className, ...rest } = Astro.props;
+const { value, class: className, as: Tag = "button", ...rest } = Astro.props;
 ---
 
-<button
+<Tag
   role="tab"
+  type={Tag === "button" ? "button" : undefined}
   data-value={value}
   data-state="inactive"
+  tabindex="-1"
   class={classMerge(
     "inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm",
     className
@@ -20,4 +23,4 @@ const { value, class: className, ...rest } = Astro.props;
   {...rest}
 >
   <slot />
-</button>
+</Tag>

@@ -1,18 +1,20 @@
 ---
 import { classMerge } from "../../../utils/classMerge";
-import type { HTMLAttributes } from "astro/types";
+import type { HTMLTag } from "astro/types";
+import type { PolymorphicProps } from "../../types/polymorphic";
 
-interface Props extends HTMLAttributes<"div"> {}
+type Props<T extends HTMLTag = "div"> = PolymorphicProps<T>;
 
-const { class: className, ...rest } = Astro.props;
+const { class: className, as: Tag = "div", ...rest } = Astro.props;
 ---
 
-<div
+<Tag
   data-collapse-content
+  role="region"
   class={classMerge("text-sm", className)}
   {...rest}
 >
   <div class="pb-4">
     <slot />
   </div>
-</div>
+</Tag>

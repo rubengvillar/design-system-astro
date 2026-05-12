@@ -1,12 +1,21 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
+import type { HTMLTag } from "astro/types";
+import type { PolymorphicProps } from "../../../types/polymorphic";
 import { classMerge } from "../../../utils/classMerge";
 
-interface Props extends HTMLAttributes<'div'> {}
+type Props<T extends HTMLTag = "div"> = PolymorphicProps<T>;
 
-const { class: className, ...rest } = Astro.props;
+const { class: className, as: Tag = "div", ...rest } = Astro.props;
 ---
 
-<div role="tablist" class={classMerge("inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground", className)} {...rest}>
+<Tag
+  role="tablist"
+  aria-orientation="horizontal"
+  class={classMerge(
+    "inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground",
+    className
+  )}
+  {...rest}
+>
   <slot />
-</div>
+</Tag>

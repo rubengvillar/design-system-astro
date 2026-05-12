@@ -1,33 +1,43 @@
 ---
-import { classMerge } from "../../../utils/classMerge";
-import type { HTMLAttributes } from "astro/types";
+import { createVariants } from "../../../utils/variants";
+import type { HTMLTag } from "astro/types";
+import type { PolymorphicProps } from "../../../types/polymorphic";
 
-interface Props extends HTMLAttributes<"div"> {
+const alertVariants = createVariants(
+  "relative w-full rounded-[var(--radius)] border p-4 flex items-start gap-4",
+  {
+    variant: {
+      default: "border-border bg-background text-foreground",
+      error:
+        "border-red-500/50 bg-red-50 text-red-900 dark:bg-red-900/10 dark:text-red-200 dark:border-red-900/50",
+      success:
+        "border-green-500/50 bg-green-50 text-green-900 dark:bg-green-900/10 dark:text-green-200 dark:border-green-900/50",
+      warning:
+        "border-yellow-500/50 bg-yellow-50 text-yellow-900 dark:bg-yellow-900/10 dark:text-yellow-200 dark:border-yellow-900/50",
+    },
+  }
+);
+
+type Props<T extends HTMLTag = "div"> = PolymorphicProps<T> & {
   variant?: "default" | "error" | "success" | "warning";
-}
-
-const { variant = "default", class: className, ...rest } = Astro.props;
-
-const styles = {
-  default: "border-border bg-background text-foreground",
-  error: "border-red-500/50 bg-red-50 text-red-900 dark:bg-red-900/10 dark:text-red-200 dark:border-red-900/50",
-  success: "border-green-500/50 bg-green-50 text-green-900 dark:bg-green-900/10 dark:text-green-200 dark:border-green-900/50",
-  warning: "border-yellow-500/50 bg-yellow-50 text-yellow-900 dark:bg-yellow-900/10 dark:text-yellow-200 dark:border-yellow-900/50",
 };
+
+const {
+  variant = "default",
+  class: className,
+  as: Tag = "div",
+  ...rest
+} = Astro.props;
 ---
 
 <ui-alert>
-  <div
+  <Tag
     role="alert"
-    class={classMerge(
-      "relative w-full rounded-[var(--radius)] border p-4 flex items-start gap-4",
-      styles[variant],
-      className
-    )}
+    class={alertVariants({ variant, class: className })}
     {...rest}
   >
     <slot />
-  </div>
+  </Tag>
 </ui-alert>
 
 <script>

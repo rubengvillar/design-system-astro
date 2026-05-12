@@ -1,17 +1,19 @@
 ---
+import type { HTMLTag } from "astro/types";
+import type { PolymorphicProps } from "../../types/polymorphic";
 import { classMerge } from "../../../utils/classMerge";
 
-interface Props {
-  for: string;
-  class?: string;
-}
+type Props<T extends HTMLTag = "label"> = PolymorphicProps<T>;
 
-const { for: htmlFor, class: className } = Astro.props;
+const { class: className, as: Tag = "label", ...rest } = Astro.props;
 ---
 
-<label 
-  for={htmlFor} 
-  class={classMerge("text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70", className)}
+<Tag
+  class={classMerge(
+    "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
+    className
+  )}
+  {...rest}
 >
   <slot />
-</label>
+</Tag>

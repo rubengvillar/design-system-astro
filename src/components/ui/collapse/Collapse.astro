@@ -1,8 +1,8 @@
 ---
 import { classMerge } from "../../../utils/classMerge";
 import type { HTMLTag } from "astro/types";
-import type { PolymorphicProps } from "../../types/polymorphic";
-import { generateId } from "../../utils/id";
+import type { PolymorphicProps } from "../../../types/polymorphic";
+import { generateId } from "../../../utils/id";
 
 type Props<T extends HTMLTag = "div"> = PolymorphicProps<T> & {
   open?: boolean;
@@ -20,7 +20,7 @@ const { open = false, class: className, as: Tag = "div", ...rest } = Astro.props
 </ui-collapse>
 
 <script>
-  import { generateId } from "../../utils/id";
+  import { generateId } from "../../../utils/id";
 
   class UiCollapse extends HTMLElement {
     private header: HTMLElement | null = null;

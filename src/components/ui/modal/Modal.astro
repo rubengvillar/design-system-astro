@@ -1,6 +1,6 @@
 ---
 import type { HTMLTag } from "astro/types";
-import type { PolymorphicProps } from "../../types/polymorphic";
+import type { PolymorphicProps } from "../../../types/polymorphic";
 import { classMerge } from "../../../utils/classMerge";
 
 type Props<T extends HTMLTag = "div"> = PolymorphicProps<T> & {

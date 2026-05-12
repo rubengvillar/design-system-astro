@@ -1,116 +1,295 @@
 ---
 import DocsLayout from "../../layouts/DocsLayout.astro";
 import ComponentPreview from "../../playground-components/ComponentPreview.astro";
+import { Typography, Container, Grid, GridItem, Separator, Spacer } from "@rubenvillar/design-system-astro";
 
-// Nota: Importamos desde el barrel file (index.ts) para simular la DX real
-import { Container, Grid, GridItem, Separator, Spacer } from "@rubenvillar/design-system-astro";
-
-const containerCode = `
----
-import { Container } from "design-system-astro";
+const containerCode = `---
+import { Container } from '@rubenvillar/design-system-astro';
 ---
 
-<Container class="border-2 border-dashed border-neutral-300 p-6 text-center bg-neutral-50 dark:bg-neutral-900 dark:border-neutral-700">
-  <p class="text-neutral-500">Este contenido está centrado y contenido con márgenes responsivos automáticos.</p>
-</Container>
-`;
+<Container size="lg" class="border-2 border-dashed p-6">
+  Contenido centrado
+</Container>`;
 
-const gridCode = `
----
-import { Grid, GridItem } from "design-system-astro";
+const containerSizesCode = `---
+import { Container } from '@rubenvillar/design-system-astro';
 ---
 
-<Grid class="grid-cols-1 md:grid-cols-3 gap-4">
-  <GridItem class="bg-blue-100 dark:bg-blue-900 p-4 rounded-md text-center">Columna 1</GridItem>
-  <GridItem class="bg-blue-100 dark:bg-blue-900 p-4 rounded-md text-center">Columna 2</GridItem>
-  <GridItem class="bg-blue-100 dark:bg-blue-900 p-4 rounded-md text-center">Columna 3</GridItem>
+<!-- Tamaño pequeño (max-w-screen-sm) -->
+<Container size="sm">...</Container>
+
+<!-- Tamaño medio (max-w-screen-md) -->
+<Container size="md">...</Container>
+
+<!-- Tamaño grande (max-w-screen-xl) - default -->
+<Container size="lg">...</Container>
+
+<!-- Ancho completo -->
+<Container size="full">...</Container>`;
+
+const gridCode = `---
+import { Grid, GridItem } from '@rubenvillar/design-system-astro';
+---
+
+<Grid gap="md" class="grid-cols-1 md:grid-cols-3">
+  <GridItem>Columna 1</GridItem>
+  <GridItem>Columna 2</GridItem>
+  <GridItem>Columna 3</GridItem>
+</Grid>`;
+
+const gridItemCode = `---
+import { Grid, GridItem } from '@rubenvillar/design-system-astro';
+---
+
+<Grid gap="md">
+  <!-- Spans 1 columna -->
+  <GridItem colSpan="1">1/3</GridItem>
   
-  <GridItem class="col-span-1 md:col-span-3 bg-indigo-100 dark:bg-indigo-900 p-4 rounded-md text-center">
-    Fila completa (col-span-3)
-  </GridItem>
-</Grid>
-`;
-
-const spacingCode = `
----
-import { Separator, Spacer } from "design-system-astro";
----
-
-<div class="border rounded-md p-6">
-  <h3 class="text-lg font-medium">Sección Principal</h3>
-  <p class="text-sm text-neutral-500">Descripción detallada de esta sección.</p>
+  <!-- Spans 2 columnas -->
+  <GridItem colSpan="2">2/3</GridItem>
   
-  <Spacer class="h-6" /> 
-  <Separator /> 
-  <Spacer class="h-6" /> <h3 class="text-lg font-medium">Sub-sección</h3>
-  
-  <p class="text-sm text-neutral-500">Más contenido estructurado visualmente.</p>
-</div>
-`;
+  <!-- Ancho completo -->
+  <GridItem colSpan="full">Full width</GridItem>
+</Grid>`;
+
+const separatorCode = `---
+import { Separator } from '@rubenvillar/design-system-astro';
+---
+
+<!-- Separador horizontal (default) -->
+<Separator />
+
+<!-- Separador vertical -->
+<Separator orientation="vertical" />`;
+
+const spacerCode = `---
+import { Spacer } from '@rubenvillar/design-system-astro';
+---
+
+<!-- Espaciador vertical -->
+<Spacer size="md" axis="vertical" />
+
+<!-- Espaciador horizontal -->
+<Spacer size="lg" axis="horizontal" />
+
+<!-- Tamaños: sm (1rem), md (2rem), lg (4rem), xl (6rem) -->
+<Spacer size="xl" />`;
 ---
 
 <DocsLayout 
   title="Layout & Estructura" 
-  description="Primitivas fundamentales para organizar y espaciar el contenido de la interfaz."
+  description="Primitivas fundamentales para organizar y espaciar el contenido"
 >
-  <div class="space-y-16">
-    
-    <section class="space-y-4">
-      <div class="space-y-1">
-        <h2 class="text-2xl font-semibold tracking-tight">Container</h2>
-        <p class="text-neutral-500">Limita el ancho máximo del contenido y lo centra horizontalmente. Ideal para envolturas principales de página.</p>
-      </div>
-      <ComponentPreview code={containerCode}>
-        <div class="p-4 w-full">
-          <Container class="border-2 border-dashed border-neutral-300 p-6 text-center bg-neutral-50 dark:bg-neutral-900 dark:border-neutral-700 rounded-md">
-            <p class="text-neutral-500">Este contenido está centrado y contenido con márgenes responsivos automáticos.</p>
-          </Container>
-        </div>
-      </ComponentPreview>
-    </section>
+  <Typography variant="lead" class="mb-12">
+    Componentes de diseño atómicos y reutilizables. Todos extienden de <code>HTMLAttributes&lt;'div'&gt;</code> 
+    para máxima flexibilidad.
+  </Typography>
 
-    <section class="space-y-4">
-      <div class="space-y-1">
-        <h2 class="text-2xl font-semibold tracking-tight">Grid & GridItem</h2>
-        <p class="text-neutral-500">Sistema de cuadrícula basado en CSS Grid. Extiende el componente con las clases utilitarias de Tailwind (ej. <code>grid-cols-3</code>).</p>
-      </div>
-      <ComponentPreview code={gridCode}>
-        <div class="p-4 w-full">
-          <Grid class="grid-cols-1 md:grid-cols-3 gap-4">
-            <GridItem class="bg-blue-100 dark:bg-blue-900/40 p-4 rounded-md text-center border dark:border-blue-800 text-sm">Columna 1</GridItem>
-            <GridItem class="bg-blue-100 dark:bg-blue-900/40 p-4 rounded-md text-center border dark:border-blue-800 text-sm">Columna 2</GridItem>
-            <GridItem class="bg-blue-100 dark:bg-blue-900/40 p-4 rounded-md text-center border dark:border-blue-800 text-sm">Columna 3</GridItem>
-            <GridItem class="col-span-1 md:col-span-3 bg-indigo-100 dark:bg-indigo-900/40 p-4 rounded-md text-center border dark:border-indigo-800 text-sm">
-              Fila completa (col-span-3)
-            </GridItem>
-          </Grid>
-        </div>
-      </ComponentPreview>
-    </section>
+  <section class="space-y-8">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Container</h2>
+      <p class="text-muted-foreground">Limita el ancho máximo y centra el contenido horizontalmente.</p>
+    </div>
 
-    <section class="space-y-4">
-      <div class="space-y-1">
-        <h2 class="text-2xl font-semibold tracking-tight">Separator & Spacer</h2>
-        <p class="text-neutral-500">Controla el ritmo vertical y divide el contenido de forma semántica y visual.</p>
+    <ComponentPreview title="Uso Básico" code={containerCode}>
+      <div class="p-4 w-full">
+        <Container class="border-2 border-dashed border-neutral-300 p-6 text-center bg-neutral-50 dark:bg-neutral-900 dark:border-neutral-700 rounded-lg">
+          <p class="text-sm text-neutral-500">Contenido centrado con max-width</p>
+        </Container>
       </div>
-      <ComponentPreview code={spacingCode}>
-        <div class="p-4 w-full flex justify-center">
-          <div class="border rounded-md p-6 w-full max-w-md bg-white dark:bg-neutral-950 shadow-sm">
-            <h3 class="text-lg font-medium">Sección Principal</h3>
-            <p class="text-sm text-neutral-500">Descripción detallada de esta sección.</p>
-            
-            <Spacer class="h-6 block w-full bg-red-500/10 border-y border-dashed border-red-500/30 my-2 relative" />
-            
-            <Separator class="bg-neutral-200 dark:bg-neutral-800 w-full h-[1px]" />
-            
-            <Spacer class="h-6 block w-full bg-red-500/10 border-y border-dashed border-red-500/30 my-2 relative" />
-            
-            <h3 class="text-lg font-medium">Sub-sección</h3>
-            <p class="text-sm text-neutral-500">Más contenido estructurado visualmente.</p>
-          </div>
-        </div>
-      </ComponentPreview>
-    </section>
+    </ComponentPreview>
 
-  </div>
+    <ComponentPreview title="Tamaños Disponibles" code={containerSizesCode}>
+      <div class="space-y-4 p-4">
+        <div class="text-xs text-muted-foreground mb-2">SM (max-w-screen-sm)</div>
+        <Container size="sm" class="border border-primary/30 p-3 rounded bg-muted/50 text-sm">Container sm</Container>
+        
+        <div class="text-xs text-muted-foreground mt-4 mb-2">MD (max-w-screen-md)</div>
+        <Container size="md" class="border border-primary/30 p-3 rounded bg-muted/50 text-sm">Container md</Container>
+        
+        <div class="text-xs text-muted-foreground mt-4 mb-2">LG (max-w-screen-xl) - Default</div>
+        <Container size="lg" class="border border-primary/30 p-3 rounded bg-muted/50 text-sm">Container lg</Container>
+        
+        <div class="text-xs text-muted-foreground mt-4 mb-2">FULL (max-w-full)</div>
+        <Container size="full" class="border border-primary/30 p-3 rounded bg-muted/50 text-sm">Container full</Container>
+      </div>
+    </ComponentPreview>
+
+    <div class="p-4 bg-muted/50 rounded-lg border border-border">
+      <h3 class="text-sm font-semibold mb-3">Props</h3>
+      <div class="grid gap-2 text-sm">
+        <div class="grid grid-cols-[120px_100px_1fr] gap-4 p-2 bg-background rounded">
+          <code class="text-primary">size</code>
+          <code class="text-xs text-muted-foreground">'sm' | 'md' | 'lg' | 'full'</code>
+          <span class="text-muted-foreground">default: 'lg'</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="my-12 border-border" />
+
+  <section class="space-y-8">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Grid & GridItem</h2>
+      <p class="text-muted-foreground">Sistema de cuadrícula basado en CSS Grid. Combina con clases de Tailwind.</p>
+    </div>
+
+    <ComponentPreview title="Grid Básico" code={gridCode}>
+      <div class="p-4 w-full">
+        <Grid gap="md" class="grid-cols-1 md:grid-cols-3">
+          <GridItem class="bg-blue-100 dark:bg-blue-900/40 p-4 rounded-md text-center border dark:border-blue-800 text-sm font-medium">Columna 1</GridItem>
+          <GridItem class="bg-blue-100 dark:bg-blue-900/40 p-4 rounded-md text-center border dark:border-blue-800 text-sm font-medium">Columna 2</GridItem>
+          <GridItem class="bg-blue-100 dark:bg-blue-900/40 p-4 rounded-md text-center border dark:border-blue-800 text-sm font-medium">Columna 3</GridItem>
+        </Grid>
+      </div>
+    </ComponentPreview>
+
+    <ComponentPreview title="GridItem con Spans" code={gridItemCode}>
+      <div class="p-4 w-full">
+        <Grid gap="md" class="grid-cols-3">
+          <GridItem colSpan="1" class="bg-purple-100 dark:bg-purple-900/40 p-4 rounded-md text-center border dark:border-purple-800 text-sm">1/3</GridItem>
+          <GridItem colSpan="2" class="bg-purple-100 dark:bg-purple-900/40 p-4 rounded-md text-center border dark:border-purple-800 text-sm">2/3</GridItem>
+          <GridItem colSpan="full" class="bg-indigo-100 dark:bg-indigo-900/40 p-4 rounded-md text-center border dark:border-indigo-800 text-sm">Full width</GridItem>
+        </Grid>
+      </div>
+    </ComponentPreview>
+
+    <div class="p-4 bg-muted/50 rounded-lg border border-border">
+      <h3 class="text-sm font-semibold mb-3">Props</h3>
+      <div class="grid gap-2 text-sm">
+        <div class="font-medium text-xs text-muted-foreground mb-1">Grid</div>
+        <div class="grid grid-cols-[120px_100px_1fr] gap-4 p-2 bg-background rounded">
+          <code class="text-primary">gap</code>
+          <code class="text-xs text-muted-foreground">'sm' | 'md' | 'lg'</code>
+          <span class="text-muted-foreground">Espaciado entre items</span>
+        </div>
+        <div class="font-medium text-xs text-muted-foreground mb-1 mt-4">GridItem</div>
+        <div class="grid grid-cols-[120px_100px_1fr] gap-4 p-2 bg-background rounded">
+          <code class="text-primary">colSpan</code>
+          <code class="text-xs text-muted-foreground">'1' | '2' | '3' | 'full'</code>
+          <span class="text-muted-foreground">default: '1'</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="my-12 border-border" />
+
+  <section class="space-y-8">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Separator</h2>
+      <p class="text-muted-foreground">Línea divisoria semántica con soporte para orientación horizontal y vertical.</p>
+    </div>
+
+    <ComponentPreview title="Orientaciones" code={separatorCode}>
+      <div class="p-8 space-y-8">
+        <div class="space-y-2">
+          <span class="text-xs text-muted-foreground">Horizontal</span>
+          <Separator orientation="horizontal" />
+        </div>
+        <div class="flex items-center gap-8">
+          <span class="text-xs text-muted-foreground">Vertical</span>
+          <Separator orientation="vertical" class="h-16" />
+          <span class="text-xs text-muted-foreground">con altura custom</span>
+        </div>
+      </div>
+    </ComponentPreview>
+
+    <div class="p-4 bg-muted/50 rounded-lg border border-border">
+      <h3 class="text-sm font-semibold mb-3">Props</h3>
+      <div class="grid gap-2 text-sm">
+        <div class="grid grid-cols-[120px_150px_1fr] gap-4 p-2 bg-background rounded">
+          <code class="text-primary">orientation</code>
+          <code class="text-xs text-muted-foreground">'horizontal' | 'vertical'</code>
+          <span class="text-muted-foreground">default: 'horizontal'</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-4 bg-primary/5 rounded-lg border border-primary/20">
+      <h3 class="text-sm font-semibold mb-2 flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        Accesibilidad
+      </h3>
+      <p class="text-sm text-muted-foreground">
+        Incluye <code>role="separator"</code> y <code>aria-orientation</code> para lectores de pantalla.
+      </p>
+    </div>
+  </section>
+
+  <hr class="my-12 border-border" />
+
+  <section class="space-y-8">
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold tracking-tight">Spacer</h2>
+      <p class="text-muted-foreground">Espaciador invisible que mantiene espaciado consistente. Útil para layouts responsivos.</p>
+    </div>
+
+    <ComponentPreview title="Uso con Eje Vertical" code={spacerCode}>
+      <div class="p-4 flex flex-col items-center">
+        <div class="border rounded-md p-4 w-full max-w-xs bg-white dark:bg-neutral-950 shadow-sm">
+          <h3 class="text-base font-medium text-center">Primera Sección</h3>
+          <Spacer size="md" axis="vertical" class="bg-red-500/10 border-y border-dashed border-red-500/30" />
+          <Separator class="bg-neutral-200 dark:bg-neutral-800" />
+          <Spacer size="md" axis="vertical" class="bg-red-500/10 border-y border-dashed border-red-500/30" />
+          <h3 class="text-base font-medium text-center">Segunda Sección</h3>
+        </div>
+      </div>
+    </ComponentPreview>
+
+    <div class="p-4 bg-muted/50 rounded-lg border border-border">
+      <h3 class="text-sm font-semibold mb-3">Props</h3>
+      <div class="grid gap-2 text-sm">
+        <div class="grid grid-cols-[120px_100px_1fr] gap-4 p-2 bg-background rounded">
+          <code class="text-primary">size</code>
+          <code class="text-xs text-muted-foreground">'sm' | 'md' | 'lg' | 'xl'</code>
+          <span class="text-muted-foreground">sm: 1rem, md: 2rem, lg: 4rem, xl: 6rem</span>
+        </div>
+        <div class="grid grid-cols-[120px_100px_1fr] gap-4 p-2 bg-background rounded">
+          <code class="text-primary">axis</code>
+          <code class="text-xs text-muted-foreground">'vertical' | 'horizontal'</code>
+          <span class="text-muted-foreground">default: 'vertical'</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-4 bg-primary/5 rounded-lg border border-primary/20">
+      <h3 class="text-sm font-semibold mb-2 flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        Accesibilidad
+      </h3>
+      <p class="text-sm text-muted-foreground">
+        Tiene <code>aria-hidden="true"</code> para que sea invisible para lectores de pantalla.
+      </p>
+    </div>
+  </section>
+
+  <hr class="my-12 border-border" />
+
+  <section class="space-y-4">
+    <h2 class="text-2xl font-bold tracking-tight">Ejemplo Combinado</h2>
+    <div class="p-4 bg-muted/50 rounded-lg border border-border">
+      <pre class="text-sm overflow-x-auto"><code class="text-muted-foreground">{`<Grid gap="lg">
+  <GridItem colSpan="full">
+    <Container>
+      <Separator />
+    </Container>
+  </GridItem>
+  
+  <GridItem colSpan="2">
+    <h2>Contenido Principal</h2>
+    <Spacer size="md" />
+    <p>Descripción...</p>
+  </GridItem>
+  
+  <GridItem colSpan="1">
+    <h3>Sidebar</h3>
+    <Spacer size="sm" />
+    <p>Enlaces...</p>
+  </GridItem>
+</Grid>`}</code></pre>
+    </div>
+  </section>
+
 </DocsLayout>

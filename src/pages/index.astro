@@ -48,7 +48,7 @@ import { version } from '../../package.json';
 
     <!-- Stats Section -->
     <section class="mb-24 px-4">
-      <Grid cols="3" gap="lg" class="max-w-4xl mx-auto">
+      <Grid gap="lg" class="grid-cols-3 max-w-4xl mx-auto">
         <Reveal direction="up" delay={0.3}>
           <div class="glass p-8 rounded-2xl text-center shadow-sm">
             <Stat>
@@ -83,7 +83,7 @@ import { version } from '../../package.json';
         <Typography as="p" variant="p" class="text-muted-foreground">Todo lo que necesitas para construir sitios web modernos y accesibles en tiempo récord.</Typography>
       </div>
 
-      <Grid cols="1 md:2 lg:3" gap="lg">
+      <Grid gap="lg" class="grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         <Reveal direction="up" delay={0.2}>
           <Card class="group hover:border-primary/50 transition-colors bg-card/40 backdrop-blur-md h-full">
             <CardHeader>

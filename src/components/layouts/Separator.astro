@@ -1,17 +1,21 @@
 ---
-interface Props {
+import type { HTMLAttributes } from 'astro/types';
+import { classMerge } from '../../utils/classMerge';
+
+interface Props extends HTMLAttributes<'div'> {
   orientation?: 'horizontal' | 'vertical';
-  class?: string;
 }
 
-const { orientation = 'horizontal', class: className } = Astro.props;
+const { orientation = 'horizontal', class: className, ...rest } = Astro.props;
 ---
 
 <div
   role="separator"
-  class:list={[
+  aria-orientation={orientation}
+  class={classMerge(
     "shrink-0 bg-[var(--border)]",
     orientation === 'horizontal' ? 'h-[1px] w-full' : 'h-full w-[1px]',
     className
-  ]}
+  )}
+  {...rest}
 />

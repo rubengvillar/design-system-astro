@@ -1,10 +1,12 @@
 ---
-interface Props {
-  class?: string;
+import type { HTMLAttributes } from 'astro/types';
+import { classMerge } from '../../utils/classMerge';
+
+interface Props extends HTMLAttributes<'div'> {
   size?: 'sm' | 'md' | 'lg' | 'full';
 }
 
-const { class: className, size = 'lg' } = Astro.props;
+const { class: className, size = 'lg', ...rest } = Astro.props;
 
 const sizes = {
   sm: 'max-w-screen-sm',
@@ -14,6 +16,6 @@ const sizes = {
 };
 ---
 
-<div class:list={["mx-auto px-6 w-full", sizes[size], className]}>
+<div class={classMerge("mx-auto px-6 w-full", sizes[size], className)} {...rest}>
   <slot />
 </div>

@@ -1,16 +1,15 @@
 ---
+import type { HTMLAttributes } from 'astro/types';
 import { classMerge } from "../../utils/classMerge";
 
-interface Props {
-  cols?: string | number; // Ej: "1 md:2 lg:3" o 3
+interface Props extends HTMLAttributes<'div'> {
   gap?: 'sm' | 'md' | 'lg';
-  class?: string;
 }
 
 const { 
-  cols = "1 md:2", 
   gap = "md", 
-  class: className 
+  class: className,
+  ...rest
 } = Astro.props;
 
 const gapStyles = {
@@ -18,32 +17,12 @@ const gapStyles = {
   md: 'gap-4',
   lg: 'gap-8',
 };
-
-const getColsClasses = () => {
-  if (typeof cols === 'number') return `grid-cols-${cols}`;
-  
-  const parts = cols.toString().split(' ');
-  let classes = '';
-  
-  parts.forEach(part => {
-    if (part.includes('md:')) {
-      classes += ` md:grid-cols-${part.replace('md:', '')}`;
-    } else if (part.includes('lg:')) {
-      classes += ` lg:grid-cols-${part.replace('lg:', '')}`;
-    } else {
-      classes += ` grid-cols-${part}`;
-    }
-  });
-  
-  return classes.trim();
-};
 ---
 
 <div class={classMerge(
   "grid w-full",
-  getColsClasses(),
   gapStyles[gap],
   className
-)}>
+)} {...rest}>
   <slot />
 </div>

@@ -1,26 +1,34 @@
 ---
+import type { HTMLAttributes } from 'astro/types';
 import { classMerge } from '../../utils/classMerge';
 
-interface Props {
-  class?: string;
+interface Props extends HTMLAttributes<'div'> {
   size?: 'sm' | 'md' | 'lg' | 'xl';
   axis?: 'vertical' | 'horizontal';
 }
 
-const { size = 'md', axis = 'vertical', class: className } = Astro.props;
+const { size = 'md', axis = 'vertical', class: className, ...rest } = Astro.props;
 
-const sizes = {
-  sm: 'size-4',      // 1rem
-  md: 'size-8',      // 2rem
-  lg: 'size-16',     // 4rem
-  xl: 'size-24',     // 6rem
+// Mapeo explícito de clases completas de Tailwind para evitar purga
+const verticalSizes = {
+  sm: 'h-4',      // 1rem
+  md: 'h-8',      // 2rem
+  lg: 'h-16',     // 4rem
+  xl: 'h-24',     // 6rem
 };
 
-// Si es vertical, aplicamos altura. Si es horizontal, aplicamos ancho.
-const axisStyles = {
-  vertical: `h-${sizes[size].split('-')[1]}`,
-  horizontal: `w-${sizes[size].split('-')[1]}`,
+const horizontalSizes = {
+  sm: 'w-4',      // 1rem
+  md: 'w-8',      // 2rem
+  lg: 'w-16',     // 4rem
+  xl: 'w-24',     // 6rem
 };
+
+const sizeClass = axis === 'vertical' ? verticalSizes[size] : horizontalSizes[size];
 ---
 
-<div class={classMerge(["shrink-0", axis === 'vertical' ? axisStyles.vertical : axisStyles.horizontal, className])} />
+<div 
+  aria-hidden="true"
+  class={classMerge("shrink-0", sizeClass, className)} 
+  {...rest} 
+/>

@@ -8,7 +8,7 @@ export default defineConfig({
     plugins: [tailwindcss()], // <--- Añadimos el plugin aquí
     optimizeDeps: {
       // Mantenemos tu configuración anterior de monorepo que es correcta
-      include: ['@rubenvillar/design-system-astro']
+      include: ['@rubenvillar/design-system-astro', 'axe-core']
     },
     resolve: {
       dedupe: ['astro']

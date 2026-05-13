@@ -19,108 +19,110 @@ import { version } from '../../package.json';
 ---
 
 <DocsLayout title="Diseña con Velocidad y Estilo">
-  <div class="relative overflow-hidden py-12 lg:py-20">
-    <!-- Hero Section -->
-    <section class="text-center space-y-8 max-w-3xl mx-auto mb-20">
-      <BlurFade>
-        <Badge variant="outline" class="px-4 py-1.5 text-xs font-semibold tracking-wider uppercase mb-6 border-primary/20 bg-primary/5 text-primary">
-          v{version} ya disponible
-        </Badge>
-        <Typography as="h1" variant="h1" class="text-5xl md:text-7xl font-extrabold tracking-tighter mb-6 bg-gradient-to-br from-foreground to-foreground/50 bg-clip-text text-transparent leading-tight">
-          La base para tus <span class="text-primary">mejores interfaces</span>.
-        </Typography>
-        <Typography as="p" variant="p" class="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          Un sistema de diseño atómico y composible construido con <strong>Astro</strong> y <strong>Tailwind CSS</strong>. Diseñado para la máxima flexibilidad y rendimiento.
-        </Typography>
-      </BlurFade>
+  <main>
+    <div class="relative overflow-hidden py-12 lg:py-20">
+      <!-- Hero Section -->
+      <section class="text-center space-y-8 max-w-3xl mx-auto mb-20" aria-labelledby="hero-title">
+        <BlurFade>
+          <Badge variant="outline" class="px-4 py-1.5 text-xs font-semibold tracking-wider uppercase mb-6 border-primary/20 bg-primary/5 text-primary">
+            v{version} ya disponible
+          </Badge>
+          <Typography as="h1" variant="h1" id="hero-title" class="text-5xl md:text-7xl font-extrabold tracking-tighter mb-6 bg-gradient-to-br from-foreground to-foreground/50 bg-clip-text text-transparent leading-tight">
+            La base para tus <span class="text-primary">mejores interfaces</span>.
+          </Typography>
+          <Typography as="p" variant="p" class="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            Un sistema de diseño atómico y composible construido con <strong>Astro</strong> y <strong>Tailwind CSS</strong>. Diseñado para la máxima flexibilidad y rendimiento.
+          </Typography>
+        </BlurFade>
 
-      <Reveal direction="up" delay={0.2}>
-        <div class="flex flex-wrap justify-center gap-4 pt-4">
-          <Button href="/docs/button" size="lg" class="px-8 h-14 text-base font-bold shadow-2xl shadow-primary/20">
-            Empezar ahora
-          </Button>
-          <Button variant="outline" href="https://github.com/rubengvillar/design-system-astro" target="_blank" size="lg" class="px-8 h-14 text-base font-bold">
-            Ver en GitHub
-          </Button>
-        </div>
-      </Reveal>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="mb-24 px-4">
-      <Grid gap="lg" class="grid-cols-3 max-w-4xl mx-auto">
-        <Reveal direction="up" delay={0.3}>
-          <div class="glass p-8 rounded-2xl text-center shadow-sm">
-            <Stat>
-              <StatNumber class="text-4xl font-black text-primary tracking-tighter">40+</StatNumber>
-              <StatLabel class="text-muted-foreground font-medium">Componentes</StatLabel>
-            </Stat>
-          </div>
-        </Reveal>
-        <Reveal direction="up" delay={0.4}>
-          <div class="glass p-8 rounded-2xl text-center shadow-sm">
-            <Stat>
-              <StatNumber class="text-4xl font-black text-primary tracking-tighter">100%</StatNumber>
-              <StatLabel class="text-muted-foreground font-medium">Tipado TS</StatLabel>
-            </Stat>
-          </div>
-        </Reveal>
-        <Reveal direction="up" delay={0.5}>
-          <div class="glass p-8 rounded-2xl text-center shadow-sm">
-            <Stat>
-              <StatNumber class="text-4xl font-black text-primary tracking-tighter">0.1ms</StatNumber>
-              <StatLabel class="text-muted-foreground font-medium">Tiempo Carga</StatLabel>
-            </Stat>
-          </div>
-        </Reveal>
-      </Grid>
-    </section>
-
-    <!-- Features Section -->
-    <section class="space-y-12">
-      <div class="text-center max-w-xl mx-auto space-y-4">
-        <Typography as="h2" variant="h2" class="text-3xl font-bold tracking-tight">Potencia sin complicaciones</Typography>
-        <Typography as="p" variant="p" class="text-muted-foreground">Todo lo que necesitas para construir sitios web modernos y accesibles en tiempo récord.</Typography>
-      </div>
-
-      <Grid gap="lg" class="grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         <Reveal direction="up" delay={0.2}>
-          <Card class="group hover:border-primary/50 transition-colors bg-card/40 backdrop-blur-md h-full">
-            <CardHeader>
-              <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 text-primary group-hover:scale-110 transition-transform">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg>
-              </div>
-              <CardTitle>Astro Native</CardTitle>
-              <CardDescription>Optimizado para la arquitectura de islas de Astro, entregando el mínimo JS posible al cliente.</CardDescription>
-            </CardHeader>
-          </Card>
+          <div class="flex flex-wrap justify-center gap-4 pt-4">
+            <Button href="/docs/button" size="lg" class="px-8 h-14 text-base font-bold shadow-2xl shadow-primary/20">
+              Empezar ahora
+            </Button>
+            <Button variant="outline" href="https://github.com/rubengvillar/design-system-astro" target="_blank" size="lg" class="px-8 h-14 text-base font-bold">
+              Ver en GitHub
+            </Button>
+          </div>
         </Reveal>
+      </section>
 
-        <Reveal direction="up" delay={0.3}>
-          <Card class="group hover:border-primary/50 transition-colors bg-card/40 backdrop-blur-md h-full">
-            <CardHeader>
-              <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 text-primary group-hover:scale-110 transition-transform">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/></svg>
-              </div>
-              <CardTitle>Tailwind v4</CardTitle>
-              <CardDescription>Estilos ultrarrápidos y personalizables utilizando la última versión de Tailwind CSS y variables CSS.</CardDescription>
-            </CardHeader>
-          </Card>
-        </Reveal>
+      <!-- Stats Section -->
+      <section class="mb-24 px-4" aria-label="Estadísticas del proyecto">
+        <Grid gap="lg" class="grid-cols-3 max-w-4xl mx-auto">
+          <Reveal direction="up" delay={0.3}>
+            <div class="glass p-8 rounded-2xl text-center shadow-sm">
+              <Stat>
+                <StatNumber class="text-4xl font-black text-primary tracking-tighter">40+</StatNumber>
+                <StatLabel class="text-muted-foreground font-medium">Componentes</StatLabel>
+              </Stat>
+            </div>
+          </Reveal>
+          <Reveal direction="up" delay={0.4}>
+            <div class="glass p-8 rounded-2xl text-center shadow-sm">
+              <Stat>
+                <StatNumber class="text-4xl font-black text-primary tracking-tighter">100%</StatNumber>
+                <StatLabel class="text-muted-foreground font-medium">Tipado TS</StatLabel>
+              </Stat>
+            </div>
+          </Reveal>
+          <Reveal direction="up" delay={0.5}>
+            <div class="glass p-8 rounded-2xl text-center shadow-sm">
+              <Stat>
+                <StatNumber class="text-4xl font-black text-primary tracking-tighter">0.1ms</StatNumber>
+                <StatLabel class="text-muted-foreground font-medium">Tiempo Carga</StatLabel>
+              </Stat>
+            </div>
+          </Reveal>
+        </Grid>
+      </section>
 
-        <Reveal direction="up" delay={0.4}>
-          <Card class="group hover:border-primary/50 transition-colors bg-card/40 backdrop-blur-md h-full">
-            <CardHeader>
-              <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 text-primary group-hover:scale-110 transition-transform">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-              </div>
-              <CardTitle>Accesible por Defecto</CardTitle>
-              <CardDescription>Cumple con los estándares WCAG para asegurar que tu sitio sea usable por todas las personas.</CardDescription>
-            </CardHeader>
-          </Card>
-        </Reveal>
-      </Grid>
-    </section>
-  </div>
+      <!-- Features Section -->
+      <section class="space-y-12" aria-labelledby="features-title">
+        <div class="text-center max-w-xl mx-auto space-y-4">
+          <Typography as="h2" variant="h2" id="features-title" class="text-3xl font-bold tracking-tight">Potencia sin complicaciones</Typography>
+          <Typography as="p" variant="p" class="text-muted-foreground">Todo lo que necesitas para construir sitios web modernos y accesibles en tiempo récord.</Typography>
+        </div>
+
+        <Grid gap="lg" class="grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          <Reveal direction="up" delay={0.2}>
+            <Card class="group hover:border-primary/50 transition-colors bg-card/40 backdrop-blur-md h-full">
+              <CardHeader>
+                <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 text-primary group-hover:scale-110 transition-transform">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg>
+                </div>
+                <CardTitle>Astro Native</CardTitle>
+                <CardDescription>Optimizado para la arquitectura de islas de Astro, entregando el mínimo JS posible al cliente.</CardDescription>
+              </CardHeader>
+            </Card>
+          </Reveal>
+
+          <Reveal direction="up" delay={0.3}>
+            <Card class="group hover:border-primary/50 transition-colors bg-card/40 backdrop-blur-md h-full">
+              <CardHeader>
+                <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 text-primary group-hover:scale-110 transition-transform">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/></svg>
+                </div>
+                <CardTitle>Tailwind v4</CardTitle>
+                <CardDescription>Estilos ultrarrápidos y personalizables utilizando la última versión de Tailwind CSS y variables CSS.</CardDescription>
+              </CardHeader>
+            </Card>
+          </Reveal>
+
+          <Reveal direction="up" delay={0.4}>
+            <Card class="group hover:border-primary/50 transition-colors bg-card/40 backdrop-blur-md h-full">
+              <CardHeader>
+                <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 text-primary group-hover:scale-110 transition-transform">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                </div>
+                <CardTitle>Accesible por Defecto</CardTitle>
+                <CardDescription>Cumple con los estándares WCAG para asegurar que tu sitio sea usable por todas las personas.</CardDescription>
+              </CardHeader>
+            </Card>
+          </Reveal>
+        </Grid>
+      </section>
+    </div>
+  </main>
 </DocsLayout>
 

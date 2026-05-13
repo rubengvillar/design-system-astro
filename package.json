@@ -53,6 +53,7 @@
     "./styles.css": "./src/styles/globals.css"
   },
   "dependencies": {
+    "axe-core": "^4.10.2",
     "clsx": "^2.1.1",
     "tailwind-merge": "^3.5.0"
   },

@@ -53,6 +53,7 @@ export { default as CardFooter } from './components/ui/card/CardFooter.astro';
 export { toast, type ToastOptions, type ToastVariant } from "./utils/use-toast";
 export { default as Toaster } from "./components/ui/Toaster.astro";
 export { default as Skeleton } from "./components/ui/Skeleton.astro";
+export { default as A11yAuditor } from "./components/ui/A11yAuditor/A11yAuditor.astro";
 
 // Componentes de formulario
 export { default as Input } from './components/ui/form/Input.astro';

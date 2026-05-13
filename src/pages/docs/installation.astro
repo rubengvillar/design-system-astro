@@ -3,31 +3,58 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 import { Typography, Card, CardHeader, CardTitle, CardDescription, Tabs, TabsList, TabsTrigger, TabsContent } from '@rubenvillar/design-system-astro';
 import { Code } from 'astro:components';
 
-const tailwindConfig = `
-@import "tailwindcss";
-@reference "../../node_modules/@rubenvillar/design-system-astro/src/styles/globals.css";
+const tailwindConfig = `@import "tailwindcss";
+@import "@rubenvillar/design-system-astro/styles.css";`;
 
-/* Importa las variables del sistema */
-@import "../../node_modules/@rubenvillar/design-system-astro/src/styles/globals.css";
-`;
-
-const usageExample = `
----
+const usageExample = `---
 import { Button } from '@rubenvillar/design-system-astro';
 ---
 
-<Button>Mi Botón</Button>
-`;
+<Button>Mi Botón</Button>`;
 ---
 
 <DocsLayout 
   title="Instalación" 
   description="Guía paso a paso para integrar el sistema de diseño en tu proyecto Astro."
 >
-  <section class="space-y-6">
-    <Typography as="h2" variant="h2">1. Instala el paquete</Typography>
+  <section class="space-y-6 p-6 rounded-2xl bg-primary/5 border border-primary/10">
+    <Typography as="h2" variant="h2" class="text-primary">✨ Instalación Rápida (Recomendada)</Typography>
     <Typography as="p" variant="p">
-      Añade la librería a tu proyecto utilizando tu gestor de paquetes preferido.
+      Usa la CLI interactiva para una configuración automática en segundos:
+    </Typography>
+
+    <div class="space-y-4">
+      <Card class="bg-zinc-900/50 border-zinc-800">
+        <CardHeader>
+          <CardTitle class="text-sm font-mono">Proyecto nuevo desde cero</CardTitle>
+          <CardDescription>Crea un proyecto Astro con todo preconfigurado</CardDescription>
+        </CardHeader>
+        <div class="px-6 pb-6 overflow-x-auto text-sm leading-relaxed [&_pre]:!bg-transparent [&_pre]:!m-0 [&_pre]:!p-0">
+          <Code code="npx @rubenvillar/design-system-astro create" lang="bash" theme="github-dark" />
+        </div>
+      </Card>
+
+      <Card class="bg-zinc-900/50 border-zinc-800">
+        <CardHeader>
+          <CardTitle class="text-sm font-mono">Proyecto existente</CardTitle>
+          <CardDescription>Añade el design system a tu proyecto actual</CardDescription>
+        </CardHeader>
+        <div class="px-6 pb-6 overflow-x-auto text-sm leading-relaxed [&_pre]:!bg-transparent [&_pre]:!m-0 [&_pre]:!p-0">
+          <Code code="npx @rubenvillar/design-system-astro init" lang="bash" theme="github-dark" />
+        </div>
+      </Card>
+    </div>
+
+    <Typography as="p" variant="p" class="text-sm">
+      La CLI te guiará interactivamente: selecciona componentes, elige modo oscuro y genera páginas de ejemplo automáticamente. 
+      <a href="/docs/cli" class="text-primary hover:underline font-medium">Saber más →</a>
+    </Typography>
+  </section>
+
+  <section class="space-y-6 mt-12">
+    <Typography as="h2" variant="h2">1. Instalación Manual</Typography>
+    <Typography as="p" variant="p">
+      Si prefieres instalar manualmente, añade la librería con tu gestor de paquetes preferido.
     </Typography>
 
     <Tabs defaultValue="pnpm">
@@ -57,7 +84,7 @@ import { Button } from '@rubenvillar/design-system-astro';
   <section class="space-y-6 mt-12">
     <Typography as="h2" variant="h2">2. Configura Tailwind CSS v4</Typography>
     <Typography as="p" variant="p">
-      Para que los estilos se apliquen correctamente, debes referenciar el archivo global de estilos de la librería en tu CSS principal.
+      Para que los estilos se apliquen correctamente, añade el import de la librería en tu CSS principal.
     </Typography>
     
     <Card class="bg-zinc-900/50 border-zinc-800">
@@ -89,7 +116,8 @@ import { Button } from '@rubenvillar/design-system-astro';
   <section class="mt-12 p-8 rounded-2xl bg-primary/5 border border-primary/10">
     <Typography as="h3" variant="h3" class="text-primary mb-2">¿Necesitas ayuda?</Typography>
     <Typography as="p" variant="p" class="text-muted-foreground">
-      Si encuentras algún problema durante la instalación, puedes revisar nuestro repositorio en <a href="https://github.com/rubengvillar/design-system-astro" class="text-primary hover:underline">GitHub</a> o abrir un issue.
+      Consulta la <a href="/docs/cli" class="text-primary hover:underline font-medium">documentación de la CLI</a> para una instalación guiada, 
+      o revisa nuestro repositorio en <a href="https://github.com/rubengvillar/design-system-astro" class="text-primary hover:underline">GitHub</a>.
     </Typography>
   </section>
 </DocsLayout>

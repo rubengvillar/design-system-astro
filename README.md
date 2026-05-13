@@ -2,33 +2,48 @@
 
 Un sistema de diseño premium, moderno y altamente composible construido con **Astro**, **React** y **Tailwind CSS v4**. Diseñado para ofrecer una estética excepcional y un rendimiento óptimo.
 
-## 🚀 Instalación
+## 🚀 CLI (Recomendado)
 
-Esta librería está disponible de forma pública en el registro de NPM. Puedes instalarla en cualquier proyecto Astro sin necesidad de configurar credenciales.
+La forma más rápida de empezar es con nuestra CLI interactiva:
 
 ```bash
-# Con pnpm
+# Crear un proyecto desde cero
+npx @rubenvillar/design-system-astro create
+
+# Configurar un proyecto Astro existente
+npx @rubenvillar/design-system-astro init
+```
+
+El CLI te guiará paso a paso:
+- Selección de componentes individuales (Button, Card, Navbar, etc.)
+- Soporte para modo oscuro
+- Creación de páginas de ejemplo
+- Configuración automática de `astro.config.*` y CSS
+
+### Comandos
+
+| Comando | Descripción |
+|---|---|
+| `init` | Configura el design system en un proyecto Astro existente |
+| `create` | Crea un nuevo proyecto Astro con el design system preconfigurado |
+
+## 📦 Instalación Manual
+
+Si prefieres instalar manualmente, la librería está disponible en NPM:
+
+```bash
 pnpm add @rubenvillar/design-system-astro
-
-# Con npm
 npm install @rubenvillar/design-system-astro
-
-# Con yarn
 yarn add @rubenvillar/design-system-astro
 ```
 
-## 🛠️ Configuración (Tailwind CSS v4)
+## 🛠️ Configuración Manual (Tailwind CSS v4)
 
-Para que el sistema de diseño funcione correctamente y los estilos se apliquen, debes configurar tu proyecto para que Tailwind procese los componentes de la librería.
-
-En tu archivo principal de CSS (ej: `src/styles/globals.css`), añade la referencia a la librería:
+Añade la referencia a la librería en tu archivo CSS principal:
 
 ```css
 @import "tailwindcss";
-@reference "../../node_modules/@rubenvillar/design-system-astro/src/styles/globals.css";
-
-/* Opcional: importa los estilos base si no quieres definirlos manualmente */
-@import "../../node_modules/@rubenvillar/design-system-astro/src/styles/globals.css";
+@import "@rubenvillar/design-system-astro/styles.css";
 ```
 
 ## 💡 Uso Básico
@@ -56,17 +71,18 @@ import { Button, Typography, Card } from '@rubenvillar/design-system-astro';
 - **Glassmorphism:** Estética moderna con desenfoques y gradientes dinámicos.
 - **Accesible:** Cumple con estándares WCAG por defecto.
 - **Componible:** Divide interfaces complejas en piezas atómicas reutilizables.
+- **CLI Interactiva:** Inicialización y configuración automática con `npx`.
 
 ## 📦 Desarrollo y Contribución
 
-Si eres el autor o quieres contribuir al proyecto:
-
 1. Clona el repositorio.
 2. Instala las dependencias: `pnpm install`.
-3. Ejecuta el playground en modo desarrollo: `pnpm dev`.
-4. Para publicar una nueva versión:
+3. Ejecuta el playground: `pnpm dev`.
+4. Construye la CLI: `pnpm build:cli`.
+5. Para publicar:
    ```bash
-   pnpm version patch # o minor/major
+   pnpm build:cli
+   pnpm version patch
    npm publish --access public
    ```
 

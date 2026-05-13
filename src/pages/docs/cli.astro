@@ -1,0 +1,147 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import ComponentPreview from '../../playground-components/ComponentPreview.astro';
+import { Typography, Card, CardHeader, CardTitle, CardDescription, CardContent } from '@rubenvillar/design-system-astro';
+import { Code } from 'astro:components';
+
+const initCommand = `npx @rubenvillar/design-system-astro init`;
+const createCommand = `npx @rubenvillar/design-system-astro create`;
+const pkgVersion = `3.0.9`;
+---
+
+<DocsLayout 
+  title="CLI"
+  description="La CLI interactiva automatiza la instalación y configuración del design system en segundos."
+>
+  <section class="space-y-6">
+    <Typography as="h2" variant="h2">¿Qué es?</Typography>
+    <Typography as="p" variant="p">
+      La CLI de <code>@rubenvillar/design-system-astro</code> es una herramienta interactiva que 
+      te guía paso a paso para instalar y configurar el design system. Ya sea que estés empezando 
+      un proyecto desde cero o quieras añadirlo a uno existente, la CLI se encarga de todo:
+      instalar dependencias, configurar <code>astro.config.*</code>, inyectar estilos CSS y más.
+    </Typography>
+  </section>
+
+  <section class="space-y-6 mt-12">
+    <Typography as="h2" variant="h2">Comando <code>create</code></Typography>
+    <Typography as="p" variant="p">
+      Crea un proyecto Astro desde cero con el design system preconfigurado.
+    </Typography>
+
+    <Card class="bg-zinc-900/50 border-zinc-800">
+      <CardContent>
+        <div class="overflow-x-auto text-sm leading-relaxed font-mono text-zinc-300 py-4">
+          <Code code={createCommand} lang="bash" theme="github-dark" />
+        </div>
+      </CardContent>
+    </Card>
+
+    <Typography as="p" variant="p">
+      El CLI te preguntará de forma interactiva:
+    </Typography>
+
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground">
+      <li><strong class="text-foreground">Nombre del proyecto</strong> — solo minúsculas y guiones</li>
+      <li><strong class="text-foreground">Gestor de paquetes</strong> — npm, pnpm, yarn o bun</li>
+      <li><strong class="text-foreground">TypeScript</strong> — con configuración strict</li>
+      <li><strong class="text-foreground">Componentes</strong> — selección individual por categorías</li>
+      <li><strong class="text-foreground">Modo oscuro</strong> — soporte incluido</li>
+    </ul>
+
+    <Typography as="p" variant="p">
+      Tras responder, la CLI ejecutará <code>create-astro</code> automáticamente, instalará 
+      las dependencias y configurará todo el design system. Al finalizar, solo tienes que 
+      ejecutar <code>cd mi-proyecto && pnpm dev</code>.
+    </Typography>
+  </section>
+
+  <section class="space-y-6 mt-12">
+    <Typography as="h2" variant="h2">Comando <code>init</code></Typography>
+    <Typography as="p" variant="p">
+      Configura el design system en un proyecto Astro existente.
+    </Typography>
+
+    <Card class="bg-zinc-900/50 border-zinc-800">
+      <CardContent>
+        <div class="overflow-x-auto text-sm leading-relaxed font-mono text-zinc-300 py-4">
+          <Code code={initCommand} lang="bash" theme="github-dark" />
+        </div>
+      </CardContent>
+    </Card>
+
+    <Typography as="p" variant="p">
+      Este comando es ideal si ya tienes un proyecto Astro y quieres añadir el design system. 
+      Te guiará a través de:
+    </Typography>
+
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground">
+      <li><strong class="text-foreground">Selección de componentes</strong> — elige solo los que necesites</li>
+      <li><strong class="text-foreground">Modo oscuro</strong> — activar o desactivar</li>
+      <li><strong class="text-foreground">Página de ejemplo</strong> — genera un demo automático</li>
+    </ul>
+
+    <Typography as="p" variant="p">
+      La CLI detectará tu gestor de paquetes automáticamente, instalará la librería, 
+      modificará <code>astro.config.*</code> para añadir <code>@astrojs/react</code> y 
+      <code>@tailwindcss/vite</code>, e inyectará las variables CSS en tu archivo de estilos.
+    </Typography>
+  </section>
+
+  <section class="space-y-6 mt-12">
+    <Typography as="h2" variant="h2">¿Qué configura automáticamente?</Typography>
+
+    <div class="grid gap-6 md:grid-cols-2">
+      <Card>
+        <CardHeader>
+          <CardTitle>astro.config.*</CardTitle>
+          <CardDescription>Configuración de Astro</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <ul class="list-disc list-inside space-y-1 text-sm text-muted-foreground">
+            <li>Importa <code>@astrojs/react</code></li>
+            <li>Importa <code>@tailwindcss/vite</code></li>
+            <li>Añade <code>react()</code> a integrations</li>
+            <li>Añade <code>tailwindcss()</code> a vite.plugins</li>
+            <li>Configura <code>optimizeDeps</code></li>
+            <li>Configura <code>resolve.dedupe</code></li>
+          </ul>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>CSS Global</CardTitle>
+          <CardDescription>Variables y utilidades</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <ul class="list-disc list-inside space-y-1 text-sm text-muted-foreground">
+            <li>Añade <code>@import</code> de estilos del DS</li>
+            <li>Inyecta variables HSL de color</li>
+            <li>Configura modo oscuro</li>
+            <li>Crea el archivo si no existe</li>
+          </ul>
+        </CardContent>
+      </Card>
+    </div>
+  </section>
+
+  <section class="space-y-6 mt-12">
+    <Typography as="h2" variant="h2">Compatibilidad</Typography>
+
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground">
+      <li><strong class="text-foreground">Gestores de paquetes:</strong> npm, pnpm, yarn, bun</li>
+      <li><strong class="text-foreground">Archivos de configuración:</strong> <code>astro.config.mjs</code>, <code>.ts</code>, <code>.js</code></li>
+      <li><strong class="text-foreground">Node.js:</strong> v18 o superior</li>
+      <li><strong class="text-foreground">Astro:</strong> v4, v5 y v6</li>
+    </ul>
+  </section>
+
+  <section class="mt-12 p-8 rounded-2xl bg-primary/5 border border-primary/10">
+    <Typography as="h3" variant="h3" class="text-primary mb-2">¿Listo para empezar?</Typography>
+    <Typography as="p" variant="p" class="text-muted-foreground">
+      Ejecuta <code>npx @rubenvillar/design-system-astro create</code> para crear un nuevo 
+      proyecto o <code>npx @rubenvillar/design-system-astro init</code> para configurar uno existente.
+    </Typography>
+  </section>
+</DocsLayout>

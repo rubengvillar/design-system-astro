@@ -1,0 +1,6 @@
+{
+  "name": "test-astro",
+  "dependencies": {
+    "astro": "^6.0.0"
+  }
+}

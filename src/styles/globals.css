@@ -9,6 +9,7 @@
   --color-border: hsl(var(--border));
   --color-primary: hsl(var(--primary));
   --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-primary-emphasis: hsl(var(--primary-emphasis));
   --color-secondary: hsl(var(--secondary));
   --color-secondary-foreground: hsl(var(--secondary-foreground));
   --color-muted: hsl(var(--muted));
@@ -48,7 +49,8 @@
     /* El formato H S L permite controlar la saturación y luminosidad después */
     --background: 0 0% 100%;
     --foreground: 222 47% 11%;
-    --primary: 221 83% 53%;
+    --primary: 221 83% 45%;
+    --primary-emphasis: 221 83% 53%;
     --primary-foreground: 210 40% 98%;
     --secondary: 210 40% 96%;
     --secondary-foreground: 222 47% 11%;
@@ -105,7 +107,8 @@
     --background: 222 47% 11%;
     --foreground: 210 40% 98%;
     --border: 217 32% 17%;
-    --primary: 217 91% 60%; /* Un azul más brillante para modo oscuro */
+    --primary: 217 91% 45%; /* Un azul más brillante para modo oscuro, ajustado para contraste */
+    --primary-emphasis: 217 91% 60%;
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
     --destructive: 0 62.8% 30.6%;

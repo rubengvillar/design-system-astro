@@ -57,7 +57,7 @@ const positionClasses = {
     <div data-content class="flex-1 overflow-y-auto p-4 custom-scrollbar">
       <div class="flex flex-col items-center justify-center py-8 text-center space-y-3">
         <div class="p-3 bg-primary/5 rounded-full">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary-emphasis"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
         </div>
         <p class="text-sm font-medium">Listo para analizar el DOM</p>
         <button data-run class="text-xs px-4 py-2 bg-primary text-primary-foreground rounded-lg font-bold hover:opacity-90 transition-opacity">
@@ -216,7 +216,7 @@ const positionClasses = {
             </div>
             <h4 class="font-bold text-green-700 dark:text-green-300">¡Perfecto!</h4>
             <p class="text-xs text-green-600/80 dark:text-green-400/80">No se detectaron violaciones de accesibilidad automáticas en esta página.</p>
-            <button data-run-again class="text-xs font-bold text-primary hover:underline pt-2">Volver a escanear</button>
+            <button data-run-again class="text-xs font-bold text-primary-emphasis hover:underline pt-2">Volver a escanear</button>
           </div>
         `;
         return;
@@ -260,7 +260,7 @@ const positionClasses = {
               <div class="flex items-center gap-2">
                 <button 
                   data-toggle-nodes="${index}"
-                  class="text-[10px] font-bold text-primary flex items-center gap-1 hover:underline"
+                  class="text-[10px] font-bold text-primary-emphasis flex items-center gap-1 hover:underline"
                 >
                   ${v.nodes.length} elemento(s) afectado(s)
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
@@ -284,7 +284,7 @@ const positionClasses = {
       return `
         <div class="p-3 space-y-2">
           <div class="flex items-start justify-between gap-2">
-            <code class="text-[9px] bg-muted p-1 rounded font-mono break-all flex-1 text-primary">
+            <code class="text-[9px] bg-muted p-1 rounded font-mono break-all flex-1 text-primary-emphasis">
               ${this.escapeHtml(selector)}
             </code>
             <button 

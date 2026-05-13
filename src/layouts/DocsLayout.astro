@@ -161,7 +161,7 @@ const currentPath = Astro.url.pathname;
       }
 
       .active-link {
-        color: hsl(var(--primary));
+        color: hsl(var(--primary-emphasis));
         font-weight: 600;
         background-color: hsla(var(--primary) / 0.1);
         position: relative;
@@ -174,7 +174,7 @@ const currentPath = Astro.url.pathname;
         top: 20%;
         bottom: 20%;
         width: 3px;
-        background-color: hsl(var(--primary));
+        background-color: hsl(var(--primary-emphasis));
         border-radius: 0 4px 4px 0;
       }
 
@@ -195,15 +195,15 @@ const currentPath = Astro.url.pathname;
       <Navbar>
         <div class="container mx-auto flex h-16 items-center justify-between px-6">
           <NavbarBrand>
-            <a href="/" class="font-extrabold text-2xl tracking-tighter hover:text-primary transition-colors">
-              System<span class="text-primary">Docs</span>
+            <a href="/" class="font-extrabold text-2xl tracking-tighter hover:text-primary-emphasis transition-colors">
+              System<span class="text-primary-emphasis">Docs</span>
             </a>
           </NavbarBrand>
           
-          <NavbarContent aria-label="Navegación principal">
+            <NavbarContent aria-label="Navegación principal">
             <NavbarLink href="/">Inicio</NavbarLink>
             <NavbarLink href="/docs/button">Componentes</NavbarLink>
-            <a href="https://github.com/rubengvillar/design-system-astro" target="_blank" class="text-sm font-medium hover:text-primary transition-colors px-3 py-2">GitHub</a>
+            <a href="https://github.com/rubengvillar/design-system-astro" target="_blank" class="text-sm font-medium hover:text-primary-emphasis transition-colors px-3 py-2">GitHub</a>
             <ThemeToggle />
           </NavbarContent>
 
@@ -213,11 +213,11 @@ const currentPath = Astro.url.pathname;
           </div>
         </div>
 
-        <NavbarMenu aria-label="Navegación móvil">
+          <NavbarMenu aria-label="Navegación móvil">
           <div class="flex flex-col gap-4 py-8">
             <NavbarLink href="/" class="text-xl font-bold">Inicio</NavbarLink>
             <NavbarLink href="/docs/installation" class="text-xl font-bold">Documentación</NavbarLink>
-            <a href="https://github.com/rubengvillar/design-system-astro" target="_blank" class="text-xl font-bold text-muted-foreground hover:text-primary transition-colors">GitHub</a>
+            <a href="https://github.com/rubengvillar/design-system-astro" target="_blank" class="text-xl font-bold text-muted-foreground hover:text-primary-emphasis transition-colors">GitHub</a>
           </div>
         </NavbarMenu>
       </Navbar>
@@ -240,7 +240,7 @@ const currentPath = Astro.url.pathname;
                       <a 
                         href={item.url} 
                         class:list={[
-                          "flex w-full items-center rounded-lg px-3 py-2 text-sm transition-all hover:bg-primary/5 hover:text-primary",
+                          "flex w-full items-center rounded-lg px-3 py-2 text-sm transition-all hover:bg-primary/5 hover:text-primary-emphasis",
                           currentPath === item.url ? "active-link" : "text-muted-foreground"
                         ]}
                       >
@@ -261,7 +261,7 @@ const currentPath = Astro.url.pathname;
           <!-- Mobile Sidebar (Categorized) -->
           <div class="md:hidden mb-8">
             <Collapse>
-              <CollapseHeader class="flex items-center gap-2 px-4 py-3 bg-secondary/30 rounded-xl border border-border/50 text-primary font-semibold">
+              <CollapseHeader class="flex items-center gap-2 px-4 py-3 bg-secondary/30 rounded-xl border border-border/50 text-primary-emphasis font-semibold">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18"/><path d="M3 15h18"/><path d="M3 21h18"/><path d="M3 3h18"/></svg>
                 Menú de Componentes
               </CollapseHeader>
@@ -281,7 +281,7 @@ const currentPath = Astro.url.pathname;
                                 href={item.url} 
                                 class:list={[
                                   "flex w-full items-center rounded-lg px-3 py-2 text-sm transition-all",
-                                  currentPath === item.url ? "text-primary font-semibold bg-primary/5" : "text-muted-foreground"
+                                  currentPath === item.url ? "text-primary-emphasis font-semibold bg-primary/5" : "text-muted-foreground"
                                 ]}
                               >
                                 {item.name}
@@ -317,7 +317,7 @@ const currentPath = Astro.url.pathname;
         <FooterBottom>
           <p class="text-sm text-muted-foreground">
             &copy; {new Date().getFullYear()} @rubenvillar/design-system-astro. 
-            Creado por <a href="https://rubenvillar.vercel.app" target="_blank" class="text-primary hover:underline font-medium">Ruben Villar</a>.
+            Creado por <a href="https://rubenvillar.vercel.app" target="_blank" class="text-primary-emphasis hover:underline font-medium">Ruben Villar</a>.
           </p>
         </FooterBottom>
       </div>

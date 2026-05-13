@@ -1,14 +1,15 @@
 ---
 import { classMerge } from '../../../utils/classMerge';
-import type { HTMLAttributes } from 'astro/types';
+import type { HTMLTag } from "astro/types";
+import type { PolymorphicProps } from "../../../types/polymorphic";
 
-export interface Props extends HTMLAttributes<'div'> {}
+type Props<T extends HTMLTag = "dl"> = PolymorphicProps<T>;
 
-const { class: className, ...rest } = Astro.props;
+const { class: className, as: Tag = "dl", ...rest } = Astro.props;
 
-const baseStyles = "flex flex-col gap-1 p-4 rounded-xl border border-border/50 bg-background/50 backdrop-blur-sm shadow-sm transition-all hover:shadow-md";
+const baseStyles = "flex flex-col-reverse gap-1 p-4 rounded-xl border border-border/50 bg-background/50 backdrop-blur-sm shadow-sm transition-all hover:shadow-md";
 ---
 
-<div class={classMerge(baseStyles, className)} {...rest}>
+<Tag class={classMerge(baseStyles, className)} {...rest}>
   <slot />
-</div>
+</Tag>

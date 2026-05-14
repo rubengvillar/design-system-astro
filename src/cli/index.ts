@@ -7,7 +7,7 @@ declare const __VERSION__: string;
 const program = new Command();
 
 program
-  .name('ds-astro')
+  .name('design-system-astro')
   .description('CLI interactiva para @rubenvillar/design-system-astro')
   .version(__VERSION__, '-v, --version', 'Muestra la versión');
 

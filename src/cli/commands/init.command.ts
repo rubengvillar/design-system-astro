@@ -12,7 +12,7 @@ import { join } from 'path';
 const DS_PACKAGE = '@rubenvillar/design-system-astro';
 
 export async function initCommand(): Promise<void> {
-  intro(picocolors.bold(picocolors.cyan('ds-astro init')));
+  intro(picocolors.bold(picocolors.cyan('design-system-astro init')));
 
   const check = await checkAstroProject();
   if (!check.isAstro) {

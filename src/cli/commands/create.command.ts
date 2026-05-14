@@ -12,7 +12,7 @@ import { execCmd } from '../utils/install-pkgs';
 const DS_PACKAGE = '@rubenvillar/design-system-astro';
 
 export async function createCommand(): Promise<void> {
-  intro(picocolors.bold(picocolors.cyan('ds-astro create')));
+  intro(picocolors.bold(picocolors.cyan('design-system-astro create')));
 
   const options = await promptCreateOptions();
   const { projectName, packageManager, typescript, components, darkMode } = options;
